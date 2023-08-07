@@ -1,13 +1,10 @@
 import mongoose from "mongoose";
 
 const AnimalSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  petCount: {
-    type: Number,
-    default: 0,
+  name: { type: String },
+  petIds: {
+    type: Array(mongoose.Schema.Types.ObjectId),
+    ref: "Pet",
   },
 });
 

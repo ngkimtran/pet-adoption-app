@@ -1,0 +1,78 @@
+mutation {
+  addPet(
+    type: "dog"
+    name: "Hayes"
+    breed: "Husky"
+    location: "Dsl De Drummond, NB"
+    description: "orem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget eleifend quam, rutrum euismod magna. Mauris consequat aliquet libero sed dictum. Proin posuere pulvinar imperdiet. Maecenas ut sollicitudin diam. Donec ullamcorper et ligula eget viverra. Donec placerat arcu ut augue auctor tristique. Etiam vel arcu viverra, congue massa ut, bibendum justo. Suspendisse varius interdum justo, vel dictum turpis placerat ac. Nunc dignissim nisi non turpis facilisis, vel aliquam diam viverra. Aliquam eget nibh enim. Curabitur quis orci vestibulum, convallis nibh tempor, tempus dui. Phasellus lacinia eros ac felis molestie pellentesque. Aliquam vehicula odio velit, ut iaculis metus dictum eu."
+    adoptionFee: 15
+    age: 12
+    gender: "male"
+    size: "large"
+    personality: ["Friendly", "Playful", "Cuddly", "Affectionate"]
+    coatLength: "long"
+    houseTrained: true
+    health: ["vaccinations up to date", "spayed / neutered"]
+  ) {
+    type
+    name
+    breed
+    location
+    description
+    adoptionFee
+    characteristic {
+      age
+      gender
+      size
+      personality
+      coatLength
+      houseTrained
+      health
+    }
+  }
+}
+
+{
+  pets {
+    name
+    type {
+      id
+      name
+    }
+    breed
+    location
+    description
+    adoptionFee
+    characteristic {
+      age
+      gender
+      size
+      personality
+      coatLength
+      houseTrained
+      health
+    }
+  }
+}
+
+mutation {
+  updatePet(id: "64d0da8bb3f6d02d1f3214de", name: "Papaya") {
+    type {
+      name
+    }
+    name
+    breed
+    location
+    description
+    adoptionFee
+    characteristic {
+      age
+      gender
+      size
+      personality
+      coatLength
+      houseTrained
+      health
+    }
+  }
+}

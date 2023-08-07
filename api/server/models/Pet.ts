@@ -2,23 +2,36 @@ import mongoose from "mongoose";
 
 const PetSchema = new mongoose.Schema({
   type: {
-    type: String,
-    enum: ["Dog", "Cat"],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Animal",
+    required: true,
   },
-  name: { type: String },
+  name: {
+    type: String,
+    required: true,
+  },
   breed: { type: String },
-  location: { type: String },
+  location: {
+    type: String,
+    required: true,
+  },
   description: { type: String },
+  adoptionFee: {
+    type: Number,
+    required: true,
+  },
   characteristic: {
-    age: { type: Number },
+    age: {
+      type: Number,
+      required: true,
+    },
     gender: { type: String },
     size: { type: String },
     personality: { type: Array(String) },
     coatLength: { type: String },
     houseTrained: { type: Boolean },
-    health: { type: new Array(String) },
+    health: { type: Array(String) },
   },
-  adoptionFee: { type: mongoose.Schema.Types.Decimal128 },
 });
 
 export default mongoose.model("Pet", PetSchema);

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 const logo = require("../../assets/logo.png");
@@ -6,17 +7,23 @@ const Header = () => {
   return (
     <nav className="navbar bg-dark p-0">
       <div className="container">
-        <a href="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           <div className="d-flex align-items-center">
             <img src={logo} alt="" className="mr-2" />
             <h1>Pet Adoption</h1>
           </div>
-        </a>
+        </Link>
         <nav>
-          <ul className="navbar-list fs-4 fw-semibold gap-2 mb-0 list-unstyled d-flex flex-row align-items-center justify-content-between">
-            <li>Home</li>
-            <li>About</li>
-            <li>Adopt a pet</li>
+          <ul className="fs-4 fw-semibold gap-2 mb-0 list-unstyled d-flex flex-row align-items-center justify-content-between">
+            <Link className="navbar-link text-decoration-none" to="/">
+              Home
+            </Link>
+            <Link className="navbar-link text-decoration-none" to="/">
+              About
+            </Link>
+            <Link className="navbar-link text-decoration-none" to="/">
+              Adopt a pet
+            </Link>
           </ul>
         </nav>
       </div>

@@ -11,15 +11,12 @@
   margin-right: 1rem;
 }
 
-.navbar-list {
+.navbar-link {
+  min-width: 10rem;
   color: #eabc3f;
 }
 
-.navbar-list li {
-  min-width: 10rem;
-}
-
-.navbar-list li:hover {
+.navbar-link:hover {
   font-weight: 700;
   color: #ea9a3f;
   text-decoration: underline;

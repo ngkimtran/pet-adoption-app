@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
-import "./Animals.css";
 import { Animal } from "../../types/types";
+import "./Animals.css";
 
 const GET_ANIMALS = gql`
   query getAnimals {
@@ -30,12 +31,13 @@ const Animals = () => {
       {!loading && !error && data && (
         <>
           {data.animals.map((animal: Animal) => (
-            <div
+            <Link
+              to={`/${animal.name}/browse-pets`}
               key={animal.id}
-              className="animal-type fw-bold fs-2 text-center shadow bg-white rounded text-capitalize"
+              className="animal-type text-decoration-none fw-bold fs-2 text-center shadow bg-white rounded text-capitalize"
             >
               <p className="my-3">{animal.name}</p>
-            </div>
+            </Link>
           ))}
         </>
       )}

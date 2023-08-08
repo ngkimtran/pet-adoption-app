@@ -1,0 +1,26 @@
+.navbar-brand {
+  color: #eabc3f;
+}
+
+.navbar-brand:hover {
+  color: #eabc3f;
+}
+
+.navbar-brand img {
+  width: 8rem;
+  margin-right: 1rem;
+}
+
+.navbar-list {
+  color: #eabc3f;
+}
+
+.navbar-list li {
+  min-width: 10rem;
+}
+
+.navbar-list li:hover {
+  font-weight: 700;
+  color: #ea9a3f;
+  text-decoration: underline;
+}

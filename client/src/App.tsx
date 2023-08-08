@@ -1,8 +1,16 @@
+import Header from "./components/Header/Header";
+import Home from "./pages/Home/Home";
+import Footer from "./components/Footer/Footer";
+
 function App() {
   return (
-    <div className="container">
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <Header />
+      <div className="container-fluid px-0">
+        <Home />
+      </div>
+      <Footer />
+    </>
   );
 }
 

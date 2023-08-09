@@ -1,23 +1,13 @@
-.navbar-brand {
-  color: #eabc3f;
-}
-
-.navbar-brand:hover {
-  color: #eabc3f;
-}
-
-.navbar-brand img {
+.logo {
   width: 8rem;
   margin-right: 1rem;
 }
 
 .navbar-link {
   min-width: 10rem;
-  color: #eabc3f;
 }
 
 .navbar-link:hover {
   font-weight: 700;
   color: #ea9a3f;
-  text-decoration: underline;
 }

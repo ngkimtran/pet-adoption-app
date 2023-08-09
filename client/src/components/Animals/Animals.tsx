@@ -17,9 +17,13 @@ const Animals = () => {
   const { loading, error, data } = useQuery(GET_ANIMALS);
 
   return (
-    <div className="container my-5 gap-5 d-flex flex-wrap align-items-center justify-content-evenly">
+    <div className="container my-5 d-flex justify-content-evenly">
       {loading && (
-        <div className="spinner-border spinner fs-2" role="status">
+        <div
+          className="text-color-primary spinner-border fs-2"
+          style={{ width: "5rem", height: "5rem" }}
+          role="status"
+        >
           <span className="visually-hidden">Loading...</span>
         </div>
       )}
@@ -29,17 +33,20 @@ const Animals = () => {
         </div>
       )}
       {!loading && !error && data && (
-        <>
-          {data.animals.map((animal: Animal) => (
-            <Link
-              to={`/${animal.name}/browse-pets`}
-              key={animal.id}
-              className="animal-type text-decoration-none fw-bold fs-2 text-center shadow bg-white rounded text-capitalize"
-            >
-              <p className="my-3">{animal.name}</p>
-            </Link>
-          ))}
-        </>
+        <div className="d-flex flex-column align-items-center">
+          <h1 className="text-color-primary">Choose your companion</h1>
+          <div className="d-flex flex-wrap align-items-center justify-content-evenly gap-5 my-5">
+            {data.animals.map((animal: Animal) => (
+              <Link
+                to={`/${animal.name}/browse-pets`}
+                key={animal.id}
+                className="animal-type text-color-primary text-center text-decoration-none fw-bold fs-2 shadow rounded text-capitalize"
+              >
+                <p className="my-3">{animal.name}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

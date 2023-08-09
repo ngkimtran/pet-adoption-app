@@ -11,3 +11,103 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.text-color-primary {
+  color: #eabc3f;
+}
+
+.text-color-primary:hover {
+  color: #eabc3f;
+}
+
+.background-primary {
+  background-color: #eabc3f;
+}
+
+.btn-primary {
+  border: none;
+  background-color: #eabc3f;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #ea9a3f;
+}
+
+@keyframes Color {
+  0% {
+    color: #c9e4de;
+  }
+
+  20% {
+    color: #c6def1;
+  }
+
+  40% {
+    color: #faedcb;
+  }
+
+  60% {
+    color: #f7d9c4;
+  }
+
+  80% {
+    color: #f2c6de;
+  }
+
+  100% {
+    color: #dbcdf0;
+  }
+}
+
+@-moz-keyframes Color {
+  0% {
+    color: #c9e4de;
+  }
+
+  20% {
+    color: #c6def1;
+  }
+
+  40% {
+    color: #faedcb;
+  }
+
+  60% {
+    color: #f7d9c4;
+  }
+
+  80% {
+    color: #f2c6de;
+  }
+
+  100% {
+    color: #dbcdf0;
+  }
+}
+
+@-webkit-keyframes Color {
+  0% {
+    color: #c9e4de;
+  }
+
+  20% {
+    color: #c6def1;
+  }
+
+  40% {
+    color: #faedcb;
+  }
+
+  60% {
+    color: #f7d9c4;
+  }
+
+  80% {
+    color: #f2c6de;
+  }
+
+  100% {
+    color: #dbcdf0;
+  }
+}

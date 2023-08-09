@@ -1,7 +1,6 @@
 .animal-type {
-  outline: 1px solid #d2d1d3;
+  outline: 3px solid #eabc3f;
   padding: 2rem;
-  color: #eabc3f;
   cursor: pointer;
   min-height: 10rem;
   min-width: 18rem;
@@ -9,11 +8,7 @@
 }
 
 .animal-type:hover {
-  outline: 4px solid #eabc3f;
-}
-
-.spinner {
-  width: 5rem;
-  height: 5rem;
-  color: #eabc3f;
+  background-color: #eabc3f;
+  color: #fff;
+  font-size: 2.5rem !important;
 }

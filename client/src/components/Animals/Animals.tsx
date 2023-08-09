@@ -1,32 +1,16 @@
 import { Link } from "react-router-dom";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Animal } from "../../types/types";
+import { GET_ANIMALS } from "../../queries/animalQueries";
+import Loader from "../Loader/Loader";
 import "./Animals.css";
-
-const GET_ANIMALS = gql`
-  query getAnimals {
-    animals {
-      id
-      name
-      petCount
-    }
-  }
-`;
 
 const Animals = () => {
   const { loading, error, data } = useQuery(GET_ANIMALS);
 
   return (
     <div className="container my-5 d-flex justify-content-evenly">
-      {loading && (
-        <div
-          className="text-color-primary spinner-border fs-2"
-          style={{ width: "5rem", height: "5rem" }}
-          role="status"
-        >
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      )}
+      {loading && <Loader />}
       {error && (
         <div className="alert alert-danger p-4 fw-semibold" role="alert">
           Something went wrong - please try again.

@@ -1,3 +1,5 @@
+import { FaMagnifyingGlass } from "react-icons/fa6";
+
 const Searchbar = () => {
   return (
     <div className="container input-group input-group-lg">
@@ -6,8 +8,8 @@ const Searchbar = () => {
         className="form-control p-3"
         placeholder="What type of pets are you looking for?"
       />
-      <button className="btn btn-primary" type="button">
-        <i className="px-4 fa-solid fa-magnifying-glass"></i>
+      <button className="px-4 btn btn-primary" type="button">
+        <FaMagnifyingGlass size={"2rem"} />
       </button>
     </div>
   );

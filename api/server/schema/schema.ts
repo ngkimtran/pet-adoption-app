@@ -57,9 +57,14 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(PetType),
       args: { type: { type: GraphQLString } },
       async resolve(_parents, args) {
-        const animalFilter = await Animal.findOne({ name: args.type });
+        if (args.type) {
+          const animalFilter = await Animal.findOne({ name: args.type });
+          return Pet.find({ type: animalFilter._id }).populate("type", {
+            name: 1,
+          });
+        }
 
-        return Pet.find({ type: animalFilter._id }).populate("type", {
+        return Pet.find().populate("type", {
           name: 1,
         });
       },

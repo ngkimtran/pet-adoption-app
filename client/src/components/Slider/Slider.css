@@ -17,7 +17,10 @@
 
 .slider-caption h1 {
   font-size: 5rem;
-  animation: Color 15s linear infinite;
-  -webkit-animation: Color 15s ease-in-out infinite;
-  text-shadow: 5px 5px #333333;
+  text-shadow: 5px 5px #212529;
+}
+
+.text-animated {
+  animation: Color 10s linear infinite;
+  -webkit-animation: Color 10s ease-in-out infinite;
 }

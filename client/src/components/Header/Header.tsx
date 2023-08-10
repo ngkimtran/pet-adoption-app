@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
+import { LOGO } from "../../constants/constants";
 import "./Header.css";
-
-const logo = require("../../assets/logo.png");
 
 const Header = () => {
   return (
@@ -9,7 +8,7 @@ const Header = () => {
       <div className="container">
         <Link to="/" className="text-color-primary text-decoration-none">
           <div className="d-flex align-items-center">
-            <img src={logo} alt="" className="mr-2 logo" />
+            <img src={LOGO} alt="" className="mr-2 logo" />
             <h1>Pet Adoption</h1>
           </div>
         </Link>

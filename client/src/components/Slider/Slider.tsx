@@ -1,12 +1,6 @@
+import { LANDING_IMGS } from "../../constants/constants";
 import Searchbar from "../Searchbar/Searchbar";
 import "./Slider.css";
-
-const landings = [
-  require("../../assets/landing-1.jpg"),
-  require("../../assets/landing-2.jpg"),
-  require("../../assets/landing-3.jpg"),
-  require("../../assets/landing-4.jpg"),
-];
 
 const Slider = () => {
   return (
@@ -49,7 +43,11 @@ const Slider = () => {
       </div>
 
       <div className="slider-caption z-3 p-0 m-auto carousel-caption d-none d-md-block">
-        <h1>Find your new best friend!</h1>
+        <h1>
+          <span className="text-color-primary">Find your</span>
+          <span className="text-animated"> new best friend</span>
+          <span className="text-color-primary">!</span>
+        </h1>
         <p className="fw-semibold fs-4 mt-4">
           Pets are not our whole life, but they make our lives whole.
         </p>
@@ -57,17 +55,17 @@ const Slider = () => {
 
       <div className="carousel-inner">
         <div className="carousel-item active" data-bs-interval="5000">
-          <img className="d-block w-100" src={landings[0]} alt="" />
+          <img className="d-block w-100" src={LANDING_IMGS[0]} alt="" />
         </div>
 
         <div className="carousel-item" data-bs-interval="5000">
-          <img className="d-block w-100" src={landings[1]} alt="" />
+          <img className="d-block w-100" src={LANDING_IMGS[1]} alt="" />
         </div>
         <div className="carousel-item" data-bs-interval="5000">
-          <img className="d-block w-100" src={landings[2]} alt="" />
+          <img className="d-block w-100" src={LANDING_IMGS[2]} alt="" />
         </div>
         <div className="carousel-item">
-          <img className="d-block w-100" src={landings[3]} alt="" />
+          <img className="d-block w-100" src={LANDING_IMGS[3]} alt="" />
         </div>
       </div>
     </div>

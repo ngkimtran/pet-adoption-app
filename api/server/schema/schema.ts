@@ -25,7 +25,7 @@ const AnimalType = new GraphQLObjectType({
 const CharacteristicType = new GraphQLObjectType({
   name: "Characteristic",
   fields: () => ({
-    age: { type: GraphQLInt! },
+    age: { type: GraphQLString! },
     gender: { type: GraphQLString },
     size: { type: GraphQLString },
     personality: { type: new GraphQLList(GraphQLString) },
@@ -55,8 +55,11 @@ const RootQuery = new GraphQLObjectType({
     // Pet
     pets: {
       type: new GraphQLList(PetType),
-      resolve() {
-        return Pet.find().populate("type", {
+      args: { type: { type: GraphQLString } },
+      async resolve(_parents, args) {
+        const animalFilter = await Animal.findOne({ name: args.type });
+
+        return Pet.find({ type: animalFilter._id }).populate("type", {
           name: 1,
         });
       },
@@ -110,7 +113,7 @@ const mutation = new GraphQLObjectType({
         description: { type: GraphQLString },
         adoptionFee: { type: GraphQLNonNull(GraphQLFloat) },
         // characteristics
-        age: { type: GraphQLNonNull(GraphQLInt) },
+        age: { type: GraphQLNonNull(GraphQLString) },
         gender: { type: GraphQLString },
         size: { type: GraphQLString },
         personality: { type: new GraphQLList(GraphQLString) },
@@ -160,7 +163,7 @@ const mutation = new GraphQLObjectType({
         description: { type: GraphQLString },
         adoptionFee: { type: GraphQLFloat },
         // characteristics
-        age: { type: GraphQLInt },
+        age: { type: GraphQLString },
         gender: { type: GraphQLString },
         size: { type: GraphQLString },
         personality: { type: new GraphQLList(GraphQLString) },

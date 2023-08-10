@@ -8,7 +8,7 @@ import SinglePet from "./pages/SinglePet/SinglePet";
 const Layout = () => (
   <>
     <Header />
-    <div className="container-fluid px-0">
+    <div className="container-fluid px-0 bg-offwhite app">
       <Outlet />
     </div>
     <Footer />

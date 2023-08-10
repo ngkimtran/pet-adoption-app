@@ -20,8 +20,24 @@ code {
   color: #eabc3f;
 }
 
+.text-color-secondary {
+  color: #ea9a3f;
+}
+
+.text-color-dark {
+  color: #212529;
+}
+
 .background-primary {
   background-color: #eabc3f;
+}
+
+.background-secondary {
+  background-color: #ea9a3f;
+}
+
+.bg-offwhite {
+  background-color: #efeef1;
 }
 
 .btn-primary {
@@ -33,6 +49,12 @@ code {
 .btn-primary:hover {
   background-color: #ea9a3f;
 }
+
+.app {
+  min-height: 90vh;
+}
+
+/* keyframes */
 
 @keyframes Color {
   0% {

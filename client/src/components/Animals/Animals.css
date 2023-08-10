@@ -5,6 +5,7 @@
   min-height: 10rem;
   min-width: 18rem;
   transition: 0.1s;
+  background-color: #fff;
 }
 
 .animal-type:hover {

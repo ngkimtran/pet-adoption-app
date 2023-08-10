@@ -9,10 +9,13 @@ const Animals = () => {
   const { loading, error, data } = useQuery(GET_ANIMALS);
 
   return (
-    <div className="container my-5 d-flex justify-content-evenly">
+    <div className="container my-5">
       {loading && <Loader />}
       {error && (
-        <div className="alert alert-danger p-4 fw-semibold" role="alert">
+        <div
+          className="alert alert-danger p-4 fw-semibold text-center"
+          role="alert"
+        >
           Something went wrong - please try again.
         </div>
       )}

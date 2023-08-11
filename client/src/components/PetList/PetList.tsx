@@ -1,4 +1,3 @@
-import { AiOutlineDoubleRight } from "react-icons/ai";
 import { Pet } from "../../types/types";
 import { Link } from "react-router-dom";
 import Filter from "../Filter/Filter";
@@ -26,7 +25,7 @@ const PetList = ({ pets, animal }: PetListPropsType) => {
           </p>
         </div>
       </div>
-      <div className="d-flex mx-3 align-items-start">
+      <div className="d-flex flex-wrap mx-3 align-items-start">
         <Filter flex={"0.25"} />
         <div
           style={{ flex: "0.75" }}
@@ -41,7 +40,9 @@ const PetList = ({ pets, animal }: PetListPropsType) => {
                 alt=""
               />
               <div className="card-body p-4 text-center">
-                <h4 className="card-title text-color-secondary">{pet.name}</h4>
+                <h4 className="card-title text-center text-color-secondary">
+                  {pet.name}
+                </h4>
                 <p className="card-text text-capitalize">
                   <span className="m-0 d-block">
                     {pet.characteristic.age}
@@ -50,11 +51,8 @@ const PetList = ({ pets, animal }: PetListPropsType) => {
                   </span>
                   {pet.location}
                 </p>
-                <Link
-                  to={`/${animal}/${pet.name.toLowerCase()}-${pet.id}`}
-                  className="btn btn-primary text-uppercase fw-semibold"
-                >
-                  <AiOutlineDoubleRight /> details
+                <Link to="/" className="btn btn-primary">
+                  See details
                 </Link>
               </div>
             </div>

@@ -26,30 +26,4 @@ const GET_PETS = gql`
   }
 `;
 
-const GET_PET = gql`
-  query getPet($id: ID!) {
-    pet(id: $id) {
-      id
-      name
-      type {
-        id
-        name
-      }
-      breed
-      location
-      description
-      adoptionFee
-      characteristic {
-        age
-        gender
-        size
-        personality
-        coatLength
-        houseTrained
-        health
-      }
-    }
-  }
-`;
-
-export { GET_PETS, GET_PET };
+export { GET_PETS };

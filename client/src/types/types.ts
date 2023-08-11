@@ -9,12 +9,12 @@ export type Pet = {
   adoptionFee: number;
   breed: string;
   characteristic: {
-    age: string;
+    age: number;
     coatLength: string;
     gender: string;
-    health: Array<string>;
+    health: Array<String>;
     houseTrained: boolean;
-    personality: Array<string>;
+    personality: Array<String>;
     size: string;
     __typename: string;
   };

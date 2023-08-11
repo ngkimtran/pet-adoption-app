@@ -26,7 +26,7 @@ const Animals = () => {
               <Link
                 to={`/${animal.name}/browse-pets`}
                 key={animal.id}
-                className="cta-primary text-color-primary text-center text-decoration-none fw-bold fs-2 shadow rounded text-capitalize"
+                className="cta-primary animal-type text-color-primary text-center text-decoration-none fw-bold fs-2 shadow rounded text-capitalize"
               >
                 <p className="my-3">{animal.name}</p>
               </Link>

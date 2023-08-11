@@ -55,19 +55,29 @@ code {
 }
 
 .cta-primary {
-  outline: 3px solid #eabc3f;
-  padding: 2rem;
   cursor: pointer;
-  min-height: 10rem;
-  min-width: 18rem;
   transition: 0.1s;
   background-color: #fff;
 }
 
 .cta-primary:hover {
-  background-color: #eabc3f;
   color: #fff;
+}
+
+.animal-type {
+  outline: 3px solid #eabc3f;
+  padding: 2rem;
+  min-height: 10rem;
+  min-width: 18rem;
+}
+
+.animal-type:hover {
   font-size: 2.5rem !important;
+  background-color: #eabc3f;
+}
+
+.adopt-option:hover {
+  background-color: #ea9a3f;
 }
 
 .navbar-link {

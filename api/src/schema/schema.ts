@@ -1,7 +1,7 @@
-import Pet from "../models/Pet";
-import Animal from "../models/Animal";
+const Pet = require("../models/Pet.ts");
+const Animal = require("../models/Animal.ts");
 
-import {
+const {
   GraphQLBoolean,
   GraphQLFloat,
   GraphQLID,
@@ -11,13 +11,13 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
-} from "graphql";
+} = require("graphql");
 
 const AnimalType = new GraphQLObjectType({
   name: "Animal",
   fields: () => ({
     id: { type: GraphQLID },
-    name: { type: GraphQLString! },
+    name: { type: GraphQLString },
     petCount: { type: GraphQLInt },
   }),
 });
@@ -25,7 +25,7 @@ const AnimalType = new GraphQLObjectType({
 const CharacteristicType = new GraphQLObjectType({
   name: "Characteristic",
   fields: () => ({
-    age: { type: GraphQLString! },
+    age: { type: GraphQLString },
     gender: { type: GraphQLString },
     size: { type: GraphQLString },
     personality: { type: new GraphQLList(GraphQLString) },
@@ -39,12 +39,12 @@ const PetType = new GraphQLObjectType({
   name: "Pet",
   fields: () => ({
     id: { type: GraphQLID },
-    type: { type: AnimalType! },
-    name: { type: GraphQLString! },
+    type: { type: AnimalType },
+    name: { type: GraphQLString },
     breed: { type: GraphQLString },
-    location: { type: GraphQLString! },
+    location: { type: GraphQLString },
     description: { type: GraphQLString },
-    adoptionFee: { type: GraphQLFloat! },
+    adoptionFee: { type: GraphQLFloat },
     characteristic: { type: CharacteristicType },
   }),
 });
@@ -129,7 +129,7 @@ const mutation = new GraphQLObjectType({
       async resolve(_parent, args) {
         let animalType = await Animal.findOne({ name: args.type });
 
-        if (!animalType) {
+        if (animalType) {
           const newAnimalType = new Animal({ name: args.type });
           animalType = await newAnimalType.save();
         }
@@ -183,7 +183,7 @@ const mutation = new GraphQLObjectType({
         if (args.type) {
           animalType = await Animal.findOne({ name: args.type });
 
-          if (!animalType) {
+          if (animalType) {
             const newAnimalType = new Animal({ name: args.type });
             animalType = await newAnimalType.save();
           }
@@ -265,7 +265,7 @@ const mutation = new GraphQLObjectType({
   },
 });
 
-export default new GraphQLSchema({
+module.exports = new GraphQLSchema({
   query: RootQuery,
   mutation,
 });

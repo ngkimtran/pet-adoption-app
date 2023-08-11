@@ -1,6 +1,5 @@
 import { LANDING_IMGS } from "../../constants/constants";
 import Searchbar from "../Searchbar/Searchbar";
-import "./Slider.css";
 
 const Slider = () => {
   return (

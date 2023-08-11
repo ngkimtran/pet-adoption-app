@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { Animal } from "../../types/types";
 import { GET_ANIMALS } from "../../queries/animalQueries";
 import Loader from "../Loader/Loader";
-import "./Animals.css";
 
 const Animals = () => {
   const { loading, error, data } = useQuery(GET_ANIMALS);
@@ -27,7 +26,7 @@ const Animals = () => {
               <Link
                 to={`/${animal.name}/browse-pets`}
                 key={animal.id}
-                className="animal-type text-color-primary text-center text-decoration-none fw-bold fs-2 shadow rounded text-capitalize"
+                className="cta-primary text-color-primary text-center text-decoration-none fw-bold fs-2 shadow rounded text-capitalize"
               >
                 <p className="my-3">{animal.name}</p>
               </Link>

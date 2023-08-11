@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { LOGO } from "../../constants/constants";
-import "./Header.css";
 
 const Header = () => {
   return (
@@ -8,7 +7,12 @@ const Header = () => {
       <div className="container">
         <Link to="/" className="text-color-primary text-decoration-none">
           <div className="d-flex align-items-center">
-            <img src={LOGO} alt="" className="mr-2 logo" />
+            <img
+              src={LOGO}
+              alt=""
+              className="me-3 logo"
+              style={{ width: "8rem" }}
+            />
             <h1>Pet Adoption</h1>
           </div>
         </Link>

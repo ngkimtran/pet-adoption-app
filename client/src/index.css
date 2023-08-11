@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.app {
+  min-height: 90vh;
+}
+
 .text-color-primary {
   color: #eabc3f;
 }
@@ -50,8 +54,56 @@ code {
   background-color: #ea9a3f;
 }
 
-.app {
-  min-height: 90vh;
+.cta-primary {
+  outline: 3px solid #eabc3f;
+  padding: 2rem;
+  cursor: pointer;
+  min-height: 10rem;
+  min-width: 18rem;
+  transition: 0.1s;
+  background-color: #fff;
+}
+
+.cta-primary:hover {
+  background-color: #eabc3f;
+  color: #fff;
+  font-size: 2.5rem !important;
+}
+
+.navbar-link {
+  min-width: 10rem;
+}
+
+.navbar-link:hover {
+  font-weight: 700;
+  color: #ea9a3f;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  height: 80vh;
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+}
+
+.slider-searchbar {
+  bottom: 80%;
+}
+
+.slider-caption {
+  bottom: 30%;
+  width: fit-content;
+  height: fit-content;
+}
+
+.slider-caption h1 {
+  font-size: 5rem;
+  text-shadow: 5px 5px #212529;
+}
+
+.text-animated {
+  animation: Color 10s linear infinite;
+  -webkit-animation: Color 10s ease-in-out infinite;
 }
 
 /* keyframes */

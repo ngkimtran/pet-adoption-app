@@ -6,13 +6,13 @@ import Pets from "./pages/Pets/Pets";
 import SinglePet from "./pages/SinglePet/SinglePet";
 
 const Layout = () => (
-  <>
+  <div className="bg-offwhite ">
     <Header />
-    <div className="container-fluid px-0 bg-offwhite app">
+    <div className="container-fluid px-0 app">
       <Outlet />
     </div>
     <Footer />
-  </>
+  </div>
 );
 
 const router = createBrowserRouter([

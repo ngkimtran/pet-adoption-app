@@ -1,7 +1,5 @@
-const Pet = require("../models/Pet.ts");
-const Animal = require("../models/Animal.ts");
-
 const {
+  GraphQLError,
   GraphQLBoolean,
   GraphQLFloat,
   GraphQLID,
@@ -12,6 +10,14 @@ const {
   GraphQLSchema,
   GraphQLString,
 } = require("graphql");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+
+const Pet = require("../models/Pet.ts");
+const Animal = require("../models/Animal.ts");
+const User = require("../models/User.ts");
+
+const SALT_WORK_FACTOR = 10;
 
 const AnimalType = new GraphQLObjectType({
   name: "Animal",
@@ -46,6 +52,18 @@ const PetType = new GraphQLObjectType({
     description: { type: GraphQLString },
     adoptionFee: { type: GraphQLFloat },
     characteristic: { type: CharacteristicType },
+  }),
+});
+
+const UserType = new GraphQLObjectType({
+  name: "User",
+  fields: () => ({
+    id: { type: GraphQLID },
+    username: { type: GraphQLString },
+    password: { type: GraphQLString },
+    email: { type: GraphQLString },
+    name: { type: GraphQLString },
+    favorites: { type: new GraphQLList(PetType) },
   }),
 });
 
@@ -99,6 +117,27 @@ const RootQuery = new GraphQLObjectType({
         animal.petCount = await Pet.find({ type: animal._id }).count();
         animal.save();
         return Animal.findOne({ name: args.name });
+      },
+    },
+
+    // User
+    users: {
+      type: new GraphQLList(UserType),
+      async resolve() {
+        return User.find().populate("favorites", {
+          id: 1,
+          name: 1,
+        });
+      },
+    },
+    user: {
+      type: UserType,
+      args: { id: { type: GraphQLID } },
+      async resolve(_parent, args) {
+        return User.findById(args.id).populate("favorites", {
+          id: 1,
+          name: 1,
+        });
       },
     },
   },
@@ -156,7 +195,6 @@ const mutation = new GraphQLObjectType({
         return pet.save();
       },
     },
-
     updatePet: {
       type: PetType,
       args: {
@@ -229,7 +267,6 @@ const mutation = new GraphQLObjectType({
         );
       },
     },
-
     deletePet: {
       type: PetType,
       args: {
@@ -252,7 +289,6 @@ const mutation = new GraphQLObjectType({
         return animal.save();
       },
     },
-
     deleteAnimal: {
       type: AnimalType,
       args: {
@@ -260,6 +296,130 @@ const mutation = new GraphQLObjectType({
       },
       resolve(_parent, args) {
         return Animal.findByIdAndRemove(args.id);
+      },
+    },
+
+    // User
+    addUser: {
+      type: UserType,
+      args: {
+        name: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+        username: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(_parent, args) {
+        const passwordHash = await bcrypt.hash(args.password, SALT_WORK_FACTOR);
+
+        const user = new User({
+          name: args.name,
+          email: args.email,
+          username: args.username,
+          password: passwordHash,
+        });
+
+        return user.save();
+      },
+    },
+    updateUser: {
+      type: UserType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        username: { type: GraphQLString },
+        password: { type: GraphQLString },
+      },
+      async resolve(_parent, args) {
+        const oldUser = await User.findById(args.id);
+        const passwordHash = args.password
+          ? await bcrypt.hash(args.password, SALT_WORK_FACTOR)
+          : oldUser.password;
+
+        return User.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              name: args.name ? args.name : oldUser.name,
+              email: args.email ? args.email : oldUser.email,
+              username: args.username ? args.username : oldUser.username,
+              password: passwordHash,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+    deleteUser: {
+      type: UserType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(_parent, args) {
+        return User.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Favorites
+    updateFavorite: {
+      type: UserType,
+      args: {
+        userId: { type: GraphQLNonNull(GraphQLID) },
+        petId: { type: GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(_parent, args) {
+        const user = await User.findById(args.userId).populate("favorites", {
+          id: 1,
+        });
+        const pet = await Pet.findById(args.petId);
+        const favorites =
+          user.favorites.findIndex((p) => p.id === pet.id) === -1
+            ? [...user.favorites, pet]
+            : user.favorites.filter((p) => p.id !== pet.id);
+
+        return User.findByIdAndUpdate(
+          args.userId,
+          {
+            $set: {
+              favorites,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+
+    // Login
+    login: {
+      type: GraphQLString,
+      args: {
+        username: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLNonNull(GraphQLString) },
+      },
+      async resolve(_parent, args) {
+        const user = await User.findOne({ username: args.username }).select(
+          "password"
+        );
+
+        const passwordCorrect =
+          user === null
+            ? false
+            : await bcrypt.compare(args.password, user.password);
+
+        if (!user || !passwordCorrect) {
+          throw new GraphQLError("Wrong credentials", {
+            extensions: {
+              code: "BAD_USER_INPUT",
+            },
+          });
+        }
+
+        const userForToken = {
+          username: user.username,
+          id: user._id,
+        };
+
+        return jwt.sign(userForToken, process.env.JWT_SECRET);
       },
     },
   },

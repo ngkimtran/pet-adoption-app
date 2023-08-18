@@ -132,12 +132,21 @@ const RootQuery = new GraphQLObjectType({
     },
     user: {
       type: UserType,
-      args: { id: { type: GraphQLID } },
+      args: { id: { type: GraphQLID }, username: { type: GraphQLString } },
       async resolve(_parent, args) {
-        return User.findById(args.id).populate("favorites", {
-          id: 1,
-          name: 1,
-        });
+        if (args.id)
+          return User.findById(args.id).populate("favorites", {
+            id: 1,
+            name: 1,
+          });
+        if (args.username)
+          return User.findOne({ username: args.username }).populate(
+            "favorites",
+            {
+              id: 1,
+              name: 1,
+            }
+          );
       },
     },
   },
@@ -385,7 +394,9 @@ const mutation = new GraphQLObjectType({
             },
           },
           { new: true }
-        );
+        ).populate("favorites", {
+          id: 1,
+        });
       },
     },
 

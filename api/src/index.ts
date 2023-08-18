@@ -1,24 +1,23 @@
-const express = require("express");
-const cors = require("cors");
-const { graphqlHTTP } = require("express-graphql");
+const { ApolloServer } = require("@apollo/server");
+const { startStandaloneServer } = require("@apollo/server/standalone");
+// const cors = require("cors");
 const schema = require("./schema/schema.ts");
 const connectDBfunc = require("./config/db.ts");
 
 require("dotenv").config();
-
-const app = express();
-
 connectDBfunc();
 
-app.use(cors());
-
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema,
-    graphiql: process.env.NODE_ENV === "development",
-  })
-);
-
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Sever running on port ${port}`));
+
+const server = new ApolloServer({
+  typeDefs: schema.typeDefs,
+  resolvers: schema.resolvers,
+});
+
+// server.use(cors());
+
+startStandaloneServer(server, {
+  listen: { port },
+}).then(({ url }) => {
+  console.log(`Server ready at ${url}`);
+});

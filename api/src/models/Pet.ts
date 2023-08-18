@@ -10,7 +10,10 @@ const PetSchema = new petMongoose.Schema({
     type: String,
     required: true,
   },
-  breed: { type: String },
+  breed: {
+    type: String,
+    required: true,
+  },
   location: {
     type: String,
     required: true,

@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { useMutation, useLazyQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../mutations/userMutations";
-import { tokenState, userState } from "../../states/state";
+import { tokenState } from "../../states/state";
 import { ERROR_TOAST_ID } from "../../constants/constants";
-import { GET_USER } from "../../queries/userQueries";
 
 const Login = () => {
   const [username, setUsername] = useState<string>("");
@@ -16,7 +15,6 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const [, setUser] = useRecoilState(userState);
   const [, setToken] = useRecoilState(tokenState);
 
   const [login, loginMutationResult] = useMutation(LOGIN, {
@@ -34,21 +32,15 @@ const Login = () => {
     },
   });
 
-  const [getUser] = useLazyQuery(GET_USER);
-
   useEffect(() => {
     if (loginMutationResult.data) {
       const token = loginMutationResult.data.login;
       setToken(token);
 
-      getUser({
-        variables: { username },
-      }).then((response) => setUser(response.data.user));
-
       // if (localSavePermission)
       localStorage.setItem("pet-adoption-user-token", token);
     }
-  }, [loginMutationResult.data, getUser]); // eslint-disable-line
+  }, [loginMutationResult.data]); // eslint-disable-line
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

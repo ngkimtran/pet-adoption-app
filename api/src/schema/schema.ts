@@ -181,7 +181,10 @@ const Query = {
       });
   },
 
-  me: (_root, _args, { currentUser }) => currentUser,
+  me: (_root, _args, { currentUser }) =>
+    currentUser.populate("favorites", {
+      id: 1,
+    }),
 };
 
 const Mutation = {

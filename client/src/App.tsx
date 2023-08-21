@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import { RecoilRoot } from "recoil";
+import { useRecoilState } from "recoil";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useQuery } from "@apollo/client";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
@@ -9,6 +10,8 @@ import Pets from "./pages/Pets/Pets";
 import SinglePet from "./pages/SinglePet/SinglePet";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import { tokenState, userState } from "./states/state";
+import { CURRENT_USER } from "./queries/userQueries";
 
 const Layout = () => {
   return (
@@ -52,10 +55,16 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => (
-  <RecoilRoot>
-    <RouterProvider router={router} />
-  </RecoilRoot>
-);
+const App = () => {
+  const [token] = useRecoilState(tokenState);
+  const [, setUser] = useRecoilState(userState);
+
+  useQuery(CURRENT_USER, {
+    skip: !token,
+    onCompleted: (data) => setUser(data?.me),
+  });
+
+  return <RouterProvider router={router} />;
+};
 
 export default App;

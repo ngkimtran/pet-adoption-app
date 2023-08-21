@@ -14,4 +14,18 @@ const GET_USER = gql`
   }
 `;
 
-export { GET_USER };
+const CURRENT_USER = gql`
+  query currentUser {
+    me {
+      id
+      username
+      name
+      email
+      favorites {
+        id
+      }
+    }
+  }
+`;
+
+export { GET_USER, CURRENT_USER };

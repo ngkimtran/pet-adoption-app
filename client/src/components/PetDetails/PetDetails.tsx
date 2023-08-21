@@ -31,7 +31,7 @@ const PetDetails = ({ pet }: PetDetailsPropsType) => {
   });
 
   const toggleFavorite = () => updateFavorite({ variables: { petId: pet.id } });
-
+  console.log(user);
   return (
     <div>
       <div className=" d-flex align-items-stretch rounded-top shadow bg-white">

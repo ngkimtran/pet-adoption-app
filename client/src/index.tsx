@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
+import { RecoilRoot } from "recoil";
 import {
   ApolloClient,
   InMemoryCache,
@@ -9,6 +8,8 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import App from "./App";
+import "./index.css";
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("pet-adoption-user-token");
@@ -55,7 +56,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
     </ApolloProvider>
   </React.StrictMode>
 );

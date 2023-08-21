@@ -6,3 +6,6 @@ export const LANDING_IMGS = [
   require("../assets/landing-3.jpg"),
   require("../assets/landing-4.jpg"),
 ];
+
+export const ERROR_TOAST_ID = "error";
+export const SUCCESS_TOAST_ID = "success";

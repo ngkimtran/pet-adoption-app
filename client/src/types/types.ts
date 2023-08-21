@@ -29,3 +29,15 @@ export type Pet = {
   };
   __typename: string;
 };
+
+export type User = {
+  id: string;
+  username: string;
+  name: string;
+  email: string;
+  favorites: {
+    id: string;
+    __typename: string;
+  }[];
+  __typename: string;
+};

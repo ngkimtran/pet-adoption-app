@@ -53,6 +53,7 @@ const typeDefs = `
     animal(name: String!): Animal!,
     users: [User!],
     user(id: ID, username: String): User!, 
+    me: User
   }
 
   type Mutation {
@@ -112,10 +113,7 @@ const typeDefs = `
 
     deleteUser(id: ID!): User,
 
-    updateFavorite(
-        userId:ID!,
-        petId: ID!,
-    ): User,
+    updateFavorite(petId: ID!): User,
 
     login(
         username: String!,
@@ -182,6 +180,8 @@ const Query = {
         name: 1,
       });
   },
+
+  me: (_root, _args, { currentUser }) => currentUser,
 };
 
 const Mutation = {
@@ -308,18 +308,25 @@ const Mutation = {
 
   deleteUser: async (_parent, args) => User.findByIdAndRemove(args.id),
 
-  updateFavorite: async (_parent, args) => {
-    const user = await User.findById(args.userId).populate("favorites", {
+  updateFavorite: async (_parent, args, { currentUser }) => {
+    if (!currentUser) {
+      throw new GraphQLError("Wrong credentials", {
+        extensions: { code: "BAD_USER_INPUT" },
+      });
+    }
+
+    await currentUser.populate("favorites", {
       id: 1,
     });
+
     const pet = await Pet.findById(args.petId);
     const favorites =
-      user.favorites.findIndex((p) => p.id === pet.id) === -1
-        ? [...user.favorites, pet]
-        : user.favorites.filter((p) => p.id !== pet.id);
+      currentUser.favorites.findIndex((p) => p.id === pet.id) === -1
+        ? [...currentUser.favorites, pet]
+        : currentUser.favorites.filter((p) => p.id !== pet.id);
 
     return User.findByIdAndUpdate(
-      args.userId,
+      currentUser.id,
       {
         $set: {
           favorites,

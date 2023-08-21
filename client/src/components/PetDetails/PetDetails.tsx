@@ -1,12 +1,37 @@
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { PLACEHOLDER_IMG } from "../../constants/constants";
-import { Pet } from "../../types/types";
+import { Pet, User } from "../../types/types";
 import PetDetailsItem from "../PetDetailsItem/PetDetailsItem";
+import { useRecoilState } from "recoil";
+import { userState } from "../../states/state";
+import { useMutation } from "@apollo/client";
+import { UPDATE_FAVORITE } from "../../mutations/userMutations";
+import { GET_USER } from "../../queries/userQueries";
 
 type PetDetailsPropsType = {
   pet: Pet;
 };
 
 const PetDetails = ({ pet }: PetDetailsPropsType) => {
+  const [user, setUser] = useRecoilState<User | null>(userState);
+  const [updateFavorite] = useMutation(UPDATE_FAVORITE, {
+    update: (cache, response) => {
+      cache.updateQuery(
+        {
+          query: GET_USER,
+          variables: {
+            username: user?.username,
+          },
+        },
+        () => {
+          setUser(response.data.updateFavorite);
+        }
+      );
+    },
+  });
+
+  const toggleFavorite = () => updateFavorite({ variables: { petId: pet.id } });
+
   return (
     <div>
       <div className=" d-flex align-items-stretch rounded-top shadow bg-white">
@@ -20,7 +45,7 @@ const PetDetails = ({ pet }: PetDetailsPropsType) => {
         </div>
         <div
           className="p-4 d-flex flex-column align-item-start justify-space-between"
-          style={{ flex: ".6 " }}
+          style={{ flex: ".5 " }}
         >
           <h1 className="text-center fw-bold text-uppercase text-color-secondary">
             {pet.name}
@@ -59,6 +84,22 @@ const PetDetails = ({ pet }: PetDetailsPropsType) => {
               />
             </div>
           </div>
+        </div>
+        <div className="py-4 fs-1" style={{ flex: ".1 " }}>
+          {user && user.favorites.some((p) => p.id === pet.id) ? (
+            <FaHeart
+              onClick={toggleFavorite}
+              role="button"
+              className="text-color-primary"
+            />
+          ) : (
+            <FaRegHeart
+              onClick={toggleFavorite}
+              role="button"
+              className="text-color-primary"
+            />
+          )}
+          <div />
         </div>
       </div>
       <hr className="m-0" />

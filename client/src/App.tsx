@@ -1,19 +1,27 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Home from "./pages/Home/Home";
+import { RecoilRoot } from "recoil";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home/Home";
 import Pets from "./pages/Pets/Pets";
 import SinglePet from "./pages/SinglePet/SinglePet";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
-const Layout = () => (
-  <div className="bg-offwhite ">
-    <Header />
-    <div className="container-fluid px-0 app">
-      <Outlet />
+const Layout = () => {
+  return (
+    <div className="bg-offwhite ">
+      <ToastContainer limit={1} />
+      <Header />
+      <div className="container-fluid px-0 app">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
-    <Footer />
-  </div>
-);
+  );
+};
 
 const router = createBrowserRouter([
   {
@@ -32,10 +40,22 @@ const router = createBrowserRouter([
         path: "/:animal/:id",
         element: <SinglePet />,
       },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
     ],
   },
 ]);
 
-const App = () => <RouterProvider router={router} />;
+const App = () => (
+  <RecoilRoot>
+    <RouterProvider router={router} />
+  </RecoilRoot>
+);
 
 export default App;

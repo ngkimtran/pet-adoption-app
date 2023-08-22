@@ -10,6 +10,11 @@ const User = require("../models/User.ts");
 const SALT_WORK_FACTOR = 10;
 
 const typeDefs = `
+  enum Role {
+    ADMIN
+    USER
+  }
+
   type Characteristic {
     age: String!,
     gender: String,
@@ -44,6 +49,7 @@ const typeDefs = `
     email: String!,
     name: String!,
     favorites: [Pet],
+    role: Role!,
   }
 
   type Query {
@@ -101,6 +107,7 @@ const typeDefs = `
         email: String!,
         username: String!,
         password: String!,
+        role: String,
     ): User,
 
     updateUser(
@@ -284,6 +291,7 @@ const Mutation = {
       email: args.email,
       username: args.username,
       password: passwordHash,
+      role: args.role ? args.role.toUpperCase() : "USER",
     });
 
     return user.save();

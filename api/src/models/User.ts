@@ -26,6 +26,11 @@ const UserSchema = new userMongoose.Schema({
       ref: "Pet",
     },
   ],
+  role: {
+    type: String,
+    enum: ["ADMIN", "USER"],
+    default: "USER",
+  },
 });
 
 module.exports = userMongoose.model("User", UserSchema);

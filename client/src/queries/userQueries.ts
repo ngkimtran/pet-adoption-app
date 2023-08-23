@@ -27,6 +27,21 @@ const CURRENT_USER = gql`
       role
       favorites {
         id
+        name
+        type {
+          name
+        }
+        breed
+        location
+        characteristic {
+          age
+          gender
+          size
+          personality
+          coatLength
+          houseTrained
+          health
+        }
       }
     }
   }

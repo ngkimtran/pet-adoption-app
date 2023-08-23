@@ -10,10 +10,11 @@ const UpdateUserModal = () => {
   const [user] = useRecoilState(userState);
 
   const [username, setUsername] = useState<string>(user?.username!);
-  const [password, setPassword] = useState<string>("");
   const [firstname, setFirstname] = useState<string>(user?.firstname!);
   const [lastname, setLastname] = useState<string>(user?.lastname!);
   const [email, setEmail] = useState<string>(user?.email!);
+
+  const [password, setPassword] = useState<string>("");
 
   const [updateUser] = useMutation(UPDATE_USER, {
     onCompleted: () => {
@@ -130,7 +131,7 @@ const UpdateUserModal = () => {
             </div>
             <div className="mb-3 input-group-lg">
               <label htmlFor="password" className="form-label">
-                Password
+                New Password
               </label>
               <input
                 id="password"

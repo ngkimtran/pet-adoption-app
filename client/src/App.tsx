@@ -13,6 +13,7 @@ import Register from "./pages/Register/Register";
 import Profile from "./pages/Profile/Profile";
 import { tokenState, userState } from "./states/state";
 import { CURRENT_USER } from "./queries/userQueries";
+import Favorites from "./pages/Favorites/Favorites";
 
 const Layout = () => {
   return (
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "/:userId",
         element: <Profile />,
+      },
+      {
+        path: "/:userId/favorites",
+        element: <Favorites />,
       },
     ],
   },

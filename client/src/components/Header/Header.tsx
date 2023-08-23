@@ -80,6 +80,14 @@ const Header = () => {
                         </Link>
                       </li>
                       <li>
+                        <Link
+                          className="dropdown-item py-2 dropdown-text"
+                          to={`/${user.id}/favorites`}
+                        >
+                          Favorite pets
+                        </Link>
+                      </li>
+                      <li>
                         <p
                           role="button"
                           className="dropdown-item py-2 dropdown-text"

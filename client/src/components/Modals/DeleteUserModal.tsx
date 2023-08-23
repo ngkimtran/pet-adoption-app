@@ -59,7 +59,12 @@ const DeleteUserModal = () => {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body"></div>
+              <div className="modal-body">
+                <p className="m-0">
+                  Doing so will permanently delete your account from our
+                  database.
+                </p>
+              </div>
               <div className="modal-footer">
                 <button
                   type="button"

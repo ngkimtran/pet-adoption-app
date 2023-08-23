@@ -38,7 +38,25 @@ export type User = {
   email: string;
   role: string;
   favorites: {
+    breed: string;
+    type: {
+      id: string;
+      name: string;
+      __typename: string;
+    };
+    characteristic: {
+      age: string;
+      coatLength: string;
+      gender: string;
+      health: Array<string>;
+      houseTrained: boolean;
+      personality: Array<string>;
+      size: string;
+      __typename: string;
+    };
     id: string;
+    location: string;
+    name: string;
     __typename: string;
   }[];
   __typename: string;

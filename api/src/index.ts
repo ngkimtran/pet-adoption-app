@@ -25,13 +25,23 @@ startStandaloneServer(server, {
         auth.substring(7),
         process.env.JWT_SECRET
       );
-      const currentUser = await UserModel.findById(decodedToken.id).populate(
-        "favorites",
-        {
+      const currentUser = await UserModel.findById(decodedToken.id).populate({
+        path: "favorites",
+        select: {
           id: 1,
           name: 1,
-        }
-      );
+          breed: 1,
+          location: 1,
+          characteristic: 1,
+        },
+        populate: {
+          path: "type",
+          select: {
+            id: 1,
+            name: 1,
+          },
+        },
+      });
       return { currentUser };
     }
   },

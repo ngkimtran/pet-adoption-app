@@ -136,23 +136,35 @@ const Query = {
   pets: async (_parents, args) => {
     if (args.type) {
       const animalFilter = await Animal.findOne({ name: args.type });
-      return Pet.find({ type: animalFilter._id }).populate("type", {
-        name: 1,
+      return Pet.find({ type: animalFilter._id }).populate({
+        path: "type",
+        select: {
+          name: 1,
+        },
       });
     }
-    return Pet.find().populate("type", {
-      name: 1,
+    return Pet.find().populate({
+      path: "type",
+      select: {
+        name: 1,
+      },
     });
   },
 
   pet: async (_parents, args) => {
     if (args.id)
-      return Pet.findById(args.id).populate("type", {
-        name: 1,
+      return Pet.findById(args.id).populate({
+        path: "type",
+        select: {
+          name: 1,
+        },
       });
     if (args.name)
-      return Pet.findOne({ name: args.name }).populate("type", {
-        name: 1,
+      return Pet.findOne({ name: args.name }).populate({
+        path: "type",
+        select: {
+          name: 1,
+        },
       });
   },
 
@@ -173,27 +185,50 @@ const Query = {
   },
 
   users: async () =>
-    User.find().populate("favorites", {
-      id: 1,
-      name: 1,
+    User.find().populate({
+      path: "favorites",
+      select: {
+        id: 1,
+        name: 1,
+      },
     }),
 
   user: async (_parent, args) => {
     if (args.id)
-      return User.findById(args.id).populate("favorites", {
-        id: 1,
-        name: 1,
+      return User.findById(args.id).populate({
+        path: "favorites",
+        select: {
+          id: 1,
+          name: 1,
+        },
       });
     if (args.username)
-      return User.findOne({ username: args.username }).populate("favorites", {
-        id: 1,
-        name: 1,
+      return User.findOne({ username: args.username }).populate({
+        path: "favorites",
+        select: {
+          id: 1,
+          name: 1,
+        },
       });
   },
 
   me: (_root, _args, { currentUser }) =>
-    currentUser.populate("favorites", {
-      id: 1,
+    currentUser.populate({
+      path: "favorites",
+      select: {
+        id: 1,
+        name: 1,
+        breed: 1,
+        location: 1,
+        characteristic: 1,
+      },
+      populate: {
+        path: "type",
+        select: {
+          id: 1,
+          name: 1,
+        },
+      },
     }),
 };
 
@@ -270,9 +305,12 @@ const Mutation = {
         },
       },
       { new: true }
-    ).populate("type", {
-      id: 1,
-      name: 1,
+    ).populate({
+      path: "type",
+      select: {
+        id: 1,
+        name: 1,
+      },
     });
   },
 
@@ -331,8 +369,12 @@ const Mutation = {
       });
     }
 
-    await currentUser.populate("favorites", {
-      id: 1,
+    await currentUser.populate({
+      path: "favorites",
+      select: {
+        id: 1,
+        name: 1,
+      },
     });
 
     const pet = await Pet.findById(args.petId);
@@ -349,8 +391,12 @@ const Mutation = {
         },
       },
       { new: true }
-    ).populate("favorites", {
-      id: 1,
+    ).populate({
+      path: "favorites",
+      select: {
+        id: 1,
+        name: 1,
+      },
     });
   },
 

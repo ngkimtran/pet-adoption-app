@@ -16,7 +16,11 @@ const UserSchema = new userMongoose.Schema({
     required: true,
     index: { unique: true },
   },
-  name: {
+  firstname: {
+    type: String,
+    required: true,
+  },
+  lastname: {
     type: String,
     required: true,
   },

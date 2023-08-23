@@ -33,8 +33,10 @@ export type Pet = {
 export type User = {
   id: string;
   username: string;
-  name: string;
+  firstname: string;
+  lastname: string;
   email: string;
+  role: string;
   favorites: {
     id: string;
     __typename: string;

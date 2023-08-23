@@ -64,6 +64,21 @@ code {
   color: #fff;
 }
 
+.icon-primary {
+  fill: #eabc3f;
+  color: #eabc3f;
+  cursor: pointer;
+}
+
+.icon-primary:hover {
+  fill: #ea9a3f;
+  color: #ea9a3f;
+}
+
+.dropdown-text:hover {
+  color: #eabc3f;
+}
+
 .animal-type {
   outline: 3px solid #eabc3f;
   padding: 2rem;

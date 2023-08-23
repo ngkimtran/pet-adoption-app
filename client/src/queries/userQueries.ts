@@ -5,8 +5,10 @@ const GET_USER = gql`
     user(username: $username, id: $id) {
       id
       username
-      name
+      firstname
+      lastname
       email
+      role
       favorites {
         id
       }
@@ -19,8 +21,10 @@ const CURRENT_USER = gql`
     me {
       id
       username
-      name
+      firstname
+      lastname
       email
+      role
       favorites {
         id
       }

@@ -10,6 +10,7 @@ import Pets from "./pages/Pets/Pets";
 import SinglePet from "./pages/SinglePet/SinglePet";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Profile from "./pages/Profile/Profile";
 import { tokenState, userState } from "./states/state";
 import { CURRENT_USER } from "./queries/userQueries";
 
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/:userId",
+        element: <Profile />,
       },
     ],
   },

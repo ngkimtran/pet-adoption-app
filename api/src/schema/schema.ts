@@ -47,7 +47,8 @@ const typeDefs = `
     username: String!,
     password: String!,
     email: String!,
-    name: String!,
+    firstname: String!,
+    lastname: String!,
     favorites: [Pet],
     role: Role!,
   }
@@ -103,7 +104,8 @@ const typeDefs = `
     deleteAnimal(id: ID!): Animal,
 
     addUser(
-        name: String!,
+        firstname: String!,
+        lastname: String!,
         email: String!,
         username: String!,
         password: String!,
@@ -112,7 +114,8 @@ const typeDefs = `
 
     updateUser(
         id: ID!,
-        name: String,
+        firstname: String,
+        lastname: String,
         email: String,
         username: String,
         password: String,
@@ -287,7 +290,8 @@ const Mutation = {
     const passwordHash = await bcrypt.hash(args.password, SALT_WORK_FACTOR);
 
     const user = new User({
-      name: args.name,
+      firstname: args.firstname,
+      lastname: args.lastname,
       email: args.email,
       username: args.username,
       password: passwordHash,
@@ -307,7 +311,8 @@ const Mutation = {
       args.id,
       {
         $set: {
-          name: args.name ? args.name : oldUser.name,
+          firstname: args.firstname ? args.firstname : oldUser.firstname,
+          lastname: args.lastname ? args.lastname : oldUser.lastname,
           email: args.email ? args.email : oldUser.email,
           username: args.username ? args.username : oldUser.username,
           password: passwordHash,

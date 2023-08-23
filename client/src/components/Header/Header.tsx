@@ -1,16 +1,21 @@
 import { useRecoilState } from "recoil";
 import { ApolloConsumer, ApolloClient } from "@apollo/client";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BsFillPersonFill } from "react-icons/bs";
 import { LOGO } from "../../constants/constants";
-import { tokenState } from "../../states/state";
+import { tokenState, userState } from "../../states/state";
 
 const Header = () => {
-  const [token, setToken] = useRecoilState(tokenState);
+  const [, setToken] = useRecoilState(tokenState);
+  const [user, setUser] = useRecoilState(userState);
+  const navigate = useNavigate();
 
   const logout = (client: ApolloClient<object>) => {
     setToken(null);
+    setUser(null);
     localStorage.clear();
     client.resetStore();
+    navigate("/");
   };
 
   return (
@@ -50,17 +55,45 @@ const Header = () => {
                   Adopt a pet
                 </Link>
                 <div className=" mx-4 vr text-color-primary opacity-100"></div>
-                {token ? (
-                  <button
-                    onClick={() => logout(client)}
-                    className="navbar-link fw-semibold bg-transparent border-0 text-color-primary text-decoration-none m-0 p-0"
-                  >
-                    Log out
-                  </button>
+                {user ? (
+                  <div className="dropdown">
+                    <BsFillPersonFill
+                      className="fs-3 icon-primary dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                    />
+
+                    <ul className="dropdown-menu dropdown-menu-end mt-3">
+                      <li>
+                        <h6 className="dropdown-header text-capitalize">
+                          Hello, {user.firstname} {user.lastname}
+                        </h6>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <Link
+                          className="dropdown-item py-2 dropdown-text"
+                          to={`/${user.id}`}
+                        >
+                          Profile
+                        </Link>
+                      </li>
+                      <li>
+                        <p
+                          role="button"
+                          className="dropdown-item py-2 dropdown-text"
+                          onClick={() => logout(client)}
+                        >
+                          Log out
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
                 ) : (
                   <>
                     <Link
-                      className="navbar-link text-color-primary text-decoration-none ps-4"
+                      className="navbar-link text-color-primary text-decoration-none ps-3"
                       to="/login"
                     >
                       Log in

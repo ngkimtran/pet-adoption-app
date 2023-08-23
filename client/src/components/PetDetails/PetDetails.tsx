@@ -31,7 +31,7 @@ const PetDetails = ({ pet }: PetDetailsPropsType) => {
   });
 
   const toggleFavorite = () => updateFavorite({ variables: { petId: pet.id } });
-  console.log(user);
+
   return (
     <div>
       <div className=" d-flex align-items-stretch rounded-top shadow bg-white">
@@ -87,17 +87,9 @@ const PetDetails = ({ pet }: PetDetailsPropsType) => {
         </div>
         <div className="py-4 fs-1" style={{ flex: ".1 " }}>
           {user && user.favorites.some((p) => p.id === pet.id) ? (
-            <FaHeart
-              onClick={toggleFavorite}
-              role="button"
-              className="text-color-primary"
-            />
+            <FaHeart onClick={toggleFavorite} className="icon-primary" />
           ) : (
-            <FaRegHeart
-              onClick={toggleFavorite}
-              role="button"
-              className="text-color-primary"
-            />
+            <FaRegHeart onClick={toggleFavorite} className="icon-primary" />
           )}
           <div />
         </div>

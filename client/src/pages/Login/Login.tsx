@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,8 +17,14 @@ const Login = () => {
 
   const [, setToken] = useRecoilState(tokenState);
 
-  const [login, loginMutationResult] = useMutation(LOGIN, {
-    onCompleted: () => {
+  const [login] = useMutation(LOGIN, {
+    onCompleted: (data) => {
+      const token = data.login;
+      setToken(token);
+
+      // if (localSavePermission)
+      localStorage.setItem("pet-adoption-user-token", token);
+
       setTimeout(() => navigate("/"), 50);
     },
     onError: (error) => {
@@ -31,16 +37,6 @@ const Login = () => {
       });
     },
   });
-
-  useEffect(() => {
-    if (loginMutationResult.data) {
-      const token = loginMutationResult.data.login;
-      setToken(token);
-
-      // if (localSavePermission)
-      localStorage.setItem("pet-adoption-user-token", token);
-    }
-  }, [loginMutationResult.data]); // eslint-disable-line
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -68,6 +64,7 @@ const Login = () => {
             <input
               id="username"
               type="text"
+              autoComplete="username"
               className="form-control"
               value={username}
               onChange={({ target }) => setUsername(target.value)}
@@ -81,6 +78,7 @@ const Login = () => {
             <input
               id="password"
               type="password"
+              autoComplete="current-password"
               className="form-control"
               value={password}
               onChange={({ target }) => setPassword(target.value)}

@@ -73,24 +73,34 @@ const Header = () => {
                       </li>
                       <li>
                         <Link
-                          className="dropdown-item py-2 dropdown-text"
+                          className="dropdown-item py-2 nav-text"
                           to={`/${user.id}`}
                         >
                           Profile
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          className="dropdown-item py-2 dropdown-text"
-                          to={`/${user.id}/favorites`}
-                        >
-                          Favorite pets
-                        </Link>
+                        {user?.role === "ADMIN" && (
+                          <Link
+                            className="dropdown-item py-2 nav-text"
+                            to={`/${user.id}/admin-panel`}
+                          >
+                            Admin panel
+                          </Link>
+                        )}
+                        {user?.role === "USER" && (
+                          <Link
+                            className="dropdown-item py-2 nav-text"
+                            to={`/${user.id}/favorites`}
+                          >
+                            Favorite pets
+                          </Link>
+                        )}
                       </li>
                       <li>
                         <p
                           role="button"
-                          className="dropdown-item py-2 dropdown-text"
+                          className="dropdown-item py-2 nav-text"
                           onClick={() => logout(client)}
                         >
                           Log out

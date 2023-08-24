@@ -10,4 +10,14 @@ const GET_ANIMALS = gql`
   }
 `;
 
-export { GET_ANIMALS };
+const GET_ANIMAL = gql`
+  query getAnimal($id: ID, $name: String) {
+    animal(id: $id, name: $name) {
+      id
+      name
+      petCount
+    }
+  }
+`;
+
+export { GET_ANIMALS, GET_ANIMAL };

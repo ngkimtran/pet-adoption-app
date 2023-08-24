@@ -1,10 +1,13 @@
 import { useRecoilState } from "recoil";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userState } from "../../states/state";
 import { PLACEHOLDER_IMG } from "../../constants/constants";
 
 const Favorites = () => {
   const [user] = useRecoilState(userState);
+  const navigate = useNavigate();
+
+  if (user?.role === "ADMIN") navigate("/");
 
   return (
     <>

@@ -5,15 +5,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { useQuery } from "@apollo/client";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import Admin from "./pages/Admin/Admin";
 import Home from "./pages/Home/Home";
 import Pets from "./pages/Pets/Pets";
 import SinglePet from "./pages/SinglePet/SinglePet";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Profile from "./pages/Profile/Profile";
+import Favorites from "./pages/Favorites/Favorites";
 import { tokenState, userState } from "./states/state";
 import { CURRENT_USER } from "./queries/userQueries";
-import Favorites from "./pages/Favorites/Favorites";
+import { useEffect } from "react";
 
 const Layout = () => {
   return (
@@ -60,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/:userId/favorites",
         element: <Favorites />,
+      },
+      {
+        path: "/:userId/admin-panel",
+        element: <Admin />,
       },
     ],
   },

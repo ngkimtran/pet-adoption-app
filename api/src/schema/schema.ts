@@ -57,7 +57,7 @@ const typeDefs = `
     pets(type: String): [Pet!],
     pet(id:ID, name: String): Pet!,
     animals: [Animal!],
-    animal(name: String!): Animal!,
+    animal(id: ID, name: String): Animal!,
     users: [User!],
     user(id: ID, username: String): User!, 
     me: User
@@ -114,10 +114,10 @@ const typeDefs = `
 
     updateUser(
         id: ID!,
-        firstname: String,
-        lastname: String,
-        email: String,
-        username: String,
+        firstname: String!,
+        lastname: String!,
+        email: String!,
+        username: String!,
         password: String,
     ): User,
 
@@ -178,10 +178,19 @@ const Query = {
   },
 
   animal: async (_parent, args) => {
-    const animal = await Animal.findOne({ name: args.name });
-    animal.petCount = await Pet.find({ type: animal._id }).count();
-    animal.save();
-    return Animal.findOne({ name: args.name });
+    let animal;
+    if (args.id) {
+      animal = await Animal.findById(args.id);
+      animal.petCount = await Pet.find({ type: animal._id }).count();
+      animal.save();
+      return Animal.findById(args.id);
+    }
+    if (args.name) {
+      animal = await Animal.findOne({ name: args.name });
+      animal.petCount = await Pet.find({ type: animal._id }).count();
+      animal.save();
+      return Animal.findOne({ name: args.name });
+    }
   },
 
   users: async () =>
@@ -270,7 +279,7 @@ const Mutation = {
     if (args.type) {
       animalType = await Animal.findOne({ name: args.type });
 
-      if (animalType) {
+      if (!animalType) {
         const newAnimalType = new Animal({ name: args.type });
         animalType = await newAnimalType.save();
       }
@@ -349,10 +358,10 @@ const Mutation = {
       args.id,
       {
         $set: {
-          firstname: args.firstname ? args.firstname : oldUser.firstname,
-          lastname: args.lastname ? args.lastname : oldUser.lastname,
-          email: args.email ? args.email : oldUser.email,
-          username: args.username ? args.username : oldUser.username,
+          firstname: args.firstname,
+          lastname: args.lastname,
+          email: args.email,
+          username: args.username,
           password: passwordHash,
         },
       },

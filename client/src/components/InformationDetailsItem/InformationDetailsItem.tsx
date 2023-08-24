@@ -1,9 +1,12 @@
-type UserDetailsItemPropType = {
+type InformationDetailsItemPropType = {
   text: string;
   value: string;
 };
 
-const UserDetailsItem = ({ text, value }: UserDetailsItemPropType) => {
+const InformationDetailsItem = ({
+  text,
+  value,
+}: InformationDetailsItemPropType) => {
   return (
     <div className="ms-5 text-color-dark">
       <span className="d-inline-block w-25 pe-2 fw-semibold text-uppercase opacity-75">
@@ -14,4 +17,4 @@ const UserDetailsItem = ({ text, value }: UserDetailsItemPropType) => {
   );
 };
 
-export default UserDetailsItem;
+export default InformationDetailsItem;

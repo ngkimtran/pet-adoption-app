@@ -27,8 +27,8 @@ const GET_PETS = gql`
 `;
 
 const GET_PET = gql`
-  query getPet($id: ID!) {
-    pet(id: $id) {
+  query getPet($id: ID, $name: String) {
+    pet(id: $id, name: $name) {
       id
       name
       type {

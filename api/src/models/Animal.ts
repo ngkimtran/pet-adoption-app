@@ -4,6 +4,7 @@ const AnimalSchema = new animalMongoose.Schema({
   name: {
     type: String,
     required: true,
+    index: { unique: true },
   },
   petCount: {
     type: Number,

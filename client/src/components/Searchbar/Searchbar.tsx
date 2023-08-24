@@ -9,7 +9,7 @@ const Searchbar = () => {
         placeholder="What type of pets are you looking for?"
       />
       <button className="px-4 btn btn-primary" type="button">
-        <FaMagnifyingGlass size={"2rem"} />
+        <FaMagnifyingGlass className="fs-2" />
       </button>
     </div>
   );

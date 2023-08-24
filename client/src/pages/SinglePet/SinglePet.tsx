@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { GET_PET } from "../../queries/petQueries";
 import PetDetails from "../../components/PetDetails/PetDetails";
 import Loader from "../../components/Loader/Loader";
+import Error from "../../components/Error/Error";
 
 const SinglePet = () => {
   const { id } = useParams();
@@ -13,14 +14,7 @@ const SinglePet = () => {
   return (
     <div style={{ minHeight: "50vh" }} className="container m-auto my-5 p-0">
       {loading && <Loader />}
-      {error && (
-        <div
-          className="alert alert-danger p-4 m-5 fw-semibold text-center"
-          role="alert"
-        >
-          Something went wrong - please try again.
-        </div>
-      )}
+      {error && <Error />}
       {!loading && !error && data && (
         <div className="d-flex flex-column gap-5">
           <PetDetails pet={data.pet} />

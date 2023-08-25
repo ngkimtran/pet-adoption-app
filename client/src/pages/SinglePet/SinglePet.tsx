@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_PET } from "../../queries/petQueries";
-import PetDetails from "../../components/PetDetails/PetDetails";
+import SinglePetDetails from "../../components/SinglePetDetails/SinglePetDetails";
 import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
 
@@ -17,7 +17,7 @@ const SinglePet = () => {
       {error && <Error />}
       {!loading && !error && data && (
         <div className="d-flex flex-column gap-5">
-          <PetDetails pet={data.pet} />
+          <SinglePetDetails pet={data.pet} />
           <div className="m-auto d-flex flex-column align-items-center w-75 gap-4 px-3 py-5 text-center rounded background-primary">
             <h3 className="mb-3 fw-semibold text-white">
               Considering {data.pet.name} for adoption?

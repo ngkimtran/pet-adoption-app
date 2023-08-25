@@ -85,4 +85,24 @@ const UPDATE_FAVORITE = gql`
   }
 `;
 
-export { ADD_USER, UPDATE_USER, LOGIN, UPDATE_FAVORITE, DELETE_USER };
+const UPDATE_ROLE = gql`
+  mutation updateRole($id: ID!, $role: String!) {
+    updateRole(id: $id, role: $role) {
+      id
+      firstname
+      lastname
+      username
+      email
+      role
+    }
+  }
+`;
+
+export {
+  ADD_USER,
+  UPDATE_USER,
+  LOGIN,
+  UPDATE_FAVORITE,
+  DELETE_USER,
+  UPDATE_ROLE,
+};

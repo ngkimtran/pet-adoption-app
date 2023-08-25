@@ -27,7 +27,9 @@ const Admin = () => {
               className="list-group list-group-flush bg-white mx-2 my-4 rounded"
             >
               <li
-                className="list-group-item px-5 py-4 fs-5 nav-text"
+                className={`list-group-item px-5 py-4 fs-5 nav-text ${
+                  managementComponent === ManagementComponent.ANIMAL && "active"
+                }`}
                 onClick={() =>
                   setManagementComponent(ManagementComponent.ANIMAL)
                 }
@@ -35,13 +37,17 @@ const Admin = () => {
                 Animals management
               </li>
               <li
-                className="list-group-item px-5 py-4 fs-5 nav-text"
+                className={`list-group-item px-5 py-4 fs-5 nav-text ${
+                  managementComponent === ManagementComponent.PET && "active"
+                }`}
                 onClick={() => setManagementComponent(ManagementComponent.PET)}
               >
                 Pets management
               </li>
               <li
-                className="list-group-item px-5 py-4 fs-5 nav-text"
+                className={`list-group-item px-5 py-4 fs-5 nav-text ${
+                  managementComponent === ManagementComponent.USER && "active"
+                }`}
                 onClick={() => setManagementComponent(ManagementComponent.USER)}
               >
                 Users management

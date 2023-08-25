@@ -125,6 +125,8 @@ const typeDefs = `
 
     updateFavorite(petId: ID!): User,
 
+    updateRole( id: ID!, role: String!): User,
+
     login(
         username: String!,
         password: String!,
@@ -407,6 +409,24 @@ const Mutation = {
         name: 1,
       },
     });
+  },
+
+  updateRole: async (_parent, args, { currentUser }) => {
+    if (currentUser.role !== "ADMIN") {
+      throw new GraphQLError("No permissions", {
+        extensions: { code: "FORBIDDEN" },
+      });
+    }
+
+    return User.findByIdAndUpdate(
+      args.id,
+      {
+        $set: {
+          role: args.role,
+        },
+      },
+      { new: true }
+    );
   },
 
   login: async (_parent, args) => {

@@ -107,6 +107,19 @@ const AnimalsManagement = () => {
                 </tr>
               )}
               {!animalQueryResult.loading &&
+                animalQueryResult.error &&
+                animalList.length === 0 &&
+                searchInput.length > 0 && (
+                  <tr>
+                    <td
+                      colSpan={4}
+                      className="p-5 text-center m-auto fw-bold fs-3 text-secondary"
+                    >
+                      No animal found
+                    </td>
+                  </tr>
+                )}
+              {!animalQueryResult.loading &&
                 animalList.length > 0 &&
                 animalList.map((animal: Animal) => (
                   <tr key={animal.id}>
@@ -124,19 +137,6 @@ const AnimalsManagement = () => {
                     </td>
                   </tr>
                 ))}
-              {!animalQueryResult.loading &&
-                animalQueryResult.error &&
-                animalList.length === 0 &&
-                searchInput.length > 0 && (
-                  <tr>
-                    <td
-                      colSpan={4}
-                      className="p-5 text-center m-auto fw-bold fs-3 text-secondary"
-                    >
-                      No animal found
-                    </td>
-                  </tr>
-                )}
             </tbody>
           </table>
 

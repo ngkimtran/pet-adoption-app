@@ -131,6 +131,15 @@ code {
   -webkit-animation: Color 10s ease-in-out infinite;
 }
 
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+  border: none;
+  background-color: #eabc3f;
+  color: #212529;
+  opacity: 0.75;
+}
+
 /* keyframes */
 
 @keyframes Color {

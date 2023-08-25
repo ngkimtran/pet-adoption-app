@@ -10,6 +10,11 @@ export const LANDING_IMGS = [
 export const ERROR_TOAST_ID = "error";
 export const SUCCESS_TOAST_ID = "success";
 
+export enum Role {
+  ADMIN = "ADMIN",
+  USER = "USER",
+}
+
 export enum ManagementComponent {
   ANIMAL = "animal",
   PET = "pet",

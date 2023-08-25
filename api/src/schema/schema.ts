@@ -141,6 +141,7 @@ const Query = {
       return Pet.find({ type: animalFilter._id }).populate({
         path: "type",
         select: {
+          id: 1,
           name: 1,
         },
       });
@@ -148,6 +149,7 @@ const Query = {
     return Pet.find().populate({
       path: "type",
       select: {
+        id: 1,
         name: 1,
       },
     });
@@ -158,6 +160,7 @@ const Query = {
       return Pet.findById(args.id).populate({
         path: "type",
         select: {
+          id: 1,
           name: 1,
         },
       });
@@ -165,6 +168,7 @@ const Query = {
       return Pet.findOne({ name: args.name }).populate({
         path: "type",
         select: {
+          id: 1,
           name: 1,
         },
       });

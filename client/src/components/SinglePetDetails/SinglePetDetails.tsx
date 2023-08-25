@@ -23,9 +23,7 @@ const SinglePetDetails = ({ pet }: SinglePetDetailsPropsType) => {
             username: user?.username,
           },
         },
-        () => {
-          setUser(response.data.updateFavorite);
-        }
+        () => setUser(response.data.updateFavorite)
       );
     },
   });

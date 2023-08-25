@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
+import { GET_USER } from "../../queries/userQueries";
 import { UPDATE_USER } from "../../mutations/userMutations";
 import { ERROR_TOAST_ID, SUCCESS_TOAST_ID } from "../../constants/constants";
 import { useRecoilState } from "recoil";
 import { userState } from "../../states/state";
 
 const UpdateUserModal = () => {
-  const [user] = useRecoilState(userState);
+  const [user, setUser] = useRecoilState(userState);
 
   const [username, setUsername] = useState<string>(user?.username!);
   const [firstname, setFirstname] = useState<string>(user?.firstname!);
@@ -17,6 +18,17 @@ const UpdateUserModal = () => {
   const [password, setPassword] = useState<string>("");
 
   const [updateUser] = useMutation(UPDATE_USER, {
+    update: (cache, response) => {
+      cache.updateQuery(
+        {
+          query: GET_USER,
+          variables: {
+            username: user?.username,
+          },
+        },
+        () => setUser(response.data.updateUser)
+      );
+    },
     onCompleted: () => {
       toast.success("Update user successfully!", {
         toastId: SUCCESS_TOAST_ID,

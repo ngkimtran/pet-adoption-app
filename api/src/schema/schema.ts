@@ -372,7 +372,13 @@ const Mutation = {
         },
       },
       { new: true }
-    );
+    ).populate({
+      path: "favorites",
+      select: {
+        id: 1,
+        name: 1,
+      },
+    });
   },
 
   deleteUser: async (_parent, args) => User.findByIdAndRemove(args.id),

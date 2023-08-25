@@ -7,8 +7,8 @@ const ADD_PET = gql`
     $breed: String!
     $location: String!
     $description: String!
-    $adoptionFee: Number!
-    $age: Number!
+    $adoptionFee: Float!
+    $age: Float!
     $gender: String!
     $size: String!
     $personality: Array!
@@ -58,21 +58,23 @@ const ADD_PET = gql`
 
 const UPDATE_PET = gql`
   mutation updatePet(
+    $id: ID!
     $type: String!
     $name: String!
     $breed: String!
     $location: String!
     $description: String!
-    $adoptionFee: Number!
-    $age: Number!
+    $adoptionFee: Float!
+    $age: String!
     $gender: String!
     $size: String!
-    $personality: Array!
+    $personality: [String]!
     $coatLength: String!
     $houseTrained: Boolean!
-    $health: Array!
+    $health: [String]!
   ) {
     updatePet(
+      id: $id
       type: $type
       name: $name
       breed: $breed
@@ -87,26 +89,23 @@ const UPDATE_PET = gql`
       houseTrained: $houseTrained
       health: $health
     ) {
-      pets {
-        id
+      id
+      type {
         name
-        type {
-          id
-          name
-        }
-        breed
-        location
-        description
-        adoptionFee
-        characteristic {
-          age
-          gender
-          size
-          personality
-          coatLength
-          houseTrained
-          health
-        }
+      }
+      name
+      breed
+      location
+      description
+      adoptionFee
+      characteristic {
+        age
+        gender
+        size
+        personality
+        coatLength
+        houseTrained
+        health
       }
     }
   }

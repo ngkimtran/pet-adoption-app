@@ -50,6 +50,13 @@ code {
   color: #fff;
 }
 
+.edit-pet-form {
+  background-color: rgba(0, 0, 0, 0.075) !important;
+}
+.edit-pet-form:hover {
+  background-color: #fff !important;
+}
+
 .btn-primary:hover {
   background-color: #ea9a3f;
 }

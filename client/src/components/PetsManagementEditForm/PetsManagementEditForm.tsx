@@ -1,0 +1,381 @@
+import { useMutation } from "@apollo/client";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { ERROR_TOAST_ID, SUCCESS_TOAST_ID } from "../../constants/constants";
+import { Pet } from "../../types/types";
+import { UPDATE_PET } from "../../mutations/petMutations";
+import { GET_PETS } from "../../queries/petQueries";
+
+type PetsManagementEditFormPropType = {
+  pet: Pet;
+  setPetList: Function;
+};
+
+const PetsManagementEditForm = ({
+  pet,
+  setPetList,
+}: PetsManagementEditFormPropType) => {
+  const [name, setName] = useState<string>(pet.name);
+  const [typeName, setTypeName] = useState<string>(pet.type.name);
+  const [breed, setBreed] = useState<string>(pet.breed);
+  const [location, setLocation] = useState<string>(pet.location);
+  const [description, setDescription] = useState<string>(pet.description);
+  const [adoptionFee, setAdoptionFee] = useState<number>(pet.adoptionFee);
+  const [age, setAge] = useState<string>(pet.characteristic.age);
+  const [gender, setGender] = useState<string>(pet.characteristic.gender);
+  const [size, setSize] = useState<string>(pet.characteristic.size);
+  const [personality, setPersonality] = useState<string[]>(
+    pet.characteristic.personality
+  );
+  const [coatLength, setCoatLength] = useState<string>(
+    pet.characteristic.coatLength
+  );
+  const [houseTrained, setHouseTrained] = useState<boolean>(
+    pet.characteristic.houseTrained
+  );
+  const [health, setHealth] = useState<string[]>(pet.characteristic.health);
+
+  const [updatePet] = useMutation(UPDATE_PET, {
+    update: (cache, response) => {
+      cache.updateQuery(
+        {
+          query: GET_PETS,
+        },
+        () => console.log(response.data)
+      );
+    },
+    onCompleted: () => {
+      toast.success("Update pet successfully!", {
+        toastId: SUCCESS_TOAST_ID,
+        position: toast.POSITION.TOP_CENTER,
+        theme: "colored",
+        hideProgressBar: true,
+        autoClose: 2000,
+      });
+    },
+    onError: (error) => {
+      toast.error(error.graphQLErrors[0].message, {
+        toastId: ERROR_TOAST_ID,
+        position: toast.POSITION.TOP_CENTER,
+        theme: "colored",
+        hideProgressBar: true,
+      });
+    },
+  });
+
+  const handleReset = () => {
+    setName(pet.name);
+    setTypeName(pet.type.name);
+    setBreed(pet.breed);
+    setLocation(pet.location);
+    setDescription(pet.description);
+    setAdoptionFee(pet.adoptionFee);
+    setAge(pet.characteristic.age);
+    setGender(pet.characteristic.gender);
+    setSize(pet.characteristic.size);
+    setPersonality(pet.characteristic.personality);
+    setCoatLength(pet.characteristic.coatLength);
+    setHouseTrained(pet.characteristic.houseTrained);
+    setHealth(pet.characteristic.health);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    await updatePet({
+      variables: {
+        id: pet.id,
+        type: typeName,
+        name,
+        breed,
+        location,
+        description,
+        adoptionFee,
+        age,
+        gender,
+        size,
+        personality: personality.filter((item) => item !== ""),
+        coatLength,
+        houseTrained,
+        health: health.filter((item) => item !== ""),
+      },
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label htmlFor={`${pet.id}-name`} className="form-label fw-semibold">
+            Name
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-name`}
+            value={name}
+            onChange={({ target }) => setName(target.value)}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label htmlFor={`${pet.id}-type`} className="form-label fw-semibold">
+            Type
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-type`}
+            value={typeName}
+            onChange={({ target }) => setTypeName(target.value)}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label htmlFor={`${pet.id}-breed`} className="form-label fw-semibold">
+            Breed
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-breed`}
+            value={breed}
+            onChange={({ target }) => setBreed(target.value)}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label
+            htmlFor={`${pet.id}-location`}
+            className="form-label fw-semibold"
+          >
+            Location
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-location`}
+            value={location}
+            onChange={({ target }) => setLocation(target.value)}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label
+            htmlFor={`${pet.id}-description`}
+            className="form-label fw-semibold"
+          >
+            Description
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <textarea
+            className="form-control"
+            style={{ height: "12rem" }}
+            id={`${pet.id}-description`}
+            value={description}
+            onChange={({ target }) => setDescription(target.value)}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label
+            htmlFor={`${pet.id}-adoptionFee`}
+            className="form-label fw-semibold"
+          >
+            Adoption Fee
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="number"
+            className="form-control"
+            id={`${pet.id}-adoptionFee`}
+            value={adoptionFee}
+            onChange={({ target }) => setAdoptionFee(Number(target.value))}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label htmlFor={`${pet.id}-age`} className="form-label fw-semibold">
+            Age
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-age`}
+            value={age}
+            onChange={({ target }) => setAge(target.value)}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label
+            htmlFor={`${pet.id}-gender`}
+            className="form-label fw-semibold"
+          >
+            Gender
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-gender`}
+            value={gender}
+            onChange={({ target }) => setGender(target.value)}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label htmlFor={`${pet.id}-size`} className="form-label fw-semibold">
+            Size
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-size`}
+            value={size}
+            onChange={({ target }) => setSize(target.value)}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label
+            htmlFor={`${pet.id}-personality`}
+            className="form-label fw-semibold"
+          >
+            Personality
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-personality`}
+            value={personality.join(", ")}
+            onChange={({ target }) => setPersonality(target.value.split(", "))}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label
+            htmlFor={`${pet.id}-coatLength`}
+            className="form-label fw-semibold"
+          >
+            Coat Length
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-coatLength`}
+            value={coatLength}
+            onChange={({ target }) => setCoatLength(target.value)}
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label
+            htmlFor={`${pet.id}-houseTrained`}
+            className="form-label fw-semibold"
+          >
+            House Trained
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name={`${pet.id}-houseTrained`}
+              id={`${pet.id}-houseTrained-true`}
+              checked={houseTrained}
+              onChange={() => setHouseTrained(true)}
+            />
+            <label
+              className="form-check-label"
+              htmlFor={`${pet.id}-houseTrained-true`}
+            >
+              Yes
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name={`${pet.id}-houseTrained`}
+              id={`${pet.id}-houseTrained-no`}
+              checked={!houseTrained}
+              onChange={() => setHouseTrained(false)}
+            />
+            <label
+              className="form-check-label"
+              htmlFor={`${pet.id}-houseTrained-no`}
+            >
+              No
+            </label>
+          </div>
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label
+            htmlFor={`${pet.id}-health`}
+            className="form-label fw-semibold"
+          >
+            Health
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="text"
+            className="form-control"
+            id={`${pet.id}-health`}
+            value={health.join(", ")}
+            onChange={({ target }) => setHealth(target.value.split(", "))}
+          />
+        </div>
+      </div>
+
+      <div className="d-flex justify-content-start mt-5 mb-4 ms-4 gap-4">
+        <button
+          type="reset"
+          onClick={handleReset}
+          className="btn btn-secondary px-4 py-2"
+        >
+          Reset
+        </button>
+        <button type="submit" className="btn btn-primary px-4 py-2">
+          Submit
+        </button>
+      </div>
+    </form>
+  );
+};
+
+export default PetsManagementEditForm;

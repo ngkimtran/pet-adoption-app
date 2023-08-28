@@ -5,7 +5,7 @@ import { GET_ANIMALS } from "../../queries/animalQueries";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
 
-const Animals = () => {
+const AnimalList = () => {
   const { loading, error, data } = useQuery(GET_ANIMALS);
 
   return (
@@ -32,4 +32,4 @@ const Animals = () => {
   );
 };
 
-export default Animals;
+export default AnimalList;

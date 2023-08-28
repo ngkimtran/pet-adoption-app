@@ -15,9 +15,14 @@ const typeDefs = `
     USER
   }
 
+  enum Gender {
+    MALE
+    FEMALE
+  }
+
   type Characteristic {
     age: String!,
-    gender: String,
+    gender: Gender!,
     size: String,
     personality: [String],
     coatLength: String,
@@ -266,7 +271,7 @@ const Mutation = {
       // characteristics
       characteristic: {
         age: args.age,
-        gender: args.gender,
+        gender: args.gender.toUpperCase(),
         size: args.size,
         personality: args.personality,
         coatLength: args.coatLength,
@@ -279,43 +284,27 @@ const Mutation = {
   },
 
   updatePet: async (_parent, args) => {
-    const oldPet = await Pet.findById(args.id);
-    let animalType = undefined;
-
-    if (args.type) {
-      animalType = await Animal.findOne({ name: args.type });
-
-      if (!animalType) {
-        const newAnimalType = new Animal({ name: args.type });
-        animalType = await newAnimalType.save();
-      }
-    }
+    const animalType = await Animal.findOne({ name: args.type });
 
     return Pet.findByIdAndUpdate(
       args.id,
       {
         $set: {
-          type: animalType ? animalType._id : oldPet.type,
-          name: args.name ? args.name : oldPet.name,
-          breed: args.breed ? args.breed : oldPet.breed,
-          location: args.location ? args.location : oldPet.location,
-          description: args.description ? args.description : oldPet.description,
-          adoptionFee: args.adoptionFee ? args.adoptionFee : oldPet.adoptionFee,
+          type: animalType._id,
+          name: args.name,
+          breed: args.breed,
+          location: args.location,
+          description: args.description,
+          adoptionFee: args.adoptionFee,
           // characteristics
           characteristic: {
-            age: args.age ? args.age : oldPet.characteristic.age,
-            gender: args.gender ? args.gender : oldPet.characteristic.gender,
-            size: args.size ? args.size : oldPet.characteristic.size,
-            personality: args.personality
-              ? args.personality
-              : oldPet.characteristic.personality,
-            coatLength: args.coatLength
-              ? args.coatLength
-              : oldPet.characteristic.coatLength,
-            houseTrained: args.houseTrained
-              ? args.houseTrained
-              : oldPet.characteristic.houseTrained,
-            health: args.health ? args.health : oldPet.characteristic.health,
+            age: args.age,
+            gender: args.gender.toUpperCase(),
+            size: args.size,
+            personality: args.personality,
+            coatLength: args.coatLength,
+            houseTrained: args.houseTrained,
+            health: args.healthealth,
           },
         },
       },

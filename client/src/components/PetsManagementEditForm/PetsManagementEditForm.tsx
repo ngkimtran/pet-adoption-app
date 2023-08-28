@@ -1,7 +1,11 @@
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { ERROR_TOAST_ID, SUCCESS_TOAST_ID } from "../../constants/constants";
+import {
+  ERROR_TOAST_ID,
+  Gender,
+  SUCCESS_TOAST_ID,
+} from "../../constants/constants";
 import { Pet } from "../../types/types";
 import { UPDATE_PET } from "../../mutations/petMutations";
 import { GET_PETS } from "../../queries/petQueries";
@@ -22,7 +26,7 @@ const PetsManagementEditForm = ({
   const [description, setDescription] = useState<string>(pet.description);
   const [adoptionFee, setAdoptionFee] = useState<number>(pet.adoptionFee);
   const [age, setAge] = useState<string>(pet.characteristic.age);
-  const [gender, setGender] = useState<string>(pet.characteristic.gender);
+  const [gender, setGender] = useState<Gender>(pet.characteristic.gender);
   const [size, setSize] = useState<string>(pet.characteristic.size);
   const [personality, setPersonality] = useState<string[]>(
     pet.characteristic.personality
@@ -41,7 +45,7 @@ const PetsManagementEditForm = ({
         {
           query: GET_PETS,
         },
-        () => console.log(response.data)
+        () => setPetList((prev: Pet[]) => [...prev, response.data.updatePet])
       );
     },
     onCompleted: () => {
@@ -117,6 +121,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-name`}
             value={name}
             onChange={({ target }) => setName(target.value)}
+            required
           />
         </div>
       </div>
@@ -133,6 +138,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-type`}
             value={typeName}
             onChange={({ target }) => setTypeName(target.value)}
+            required
           />
         </div>
       </div>
@@ -149,6 +155,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-breed`}
             value={breed}
             onChange={({ target }) => setBreed(target.value)}
+            required
           />
         </div>
       </div>
@@ -168,6 +175,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-location`}
             value={location}
             onChange={({ target }) => setLocation(target.value)}
+            required
           />
         </div>
       </div>
@@ -187,6 +195,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-description`}
             value={description}
             onChange={({ target }) => setDescription(target.value)}
+            required
           />
         </div>
       </div>
@@ -206,6 +215,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-adoptionFee`}
             value={adoptionFee}
             onChange={({ target }) => setAdoptionFee(Number(target.value))}
+            required
           />
         </div>
       </div>
@@ -222,6 +232,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-age`}
             value={age}
             onChange={({ target }) => setAge(target.value)}
+            required
           />
         </div>
       </div>
@@ -235,13 +246,40 @@ const PetsManagementEditForm = ({
           </label>
         </div>
         <div className="col-lg-7">
-          <input
-            type="text"
-            className="form-control"
-            id={`${pet.id}-gender`}
-            value={gender}
-            onChange={({ target }) => setGender(target.value)}
-          />
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name={`${pet.id}-gender`}
+              id={`${pet.id}-gender-male`}
+              checked={gender === Gender.MALE}
+              onChange={() => setGender(Gender.MALE)}
+              required
+            />
+            <label
+              className="form-check-label"
+              htmlFor={`${pet.id}-gender-male`}
+            >
+              Male
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              name={`${pet.id}-gender`}
+              id={`${pet.id}-gender-female`}
+              checked={gender === Gender.FEMALE}
+              onChange={() => setGender(Gender.FEMALE)}
+              required
+            />
+            <label
+              className="form-check-label"
+              htmlFor={`${pet.id}-gender-female`}
+            >
+              Female
+            </label>
+          </div>
         </div>
       </div>
       <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
@@ -257,6 +295,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-size`}
             value={size}
             onChange={({ target }) => setSize(target.value)}
+            required
           />
         </div>
       </div>
@@ -276,6 +315,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-personality`}
             value={personality.join(", ")}
             onChange={({ target }) => setPersonality(target.value.split(", "))}
+            required
           />
         </div>
       </div>
@@ -295,6 +335,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-coatLength`}
             value={coatLength}
             onChange={({ target }) => setCoatLength(target.value)}
+            required
           />
         </div>
       </div>
@@ -316,6 +357,7 @@ const PetsManagementEditForm = ({
               id={`${pet.id}-houseTrained-true`}
               checked={houseTrained}
               onChange={() => setHouseTrained(true)}
+              required
             />
             <label
               className="form-check-label"
@@ -332,6 +374,7 @@ const PetsManagementEditForm = ({
               id={`${pet.id}-houseTrained-no`}
               checked={!houseTrained}
               onChange={() => setHouseTrained(false)}
+              required
             />
             <label
               className="form-check-label"
@@ -358,6 +401,7 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-health`}
             value={health.join(", ")}
             onChange={({ target }) => setHealth(target.value.split(", "))}
+            required
           />
         </div>
       </div>

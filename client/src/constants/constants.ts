@@ -20,3 +20,8 @@ export enum ManagementComponent {
   PET = "pet",
   USER = "user",
 }
+
+export enum Gender {
+  MALE = "MALE",
+  FEMALE = "FEMALE",
+}

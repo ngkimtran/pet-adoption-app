@@ -28,7 +28,11 @@ const PetSchema = new petMongoose.Schema({
       type: String,
       required: true,
     },
-    gender: { type: String },
+    gender: {
+      type: String,
+      enum: ["MALE", "FEMALE"],
+      required: true,
+    },
     size: { type: String },
     personality: { type: Array(String) },
     coatLength: { type: String },

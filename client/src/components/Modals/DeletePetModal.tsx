@@ -1,36 +1,29 @@
 import { useMutation } from "@apollo/client";
 import { toast } from "react-toastify";
 import { ERROR_TOAST_ID, SUCCESS_TOAST_ID } from "../../constants/constants";
-import { DELETE_ANIMAL } from "../../mutations/animalMutations";
-import { Animal } from "../../types/types";
-import { GET_ANIMALS } from "../../queries/animalQueries";
+import { DELETE_PET } from "../../mutations/petMutations";
+import { GET_PETS } from "../../queries/petQueries";
+import { Pet } from "../../types/types";
 
-type DeleteAnimalModalPropType = {
+type DeletePetModalPropType = {
   id: string;
   setId: Function;
-  setAnimalList: Function;
+  setPetList: Function;
 };
 
-const DeleteAnimalModal = ({
-  id,
-  setId,
-  setAnimalList,
-}: DeleteAnimalModalPropType) => {
-  const [deleteAnimal] = useMutation(DELETE_ANIMAL, {
+const DeletePetModal = ({ id, setId, setPetList }: DeletePetModalPropType) => {
+  const [deletePet] = useMutation(DELETE_PET, {
     update: (cache) => {
       cache.updateQuery(
         {
-          query: GET_ANIMALS,
+          query: GET_PETS,
         },
-        () =>
-          setAnimalList((prev: Animal[]) =>
-            prev.filter((animal) => animal.id !== id)
-          )
+        () => setPetList((prev: Pet[]) => prev.filter((pet) => pet.id !== id))
       );
     },
     onCompleted: () => {
       setId("");
-      toast.success("Delete animal successfully!", {
+      toast.success("Delete pet successfully!", {
         toastId: SUCCESS_TOAST_ID,
         position: toast.POSITION.TOP_CENTER,
         theme: "colored",
@@ -51,16 +44,16 @@ const DeleteAnimalModal = ({
   return (
     <div
       className="modal fade"
-      id="deleteAnimalModal"
+      id="deletePetModal"
       tabIndex={-1}
-      aria-labelledby="deleteAnimalModalLabel"
+      aria-labelledby="deletePetModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="deleteAnimalModalLabel">
-              Are you sure you want to delete this animal?
+            <h5 className="modal-title" id="deletePetModalLabel">
+              Are you sure you want to delete this pet?
             </h5>
             <button
               type="button"
@@ -72,7 +65,7 @@ const DeleteAnimalModal = ({
           <div className="modal-body">
             <p className="m-0">
               <span className="fw-bold fs-5">Warning!</span> Doing so will
-              delete all pets belong to this animal type.
+              permanently delete this pet and all its properties.
             </p>
           </div>
           <div className="modal-footer">
@@ -88,7 +81,7 @@ const DeleteAnimalModal = ({
               className="btn btn-danger"
               data-bs-dismiss="modal"
               onClick={() =>
-                deleteAnimal({
+                deletePet({
                   variables: { id },
                 })
               }
@@ -102,4 +95,4 @@ const DeleteAnimalModal = ({
   );
 };
 
-export default DeleteAnimalModal;
+export default DeletePetModal;

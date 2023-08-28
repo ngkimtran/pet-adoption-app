@@ -20,7 +20,7 @@ const PetsManagementEditForm = ({
   setPetList,
 }: PetsManagementEditFormPropType) => {
   const [name, setName] = useState<string>(pet.name);
-  const [typeName, setTypeName] = useState<string>(pet.type.name);
+  const [type, setType] = useState<string>(pet.type.name);
   const [breed, setBreed] = useState<string>(pet.breed);
   const [location, setLocation] = useState<string>(pet.location);
   const [description, setDescription] = useState<string>(pet.description);
@@ -69,7 +69,7 @@ const PetsManagementEditForm = ({
 
   const handleReset = () => {
     setName(pet.name);
-    setTypeName(pet.type.name);
+    setType(pet.type.name);
     setBreed(pet.breed);
     setLocation(pet.location);
     setDescription(pet.description);
@@ -89,7 +89,7 @@ const PetsManagementEditForm = ({
     await updatePet({
       variables: {
         id: pet.id,
-        type: typeName,
+        type,
         name,
         breed,
         location,
@@ -136,8 +136,8 @@ const PetsManagementEditForm = ({
             type="text"
             className="form-control"
             id={`${pet.id}-type`}
-            value={typeName}
-            onChange={({ target }) => setTypeName(target.value)}
+            value={type}
+            onChange={({ target }) => setType(target.value)}
             required
           />
         </div>
@@ -354,14 +354,14 @@ const PetsManagementEditForm = ({
               className="form-check-input"
               type="radio"
               name={`${pet.id}-houseTrained`}
-              id={`${pet.id}-houseTrained-true`}
+              id={`${pet.id}-houseTrained-yes`}
               checked={houseTrained}
               onChange={() => setHouseTrained(true)}
               required
             />
             <label
               className="form-check-label"
-              htmlFor={`${pet.id}-houseTrained-true`}
+              htmlFor={`${pet.id}-houseTrained-yes`}
             >
               Yes
             </label>

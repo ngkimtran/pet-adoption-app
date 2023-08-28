@@ -8,13 +8,13 @@ const ADD_PET = gql`
     $location: String!
     $description: String!
     $adoptionFee: Float!
-    $age: Float!
+    $age: String!
     $gender: String!
     $size: String!
-    $personality: Array!
+    $personality: [String]!
     $coatLength: String!
     $houseTrained: Boolean!
-    $health: Array!
+    $health: [String]!
   ) {
     addPet(
       type: $type
@@ -31,26 +31,23 @@ const ADD_PET = gql`
       houseTrained: $houseTrained
       health: $health
     ) {
-      pets {
-        id
+      id
+      type {
         name
-        type {
-          id
-          name
-        }
-        breed
-        location
-        description
-        adoptionFee
-        characteristic {
-          age
-          gender
-          size
-          personality
-          coatLength
-          houseTrained
-          health
-        }
+      }
+      name
+      breed
+      location
+      description
+      adoptionFee
+      characteristic {
+        age
+        gender
+        size
+        personality
+        coatLength
+        houseTrained
+        health
       }
     }
   }

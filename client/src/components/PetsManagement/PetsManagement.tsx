@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { useLazyQuery, useQuery } from "@apollo/client";
-import { BsFillTrashFill } from "react-icons/bs";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import { Pet } from "../../types/types";
 import { GET_PET, GET_PETS } from "../../queries/petQueries";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
-import AddAnimalModal from "../Modals/AddAnimalModal";
-import DeleteAnimalModal from "../Modals/DeleteAnimalModal";
-import PetsManagementEditForm from "../PetsManagementEditForm/PetsManagementEditForm";
+import AddPetModal from "../Modals/AddPetModal";
+import DeletePetModal from "../Modals/DeletePetModal";
+import PetManagementRow from "../PetManagementRow/PetManagementRow";
 
 const PetsManagement = () => {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -82,7 +80,7 @@ const PetsManagement = () => {
                 className="btn-primary px-0 py-2 rounded fw-bold"
                 style={{ flex: "0.2" }}
                 data-bs-toggle="modal"
-                data-bs-target="#addAnimalModal"
+                data-bs-target="#addPetModal"
               >
                 Add pet
               </button>
@@ -128,60 +126,18 @@ const PetsManagement = () => {
               {!petQueryResult.loading &&
                 petList.length > 0 &&
                 petList.map((pet: Pet) => (
-                  <>
-                    <tr
-                      key={pet.id}
-                      data-bs-toggle="collapse"
-                      data-bs-target={`#collapse-${pet.id}`}
-                      aria-expanded="false"
-                      aria-controls={`collapse-${pet.id}`}
-                    >
-                      <td className="p-3">
-                        <span
-                          className="d-inline-block"
-                          style={{ minWidth: "14rem" }}
-                        >
-                          {pet.id}
-                        </span>
-                        <MdKeyboardArrowDown className="icon-primary ms-3 fs-4" />
-                      </td>
-                      <td className="text-capitalize p-3">{pet.name}</td>
-                      <td className="text-capitalize p-3">{pet.type.name}</td>
-                      <td className="p-3">
-                        <BsFillTrashFill
-                          role="button"
-                          className="fs-5 text-danger"
-                          data-bs-toggle="modal"
-                          data-bs-target="#deleteAnimalModal"
-                          onClick={() => setId(pet.id)}
-                        />
-                      </td>
-                    </tr>
-
-                    {/* Accordion */}
-                    <tr
-                      className="collapse accordion-collapse"
-                      id={`collapse-${pet.id}`}
-                      data-bs-parent=".table"
-                    >
-                      <td className="p-3 edit-pet-form" colSpan={4}>
-                        <PetsManagementEditForm
-                          pet={pet}
-                          setPetList={setPetList}
-                        />
-                      </td>
-                    </tr>
-                  </>
+                  <PetManagementRow
+                    key={pet.id}
+                    pet={pet}
+                    setPetList={setPetList}
+                    setId={setId}
+                  />
                 ))}
             </tbody>
           </table>
 
-          {/* <AddAnimalModal setPetList={setPetList} />
-          <DeleteAnimalModal
-            id={id}
-            setId={setId}
-            setPetList={setPetList}
-          /> */}
+          <AddPetModal setPetList={setPetList} />
+          <DeletePetModal id={id} setId={setId} setPetList={setPetList} />
         </>
       )}
     </>

@@ -18,7 +18,10 @@ const PetSchema = new petMongoose.Schema({
     type: String,
     required: true,
   },
-  description: { type: String },
+  description: {
+    type: String,
+    required: true,
+  },
   adoptionFee: {
     type: Number,
     required: true,
@@ -33,11 +36,26 @@ const PetSchema = new petMongoose.Schema({
       enum: ["MALE", "FEMALE"],
       required: true,
     },
-    size: { type: String },
-    personality: { type: Array(String) },
-    coatLength: { type: String },
-    houseTrained: { type: Boolean },
-    health: { type: Array(String) },
+    size: {
+      type: String,
+      required: true,
+    },
+    personality: {
+      type: Array(String),
+      required: true,
+    },
+    coatLength: {
+      type: String,
+      required: true,
+    },
+    houseTrained: {
+      type: Boolean,
+      required: true,
+    },
+    health: {
+      type: Array(String),
+      required: true,
+    },
   },
 });
 

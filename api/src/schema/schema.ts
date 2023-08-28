@@ -23,11 +23,11 @@ const typeDefs = `
   type Characteristic {
     age: String!,
     gender: Gender!,
-    size: String,
-    personality: [String],
-    coatLength: String,
-    houseTrained: Boolean,
-    health: [String],
+    size: String!,
+    personality: [String]!,
+    coatLength: String!,
+    houseTrained: Boolean!,
+    health: [String]!,
   }
 
   type Animal {
@@ -74,15 +74,15 @@ const typeDefs = `
         name: String!,
         breed: String!,
         location: String!,
-        description: String,
+        description: String!,
         adoptionFee: Float!,
         age: String!,
-        gender: String,
-        size: String,
-        personality: [String],
-        coatLength: String,
-        houseTrained: Boolean,
-        health: [String],
+        gender: String!,
+        size: String!,
+        personality: [String]!,
+        coatLength: String!,
+        houseTrained: Boolean!,
+        health: [String]!,
     ): Pet
 
     updatePet(
@@ -277,6 +277,14 @@ const Mutation = {
         coatLength: args.coatLength,
         houseTrained: args.houseTrained,
         health: args.health,
+      },
+    });
+
+    pet.populate({
+      path: "type",
+      select: {
+        id: 1,
+        name: 1,
       },
     });
 

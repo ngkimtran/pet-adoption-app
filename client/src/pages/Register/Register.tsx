@@ -41,8 +41,8 @@ const Login = () => {
     await register({
       variables: {
         username,
-        firstname: `${firstname.charAt(0).toUpperCase() + firstname.slice(1)}`,
-        lastname: `${lastname.charAt(0).toUpperCase() + lastname.slice(1)}`,
+        firstname,
+        lastname,
         email,
         password,
       },

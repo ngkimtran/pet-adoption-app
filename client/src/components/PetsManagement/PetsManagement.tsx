@@ -66,9 +66,7 @@ const PetsManagement = () => {
                   onClick={async () =>
                     await getPet({
                       variables: {
-                        name:
-                          searchInput.charAt(0).toUpperCase() +
-                          searchInput.slice(1),
+                        name: searchInput,
                       },
                     })
                   }

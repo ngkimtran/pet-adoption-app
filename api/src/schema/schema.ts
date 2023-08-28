@@ -7,6 +7,8 @@ const Pet = require("../models/Pet.ts");
 const Animal = require("../models/Animal.ts");
 const User = require("../models/User.ts");
 
+const { CapitalizeUtil: Capitalize } = require("../utilities/utilities.ts");
+
 const SALT_WORK_FACTOR = 10;
 
 const typeDefs = `
@@ -170,7 +172,7 @@ const Query = {
         },
       });
     if (args.name)
-      return Pet.findOne({ name: args.name }).populate({
+      return Pet.findOne({ name: Capitalize(args.name) }).populate({
         path: "type",
         select: {
           id: 1,
@@ -340,8 +342,8 @@ const Mutation = {
     const passwordHash = await bcrypt.hash(args.password, SALT_WORK_FACTOR);
 
     const user = new User({
-      firstname: args.firstname,
-      lastname: args.lastname,
+      firstname: Capitalize(args.firstname),
+      lastname: Capitalize(args.lastname),
       email: args.email,
       username: args.username,
       password: passwordHash,

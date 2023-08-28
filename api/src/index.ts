@@ -4,7 +4,7 @@ const { startStandaloneServer } = require("@apollo/server/standalone");
 const schema = require("./schema/schema.ts");
 const connectDBfunc = require("./config/db.ts");
 
-const UserModel = require("./models/User");
+const UserModel = require("./models/User.ts");
 
 require("dotenv").config();
 connectDBfunc();

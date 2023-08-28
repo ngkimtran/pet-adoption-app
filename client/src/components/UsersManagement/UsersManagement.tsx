@@ -34,10 +34,10 @@ const UsersManagement = () => {
   }, [userQueryResult, usersQueryResult]); //eslint-disable-line
 
   return (
-    <>
+    <div className="w-100">
       {usersQueryResult.loading && <Loader />}
       {usersQueryResult.error && <Error />}
-      {userList && (
+      {!usersQueryResult.loading && !usersQueryResult.error && userList && (
         <>
           <div className="p-3 mt-3 mb-5 d-flex w-100 justify-content-between align-items-center">
             <h3 className="fw-bold text-secondary" style={{ flex: "0.4" }}>
@@ -126,7 +126,7 @@ const UsersManagement = () => {
           </table>
         </>
       )}
-    </>
+    </div>
   );
 };
 

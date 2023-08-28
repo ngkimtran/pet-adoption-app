@@ -59,9 +59,16 @@ const Admin = () => {
 
             {/* Content */}
             <div
-              style={{ flex: "0.79" }}
+              style={{ flex: "0.79", minHeight: "90vh" }}
               className="row row-cols-auto bg-white mx-2 my-4 px-3 py-4 rounded"
             >
+              {!managementComponent && (
+                <div className="d-flex justify-content-center align-items-center w-100 text-black-50 fw-bold">
+                  <h3>
+                    Choose a category from the navigation panel on the left
+                  </h3>
+                </div>
+              )}
               {managementComponent === MANAGEMENT_COMPONENT.ANIMAL && (
                 <AnimalsManagement />
               )}

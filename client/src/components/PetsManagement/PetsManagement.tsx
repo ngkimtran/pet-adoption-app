@@ -7,7 +7,7 @@ import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
 import AddPetModal from "../Modals/AddPetModal";
 import DeletePetModal from "../Modals/DeletePetModal";
-import PetManagementRow from "../PetManagementRow/PetManagementRow";
+import PetsManagementRow from "../PetsManagementRow/PetsManagementRow";
 
 const PetsManagement = () => {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -126,7 +126,7 @@ const PetsManagement = () => {
               {!petQueryResult.loading &&
                 petList.length > 0 &&
                 petList.map((pet: Pet) => (
-                  <PetManagementRow
+                  <PetsManagementRow
                     key={pet.id}
                     pet={pet}
                     setPetList={setPetList}

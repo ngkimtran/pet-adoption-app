@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { userState } from "../../states/state";
-import { ManagementComponent } from "../../constants/constants";
+import { MANAGEMENT_COMPONENT } from "../../constants/constants";
 import AnimalsManagement from "../../components/AnimalsManagement/AnimalsManagement";
 import PetsManagement from "../../components/PetsManagement/PetsManagement";
 import UsersManagement from "../../components/UsersManagement/UsersManagement";
@@ -10,7 +10,7 @@ import UsersManagement from "../../components/UsersManagement/UsersManagement";
 const Admin = () => {
   const [user] = useRecoilState(userState);
   const [managementComponent, setManagementComponent] = useState<
-    ManagementComponent | undefined
+    MANAGEMENT_COMPONENT | undefined
   >(undefined);
   const navigate = useNavigate();
 
@@ -28,27 +28,30 @@ const Admin = () => {
             >
               <li
                 className={`list-group-item px-5 py-4 fs-5 nav-text ${
-                  managementComponent === ManagementComponent.ANIMAL && "active"
+                  managementComponent === MANAGEMENT_COMPONENT.ANIMAL &&
+                  "active"
                 }`}
                 onClick={() =>
-                  setManagementComponent(ManagementComponent.ANIMAL)
+                  setManagementComponent(MANAGEMENT_COMPONENT.ANIMAL)
                 }
               >
                 Animals management
               </li>
               <li
                 className={`list-group-item px-5 py-4 fs-5 nav-text ${
-                  managementComponent === ManagementComponent.PET && "active"
+                  managementComponent === MANAGEMENT_COMPONENT.PET && "active"
                 }`}
-                onClick={() => setManagementComponent(ManagementComponent.PET)}
+                onClick={() => setManagementComponent(MANAGEMENT_COMPONENT.PET)}
               >
                 Pets management
               </li>
               <li
                 className={`list-group-item px-5 py-4 fs-5 nav-text ${
-                  managementComponent === ManagementComponent.USER && "active"
+                  managementComponent === MANAGEMENT_COMPONENT.USER && "active"
                 }`}
-                onClick={() => setManagementComponent(ManagementComponent.USER)}
+                onClick={() =>
+                  setManagementComponent(MANAGEMENT_COMPONENT.USER)
+                }
               >
                 Users management
               </li>
@@ -59,13 +62,13 @@ const Admin = () => {
               style={{ flex: "0.79" }}
               className="row row-cols-auto bg-white mx-2 my-4 px-3 py-4 rounded"
             >
-              {managementComponent === ManagementComponent.ANIMAL && (
+              {managementComponent === MANAGEMENT_COMPONENT.ANIMAL && (
                 <AnimalsManagement />
               )}
-              {managementComponent === ManagementComponent.PET && (
+              {managementComponent === MANAGEMENT_COMPONENT.PET && (
                 <PetsManagement />
               )}
-              {managementComponent === ManagementComponent.USER && (
+              {managementComponent === MANAGEMENT_COMPONENT.USER && (
                 <UsersManagement />
               )}
             </div>

@@ -10,18 +10,18 @@ export const LANDING_IMGS = [
 export const ERROR_TOAST_ID = "error";
 export const SUCCESS_TOAST_ID = "success";
 
-export enum Role {
+export enum ROLE {
   ADMIN = "ADMIN",
   USER = "USER",
 }
 
-export enum ManagementComponent {
+export enum MANAGEMENT_COMPONENT {
   ANIMAL = "animal",
   PET = "pet",
   USER = "user",
 }
 
-export enum Gender {
+export enum GENDER {
   MALE = "MALE",
   FEMALE = "FEMALE",
 }

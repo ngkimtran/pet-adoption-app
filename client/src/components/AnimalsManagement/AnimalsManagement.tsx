@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useLazyQuery, useQuery } from "@apollo/client";
-import { BsFillTrashFill } from "react-icons/bs";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Animal } from "../../types/types";
 import { GET_ANIMAL, GET_ANIMALS } from "../../queries/animalQueries";
@@ -8,6 +7,7 @@ import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
 import AddAnimalModal from "../Modals/AddAnimalModal";
 import DeleteAnimalModal from "../Modals/DeleteAnimalModal";
+import AnimalsManagementRow from "../AnimalsManagementRow/AnimalsManagementRow";
 
 const AnimalsManagement = () => {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -122,20 +122,11 @@ const AnimalsManagement = () => {
               {!animalQueryResult.loading &&
                 animalList.length > 0 &&
                 animalList.map((animal: Animal) => (
-                  <tr key={animal.id}>
-                    <td className="p-3">{animal.id}</td>
-                    <td className="text-capitalize p-3">{animal.name}</td>
-                    <td className="p-3">{animal.petCount}</td>
-                    <td className="p-3">
-                      <BsFillTrashFill
-                        role="button"
-                        className="fs-5 text-danger"
-                        data-bs-toggle="modal"
-                        data-bs-target="#deleteAnimalModal"
-                        onClick={() => setId(animal.id)}
-                      />
-                    </td>
-                  </tr>
+                  <AnimalsManagementRow
+                    key={animal.id}
+                    animal={animal}
+                    setId={setId}
+                  />
                 ))}
             </tbody>
           </table>

@@ -1,4 +1,4 @@
-import { Gender, Role } from "../constants/constants";
+import { GENDER, ROLE } from "../constants/constants";
 
 export type Animal = {
   id: string;
@@ -13,7 +13,7 @@ export type Pet = {
   characteristic: {
     age: string;
     coatLength: string;
-    gender: Gender;
+    gender: GENDER;
     health: Array<string>;
     houseTrained: boolean;
     personality: Array<string>;
@@ -38,7 +38,7 @@ export type User = {
   firstname: string;
   lastname: string;
   email: string;
-  role: Role;
+  role: ROLE;
   favorites: {
     breed: string;
     type: {

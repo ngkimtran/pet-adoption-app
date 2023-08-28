@@ -1,17 +1,11 @@
 import { useState, useEffect } from "react";
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { toast } from "react-toastify";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { User } from "../../types/types";
 import { GET_USER, GET_USERS } from "../../queries/userQueries";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
-import {
-  ERROR_TOAST_ID,
-  Role,
-  SUCCESS_TOAST_ID,
-} from "../../constants/constants";
-import { UPDATE_ROLE } from "../../mutations/userMutations";
+import UsersManagementRow from "../UsersManagementRow/UsersManagementRow";
 
 const UsersManagement = () => {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -19,33 +13,6 @@ const UsersManagement = () => {
 
   const usersQueryResult = useQuery(GET_USERS);
   const [getUser, userQueryResult] = useLazyQuery(GET_USER);
-  const [updateRole] = useMutation(UPDATE_ROLE, {
-    update: (cache, response) => {
-      cache.updateQuery(
-        {
-          query: GET_USERS,
-        },
-        () => setUserList(response.data.updateRole)
-      );
-    },
-    onCompleted: () => {
-      toast.success("Update user successfully!", {
-        toastId: SUCCESS_TOAST_ID,
-        position: toast.POSITION.TOP_CENTER,
-        theme: "colored",
-        hideProgressBar: true,
-        autoClose: 2000,
-      });
-    },
-    onError: (error) => {
-      toast.error(error.graphQLErrors[0].message, {
-        toastId: ERROR_TOAST_ID,
-        position: toast.POSITION.TOP_CENTER,
-        theme: "colored",
-        hideProgressBar: true,
-      });
-    },
-  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -149,28 +116,11 @@ const UsersManagement = () => {
               {!userQueryResult.loading &&
                 userList.length > 0 &&
                 userList.map((user: User) => (
-                  <tr key={user.id}>
-                    <td className="p-3">{user.id}</td>
-                    <td className="text-capitalize p-3">
-                      {user.firstname} {user.lastname}
-                    </td>
-                    <td className="p-3">{user.username}</td>
-                    <td className="p-3">{user.email}</td>
-                    <td className="p-3">
-                      <select
-                        className="form-select"
-                        defaultValue={user.role}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                          updateRole({
-                            variables: { id: user.id, role: e.target.value },
-                          })
-                        }
-                      >
-                        <option value={Role.ADMIN}>{Role.ADMIN}</option>
-                        <option value={Role.USER}>{Role.USER}</option>
-                      </select>
-                    </td>
-                  </tr>
+                  <UsersManagementRow
+                    key={user.id}
+                    user={user}
+                    setUserList={setUserList}
+                  />
                 ))}
             </tbody>
           </table>

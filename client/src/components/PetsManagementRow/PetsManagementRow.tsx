@@ -3,17 +3,17 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { Pet } from "../../types/types";
 import PetsManagementEditForm from "../PetsManagementEditForm/PetsManagementEditForm";
 
-type PetManagementRowPropType = {
+type PetsManagementRowPropType = {
   pet: Pet;
   setPetList: Function;
   setId: Function;
 };
 
-const PetManagementRow = ({
+const PetsManagementRow = ({
   pet,
   setPetList,
   setId,
-}: PetManagementRowPropType) => (
+}: PetsManagementRowPropType) => (
   <>
     <tr
       key={pet.id}
@@ -54,4 +54,4 @@ const PetManagementRow = ({
   </>
 );
 
-export default PetManagementRow;
+export default PetsManagementRow;

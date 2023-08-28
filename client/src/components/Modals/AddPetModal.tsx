@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
 import {
   ERROR_TOAST_ID,
-  Gender,
   SUCCESS_TOAST_ID,
+  GENDER,
 } from "../../constants/constants";
 import { ADD_PET } from "../../mutations/petMutations";
 import { GET_PETS } from "../../queries/petQueries";
@@ -22,7 +22,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
   const [description, setDescription] = useState<string>("");
   const [adoptionFee, setAdoptionFee] = useState<number>(0);
   const [age, setAge] = useState<string>("");
-  const [gender, setGender] = useState<Gender>(Gender.MALE);
+  const [gender, setGender] = useState<GENDER>(GENDER.MALE);
   const [size, setSize] = useState<string>("");
   const [personality, setPersonality] = useState<string[]>([""]);
   const [coatLength, setCoatLength] = useState<string>("");
@@ -180,8 +180,8 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
                   type="radio"
                   className="form-check-input"
                   name="gender"
-                  checked={gender === Gender.MALE}
-                  onChange={() => setGender(Gender.MALE)}
+                  checked={gender === GENDER.MALE}
+                  onChange={() => setGender(GENDER.MALE)}
                   required
                 />
                 <label className="form-check-label" htmlFor="gender-male">
@@ -194,8 +194,8 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
                   type="radio"
                   className="form-check-input"
                   name="gender"
-                  checked={gender === Gender.FEMALE}
-                  onChange={() => setGender(Gender.FEMALE)}
+                  checked={gender === GENDER.FEMALE}
+                  onChange={() => setGender(GENDER.FEMALE)}
                   required
                 />
                 <label className="form-check-label" htmlFor="gender-female">

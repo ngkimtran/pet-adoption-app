@@ -3,8 +3,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import {
   ERROR_TOAST_ID,
-  Gender,
   SUCCESS_TOAST_ID,
+  GENDER,
 } from "../../constants/constants";
 import { Pet } from "../../types/types";
 import { UPDATE_PET } from "../../mutations/petMutations";
@@ -26,7 +26,7 @@ const PetsManagementEditForm = ({
   const [description, setDescription] = useState<string>(pet.description);
   const [adoptionFee, setAdoptionFee] = useState<number>(pet.adoptionFee);
   const [age, setAge] = useState<string>(pet.characteristic.age);
-  const [gender, setGender] = useState<Gender>(pet.characteristic.gender);
+  const [gender, setGender] = useState<GENDER>(pet.characteristic.gender);
   const [size, setSize] = useState<string>(pet.characteristic.size);
   const [personality, setPersonality] = useState<string[]>(
     pet.characteristic.personality
@@ -252,8 +252,8 @@ const PetsManagementEditForm = ({
               type="radio"
               name={`${pet.id}-gender`}
               id={`${pet.id}-gender-male`}
-              checked={gender === Gender.MALE}
-              onChange={() => setGender(Gender.MALE)}
+              checked={gender === GENDER.MALE}
+              onChange={() => setGender(GENDER.MALE)}
               required
             />
             <label
@@ -269,8 +269,8 @@ const PetsManagementEditForm = ({
               type="radio"
               name={`${pet.id}-gender`}
               id={`${pet.id}-gender-female`}
-              checked={gender === Gender.FEMALE}
-              onChange={() => setGender(Gender.FEMALE)}
+              checked={gender === GENDER.FEMALE}
+              onChange={() => setGender(GENDER.FEMALE)}
               required
             />
             <label

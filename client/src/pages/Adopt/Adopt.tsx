@@ -1,11 +1,5 @@
 import AdoptionForm from "../../components/AdoptionForm/AdoptionForm";
 
-const Adopt = () => {
-  return (
-    <div>
-      <AdoptionForm />
-    </div>
-  );
-};
+const Adopt = () => <AdoptionForm />;
 
 export default Adopt;

@@ -16,19 +16,18 @@ import Favorites from "./pages/Favorites/Favorites";
 import { tokenState, userState } from "./states/state";
 import { CURRENT_USER } from "./queries/userQueries";
 import Adopt from "./pages/Adopt/Adopt";
+import About from "./pages/About/About";
 
-const Layout = () => {
-  return (
-    <div className="bg-offwhite ">
-      <ToastContainer limit={1} />
-      <Header />
-      <div className="container-fluid px-0 app">
-        <Outlet />
-      </div>
-      <Footer />
+const Layout = () => (
+  <div className="bg-offwhite ">
+    <ToastContainer limit={1} />
+    <Header />
+    <div className="container-fluid px-0 app">
+      <Outlet />
     </div>
-  );
-};
+    <Footer />
+  </div>
+);
 
 const router = createBrowserRouter([
   {
@@ -70,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/adopt",
         element: <Adopt />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },

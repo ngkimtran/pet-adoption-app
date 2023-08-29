@@ -46,7 +46,7 @@ const Header = () => {
                   className="navbar-link text-color-primary text-decoration-none"
                   to="/about"
                 >
-                  About
+                  About us
                 </Link>
                 <Link
                   className="navbar-link text-color-primary text-decoration-none"

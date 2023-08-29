@@ -6,10 +6,15 @@ import { userState } from "../../states/state";
 import { GET_PET } from "../../queries/petQueries";
 import { CREATE_CHECKOUT_SESSION } from "../../queries/paymentQueries";
 import { ERROR_TOAST_ID, LOGO } from "../../constants/constants";
+import { useEffect, useState } from "react";
 
 const AdoptionForm = () => {
   const [user] = useRecoilState(userState);
   const [searchParams] = useSearchParams();
+
+  const [petId, setPetId] = useState<string>(
+    searchParams.get("pet-id") ? searchParams.get("pet-id")! : ""
+  );
 
   const navigate = useNavigate();
 
@@ -30,6 +35,10 @@ const AdoptionForm = () => {
       });
     },
   });
+
+  useEffect(() => {
+    getPet({ variables: { id: petId } });
+  }, [petId, getPet]);
 
   const handlePayment = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -66,12 +75,7 @@ const AdoptionForm = () => {
       >
         {!user && (
           <>
-            <img
-              src={LOGO}
-              alt=""
-              className="mb-3 logo opacity-75 w-50"
-              // style={{ width: "10rem" }}
-            />
+            <img src={LOGO} alt="" className="mb-3 logo opacity-75 w-50" />
             <h2 className="input-group-lg text-center text-dark fw-bold">
               Login to start adopting a pet!
             </h2>
@@ -124,15 +128,11 @@ const AdoptionForm = () => {
                 <select
                   className="form-select"
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-                    getPet({ variables: { id: event.target.value } })
+                    setPetId(event.target.value)
                   }
-                  defaultValue={
-                    searchParams.get("pet-id")
-                      ? searchParams.get("pet-id")!
-                      : "default"
-                  }
+                  defaultValue={petId}
                 >
-                  <option value="default" disabled>
+                  <option value="" disabled>
                     Select a pet
                   </option>
                   {user.favorites.map((fav) => (

@@ -15,7 +15,7 @@ import Profile from "./pages/Profile/Profile";
 import Favorites from "./pages/Favorites/Favorites";
 import { tokenState, userState } from "./states/state";
 import { CURRENT_USER } from "./queries/userQueries";
-import { useEffect } from "react";
+import Adopt from "./pages/Adopt/Adopt";
 
 const Layout = () => {
   return (
@@ -66,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/:userId/admin-panel",
         element: <Admin />,
+      },
+      {
+        path: "/adopt",
+        element: <Adopt />,
       },
     ],
   },

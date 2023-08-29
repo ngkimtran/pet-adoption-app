@@ -19,7 +19,7 @@ const Login = () => {
 
   const [login] = useMutation(LOGIN, {
     onCompleted: (data) => {
-      const token = data.login;
+      const { token } = JSON.parse(data.login);
       setToken(token);
 
       // if (localSavePermission)

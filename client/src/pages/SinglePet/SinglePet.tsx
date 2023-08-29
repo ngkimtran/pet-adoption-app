@@ -24,7 +24,7 @@ const SinglePet = () => {
             </h3>
             <Link
               className="adopt-option w-50 py-2 cta-primary text-color-primary text-center text-decoration-none fw-bold fs-5 rounded-pill text-uppercase"
-              to="/"
+              to="/adopt"
             >
               Fill the form
             </Link>

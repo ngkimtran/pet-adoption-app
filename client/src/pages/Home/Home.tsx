@@ -1,6 +1,6 @@
 import AnimalList from "../../components/AnimalList/AnimalList";
 import Slider from "../../components/Slider/Slider";
-import Suggestion from "../../components/Suggestion/Suggestion";
+// import Suggestion from "../../components/Suggestion/Suggestion";
 
 const Home = () => {
   return (
@@ -11,7 +11,7 @@ const Home = () => {
         style={{ height: "1.5rem" }}
       />
       <AnimalList />
-      <Suggestion />
+      {/* <Suggestion /> */}
     </>
   );
 };

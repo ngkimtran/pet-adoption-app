@@ -44,13 +44,13 @@ const Header = () => {
                 </Link>
                 <Link
                   className="navbar-link text-color-primary text-decoration-none"
-                  to="/"
+                  to="/about"
                 >
                   About
                 </Link>
                 <Link
                   className="navbar-link text-color-primary text-decoration-none"
-                  to="/"
+                  to="/adopt"
                 >
                   Adopt a pet
                 </Link>

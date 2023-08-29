@@ -58,7 +58,10 @@ const Favorites = () => {
                     </div>
                   </Link>
                   <Link
-                    to={"/"}
+                    to={{
+                      pathname: "/adopt",
+                      search: `pet-id=${pet.id}`,
+                    }}
                     className="card-footer btn btn-primary text-uppercase fw-semibold"
                   >
                     Start adoption process

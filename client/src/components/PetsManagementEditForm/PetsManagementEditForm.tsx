@@ -5,6 +5,8 @@ import {
   ERROR_TOAST_ID,
   SUCCESS_TOAST_ID,
   GENDER,
+  AGE,
+  SIZE,
 } from "../../constants/constants";
 import { Pet } from "../../types/types";
 import { UPDATE_PET } from "../../mutations/petMutations";
@@ -25,9 +27,9 @@ const PetsManagementEditForm = ({
   const [location, setLocation] = useState<string>(pet.location);
   const [description, setDescription] = useState<string>(pet.description);
   const [adoptionFee, setAdoptionFee] = useState<number>(pet.adoptionFee);
-  const [age, setAge] = useState<string>(pet.characteristic.age);
+  const [age, setAge] = useState<AGE | string>(pet.characteristic.age);
   const [gender, setGender] = useState<GENDER>(pet.characteristic.gender);
-  const [size, setSize] = useState<string>(pet.characteristic.size);
+  const [size, setSize] = useState<SIZE | string>(pet.characteristic.size);
   const [personality, setPersonality] = useState<string[]>(
     pet.characteristic.personality
   );
@@ -226,14 +228,23 @@ const PetsManagementEditForm = ({
           </label>
         </div>
         <div className="col-lg-7">
-          <input
-            type="text"
-            className="form-control"
+          <select
+            className="form-select"
             id={`${pet.id}-age`}
-            value={age}
-            onChange={({ target }) => setAge(target.value)}
+            defaultValue={age}
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+              setAge(event.target.value)
+            }
             required
-          />
+          >
+            <option value="" disabled>
+              Select age
+            </option>
+            <option value={AGE.BABY}>Baby</option>
+            <option value={AGE.YOUNG}>Young</option>
+            <option value={AGE.ADULT}>Adult</option>
+            <option value={AGE.SENIOR}>Senior </option>
+          </select>
         </div>
       </div>
       <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
@@ -289,14 +300,23 @@ const PetsManagementEditForm = ({
           </label>
         </div>
         <div className="col-lg-7">
-          <input
-            type="text"
-            className="form-control"
+          <select
+            className="form-select"
             id={`${pet.id}-size`}
-            value={size}
-            onChange={({ target }) => setSize(target.value)}
+            defaultValue={size}
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+              setSize(event.target.value)
+            }
             required
-          />
+          >
+            <option value="" disabled>
+              Select size
+            </option>
+            <option value={SIZE.SMALL}>Small</option>
+            <option value={SIZE.MEDIUM}>Medium</option>
+            <option value={SIZE.LARGE}>Large</option>
+            <option value={SIZE.EXTRALARGE}>Extra Large</option>
+          </select>
         </div>
       </div>
       <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">

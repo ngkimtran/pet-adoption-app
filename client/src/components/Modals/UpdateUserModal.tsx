@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useMutation } from "@apollo/client";
 import { GET_USER } from "../../queries/userQueries";
 import { UPDATE_USER } from "../../mutations/userMutations";
@@ -14,8 +15,8 @@ const UpdateUserModal = () => {
   const [firstname, setFirstname] = useState<string>(user?.firstname!);
   const [lastname, setLastname] = useState<string>(user?.lastname!);
   const [email, setEmail] = useState<string>(user?.email!);
-
   const [password, setPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const [updateUser] = useMutation(UPDATE_USER, {
     update: (cache, response) => {
@@ -93,6 +94,7 @@ const UpdateUserModal = () => {
               <input
                 id="username"
                 type="text"
+                autoComplete="username"
                 className="form-control"
                 value={username}
                 onChange={({ target }) => setUsername(target.value)}
@@ -145,14 +147,25 @@ const UpdateUserModal = () => {
               <label htmlFor="password" className="form-label">
                 New Password
               </label>
-              <input
-                id="password"
-                type="password"
-                className="form-control"
-                value={password}
-                onChange={({ target }) => setPassword(target.value)}
-                required
-              />
+              <div className="d-flex">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  className="form-control"
+                  value={password}
+                  onChange={({ target }) => setPassword(target.value)}
+                  required
+                />
+                <div
+                  role="button"
+                  style={{ marginLeft: "-2.5rem" }}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="fs-5 d-flex align-items-center"
+                >
+                  {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                </div>
+              </div>
             </div>
           </div>
           <div className="modal-footer">

@@ -25,3 +25,17 @@ export enum GENDER {
   MALE = "MALE",
   FEMALE = "FEMALE",
 }
+
+export enum AGE {
+  BABY = "BABY",
+  YOUNG = "YOUNG",
+  ADULT = "ADULT",
+  SENIOR = "SENIOR",
+}
+
+export enum SIZE {
+  SMALL = "SMALL",
+  MEDIUM = "MEDIUM",
+  LARGE = "LARGE",
+  EXTRALARGE = "EXTRALARGE",
+}

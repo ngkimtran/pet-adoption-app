@@ -1,3 +1,5 @@
+import { toCapitalize } from "../../utilities/utilities";
+
 type SinglePetDetailsItemPropType = {
   text: string;
   value: string | string[];
@@ -15,7 +17,7 @@ const SinglePetDetailsItem = ({
       {typeof value === "object" ? (
         value.map((v, index) => (
           <span key={index}>
-            <span className="d-inline-block">{v}</span>
+            <span className="d-inline-block">{toCapitalize(v)}</span>
             {value.indexOf(v) === value.length - 1 ? (
               ""
             ) : (
@@ -24,7 +26,7 @@ const SinglePetDetailsItem = ({
           </span>
         ))
       ) : (
-        <span className="d-inline-block">{value}</span>
+        <span className="d-inline-block">{toCapitalize(value)}</span>
       )}
     </p>
   </div>

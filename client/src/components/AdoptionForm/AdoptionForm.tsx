@@ -88,7 +88,12 @@ const AdoptionForm = () => {
                 Login to start adopting a pet!
               </h2>
               <div className="mt-5 mx-4 d-flex justify-content-center align-items-center gap-5 w-50">
-                <button className="btn btn-primary w-100">Login</button>
+                <button
+                  onClick={() => navigate("/login")}
+                  className="btn btn-primary w-100"
+                >
+                  Login
+                </button>
                 <button
                   onClick={() => navigate(-1)}
                   className="btn btn-secondary w-100"

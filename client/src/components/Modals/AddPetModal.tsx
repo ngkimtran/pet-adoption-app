@@ -5,6 +5,8 @@ import {
   ERROR_TOAST_ID,
   SUCCESS_TOAST_ID,
   GENDER,
+  AGE,
+  SIZE,
 } from "../../constants/constants";
 import { ADD_PET } from "../../mutations/petMutations";
 import { GET_PETS } from "../../queries/petQueries";
@@ -21,9 +23,9 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
   const [location, setLocation] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [adoptionFee, setAdoptionFee] = useState<number>(0);
-  const [age, setAge] = useState<string>("");
+  const [age, setAge] = useState<AGE | string>("");
   const [gender, setGender] = useState<GENDER>(GENDER.MALE);
-  const [size, setSize] = useState<string>("");
+  const [size, setSize] = useState<SIZE | string>("");
   const [personality, setPersonality] = useState<string[]>([""]);
   const [coatLength, setCoatLength] = useState<string>("");
   const [houseTrained, setHouseTrained] = useState<boolean>(false);
@@ -46,6 +48,20 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
         hideProgressBar: true,
         autoClose: 2000,
       });
+
+      setName("");
+      setType("");
+      setBreed("");
+      setLocation("");
+      setDescription("");
+      setAdoptionFee(0);
+      setAge("");
+      setGender(GENDER.MALE);
+      setSize("");
+      setPersonality([""]);
+      setCoatLength("");
+      setHouseTrained(false);
+      setHealth([""]);
     },
     onError: (error) => {
       toast.error(error.graphQLErrors[0].message, {
@@ -161,14 +177,23 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
               <label htmlFor="age" className="form-label">
                 Age
               </label>
-              <input
+              <select
+                className="form-select"
                 id="age"
-                type="text"
-                className="form-control"
-                value={age}
-                onChange={({ target }) => setAge(target.value)}
+                defaultValue={age}
+                onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+                  setAge(event.target.value)
+                }
                 required
-              />
+              >
+                <option value="" disabled>
+                  Select age
+                </option>
+                <option value={AGE.BABY}>Baby</option>
+                <option value={AGE.YOUNG}>Young</option>
+                <option value={AGE.ADULT}>Adult</option>
+                <option value={AGE.SENIOR}>Senior</option>
+              </select>
             </div>
             <div className="mb-3 input-group-lg">
               <label htmlFor="gender" className="form-label">
@@ -207,14 +232,23 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
               <label htmlFor="size" className="form-label">
                 Size
               </label>
-              <input
+              <select
+                className="form-select"
                 id="size"
-                type="text"
-                className="form-control"
-                value={size}
-                onChange={({ target }) => setSize(target.value)}
+                defaultValue={size}
+                onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+                  setSize(event.target.value)
+                }
                 required
-              />
+              >
+                <option value="" disabled>
+                  Select size
+                </option>
+                <option value={SIZE.SMALL}>Small</option>
+                <option value={SIZE.MEDIUM}>Medium</option>
+                <option value={SIZE.LARGE}>Large</option>
+                <option value={SIZE.EXTRALARGE}>Extra Large</option>
+              </select>
             </div>
             <div className="mb-3 input-group-lg">
               <label htmlFor="personality" className="form-label">

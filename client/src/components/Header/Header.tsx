@@ -71,7 +71,7 @@ const Header = () => {
                       !error &&
                       data &&
                       data.animals.map((animal: Animal) => (
-                        <li>
+                        <li key={animal.id}>
                           <Link
                             className="dropdown-item py-2 nav-text text-capitalize"
                             to={`/${animal.name}/browse-pets`}

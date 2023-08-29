@@ -3,6 +3,7 @@ import { Pet } from "../../types/types";
 import { Link } from "react-router-dom";
 import Filter from "../Filter/Filter";
 import { PLACEHOLDER_IMG } from "../../constants/constants";
+import { toCapitalize } from "../../utilities/utilities";
 
 type PetListPropsType = {
   pets: Pet[];
@@ -52,7 +53,7 @@ const PetList = ({ pets, animal }: PetListPropsType) => (
                   style={{ minHeight: "5rem" }}
                 >
                   <span className="m-0 d-block">
-                    {pet.characteristic.age}
+                    <span>{toCapitalize(pet.characteristic.age)}</span>
                     <span className="px-2">&#x2022;</span>
                     {pet.breed}
                   </span>

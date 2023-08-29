@@ -26,6 +26,7 @@ const Login = () => {
       setToken(token);
 
       // if (localSavePermission)
+      localStorage.clear();
       localStorage.setItem("pet-adoption-user-token", token);
 
       setTimeout(() => navigate("/"), 50);

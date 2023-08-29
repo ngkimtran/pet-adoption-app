@@ -29,6 +29,7 @@ const PetSchema = new mongoose.Schema({
   characteristic: {
     age: {
       type: String,
+      enum: ["BABY", "YOUNG", "ADULT", "SENIOR"],
       required: true,
     },
     gender: {
@@ -38,6 +39,7 @@ const PetSchema = new mongoose.Schema({
     },
     size: {
       type: String,
+      enum: ["SMALL", "MEDIUM", "LARGE", "EXTRALARGE"],
       required: true,
     },
     personality: {

@@ -27,10 +27,24 @@ const typeDefs = `
     FEMALE
   }
 
+  enum Age {
+    BABY
+    YOUNG
+    ADULT
+    SENIOR
+  }
+
+  enum Size {
+    SMALL
+    MEDIUM
+    LARGE
+    EXRTALARGE
+  }
+
   type Characteristic {
-    age: String!,
+    age: Age!,
     gender: Gender!,
-    size: String!,
+    size: Size!,
     personality: [String]!,
     coatLength: String!,
     houseTrained: Boolean!,
@@ -98,19 +112,19 @@ const typeDefs = `
 
     updatePet(
         id: ID!,
-        type: String,
-        name: String,
-        breed: String,
-        location: String,
-        description: String,
-        adoptionFee: Float,
-        age: String,
-        gender: String,
-        size: String,
-        personality: [String],
-        coatLength: String,
-        houseTrained: Boolean,
-        health: [String],
+        type: String!,
+        name: String!,
+        breed: String!,
+        location: String!,
+        description: String!,
+        adoptionFee: Float!,
+        age: String!,
+        gender: String!,
+        size: String!,
+        personality: [String]!,
+        coatLength: String!,
+        houseTrained: Boolean!,
+        health: [String]!,
     ): Pet
 
     deletePet(id: ID!): Pet
@@ -306,9 +320,9 @@ const Mutation = {
       adoptionFee: args.adoptionFee,
       // characteristics
       characteristic: {
-        age: args.age,
+        age: args.age.toUpperCase(),
         gender: args.gender.toUpperCase(),
-        size: args.size,
+        size: args.size.toUpperCase(),
         personality: args.personality,
         coatLength: args.coatLength,
         houseTrained: args.houseTrained,
@@ -329,7 +343,7 @@ const Mutation = {
 
   updatePet: async (_parent, args) => {
     const animalType = await Animal.findOne({ name: args.type });
-
+    console.log(args.health);
     return Pet.findByIdAndUpdate(
       args.id,
       {
@@ -342,13 +356,13 @@ const Mutation = {
           adoptionFee: args.adoptionFee,
           // characteristics
           characteristic: {
-            age: args.age,
+            age: args.age.toUpperCase(),
             gender: args.gender.toUpperCase(),
-            size: args.size,
+            size: args.size.toUpperCase(),
             personality: args.personality,
             coatLength: args.coatLength,
             houseTrained: args.houseTrained,
-            health: args.healthealth,
+            health: args.health,
           },
         },
       },

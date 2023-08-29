@@ -102,12 +102,7 @@ code {
   background-color: #ea9a3f;
 }
 
-.navbar-link {
-  min-width: 7rem;
-}
-
 .navbar-link:hover {
-  font-weight: 700;
   color: #ea9a3f;
 }
 

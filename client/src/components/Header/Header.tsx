@@ -1,14 +1,20 @@
 import { useRecoilState } from "recoil";
-import { ApolloConsumer, ApolloClient } from "@apollo/client";
+import { ApolloConsumer, ApolloClient, useQuery } from "@apollo/client";
 import { Link, useNavigate } from "react-router-dom";
 import { BsFillPersonFill } from "react-icons/bs";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import { LOGO } from "../../constants/constants";
 import { tokenState, userState } from "../../states/state";
+import { Animal } from "../../types/types";
+import { GET_ANIMALS } from "../../queries/animalQueries";
 
 const Header = () => {
   const [, setToken] = useRecoilState(tokenState);
   const [user, setUser] = useRecoilState(userState);
+
   const navigate = useNavigate();
+
+  const { data, loading, error } = useQuery(GET_ANIMALS);
 
   const logout = (client: ApolloClient<object>) => {
     setToken(null);
@@ -35,7 +41,10 @@ const Header = () => {
               </div>
             </Link>
             <nav>
-              <ul className="fs-5 fw-semibold gap-1 mb-0 list-unstyled d-flex flex-row align-items-center">
+              <ul
+                className="fs-5 fw-semibold mb-0 list-unstyled d-flex flex-row align-items-center"
+                style={{ gap: "2rem" }}
+              >
                 <Link
                   className="navbar-link text-color-primary text-decoration-none"
                   to="/"
@@ -48,13 +57,38 @@ const Header = () => {
                 >
                   About us
                 </Link>
+                <div className="dropdown navbar-link icon-primary text-decoration-none">
+                  <span
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Find a pet{" "}
+                    <MdKeyboardArrowDown className="dropdown-toggle" />
+                  </span>
+                  <ul className="dropdown-menu mt-3">
+                    {!loading &&
+                      !error &&
+                      data &&
+                      data.animals.map((animal: Animal) => (
+                        <li>
+                          <Link
+                            className="dropdown-item py-2 nav-text text-capitalize"
+                            to={`/${animal.name}/browse-pets`}
+                          >
+                            {animal.name}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
                 <Link
                   className="navbar-link text-color-primary text-decoration-none"
                   to="/adopt"
                 >
                   Adopt a pet
                 </Link>
-                <div className=" mx-4 vr text-color-primary opacity-100"></div>
+                <div className=" mx-2 vr text-color-primary opacity-100"></div>
                 {user ? (
                   <div className="dropdown">
                     <BsFillPersonFill

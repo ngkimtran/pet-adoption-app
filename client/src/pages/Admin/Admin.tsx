@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { userState } from "../../states/state";
 import { MANAGEMENT_COMPONENT } from "../../constants/constants";
 import AnimalsManagement from "../../components/AnimalsManagement/AnimalsManagement";
@@ -18,6 +19,9 @@ const Admin = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Admin panel</title>
+      </Helmet>
       {user && (
         <div className="container-fluid m-0 p-0">
           <div className="d-flex align-items-start">

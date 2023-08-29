@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { userState } from "../../states/state";
 import { PLACEHOLDER_IMG } from "../../constants/constants";
 
@@ -11,6 +12,9 @@ const Favorites = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Favorite pets</title>
+      </Helmet>
       {user && (
         <div>
           <div className="background-primary">

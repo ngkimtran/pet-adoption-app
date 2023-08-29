@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil";
 import { AiFillEdit } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
+import { Helmet } from "react-helmet";
 import { userState } from "../../states/state";
 import UpdateUserModal from "../../components/Modals/UpdateUserModal";
 import DeleteUserModal from "../../components/Modals/DeleteUserModal";
@@ -11,6 +12,9 @@ const Profile = () => {
 
   return (
     <>
+      <Helmet>
+        <title>User profile</title>
+      </Helmet>
       {user && (
         <div
           style={{ minHeight: "50vh" }}

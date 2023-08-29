@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { toast } from "react-toastify";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../mutations/userMutations";
@@ -8,6 +9,7 @@ import { tokenState } from "../../states/state";
 import { ERROR_TOAST_ID } from "../../constants/constants";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   // const [localSavePermission, setLocalSavePermission] =
@@ -75,15 +77,25 @@ const Login = () => {
             <label htmlFor="password" className="form-label">
               Password
             </label>
-            <input
-              id="password"
-              type="password"
-              autoComplete="current-password"
-              className="form-control"
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-              required
-            />
+            <div className="d-flex">
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
+                className="form-control"
+                value={password}
+                onChange={({ target }) => setPassword(target.value)}
+                required
+              />
+              <div
+                role="button"
+                style={{ marginLeft: "-2.5rem" }}
+                onClick={() => setShowPassword(!showPassword)}
+                className="fs-5 d-flex align-items-center"
+              >
+                {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+              </div>
+            </div>
           </div>
           {/* <div className="mb-3 form-check">
             <input

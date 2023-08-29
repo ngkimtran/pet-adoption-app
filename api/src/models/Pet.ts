@@ -1,8 +1,8 @@
-const petMongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const PetSchema = new petMongoose.Schema({
+const PetSchema = new mongoose.Schema({
   type: {
-    type: petMongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Animal",
     required: true,
   },
@@ -59,4 +59,4 @@ const PetSchema = new petMongoose.Schema({
   },
 });
 
-module.exports = petMongoose.model("Pet", PetSchema);
+export default mongoose.model("Pet", PetSchema);

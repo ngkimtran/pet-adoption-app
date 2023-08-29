@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2022",
+    "target": "es2022",
     "resolveJsonModule": true,
-    "target": "es6",
     "esModuleInterop": true,
     "moduleResolution": "node",
     "sourceMap": true,
@@ -10,5 +10,11 @@
     "rootDir": "./src"
   },
   "lib": ["es2015"],
-  "incude": ["./src/**/*.ts"]
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", ".vscode"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true
+  }
 }

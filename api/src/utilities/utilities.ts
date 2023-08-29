@@ -1,4 +1,4 @@
-const CapitalizeUtil = (inputToBeCapitalized) =>
+const toCapitalize = (inputToBeCapitalized) =>
   inputToBeCapitalized.charAt(0).toUpperCase() + inputToBeCapitalized.slice(1);
 
-module.exports = { CapitalizeUtil };
+export { toCapitalize };

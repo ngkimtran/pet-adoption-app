@@ -1,15 +1,20 @@
-const { GraphQLError } = require("graphql");
+import { GraphQLError } from "graphql";
+import { Stripe } from "stripe";
 
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
-const Pet = require("../models/Pet.ts");
-const Animal = require("../models/Animal.ts");
-const User = require("../models/User.ts");
+import Pet from "../models/Pet";
+import Animal from "../models/Animal";
+import User from "../models/User";
 
-const { CapitalizeUtil: Capitalize } = require("../utilities/utilities.ts");
+import { toCapitalize } from "../utilities/utilities";
 
 const SALT_WORK_FACTOR = 10;
+
+const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY, {
+  apiVersion: "2023-08-16",
+});
 
 const typeDefs = `
   enum Role {
@@ -67,7 +72,11 @@ const typeDefs = `
     animal(id: ID, name: String): Animal!,
     users: [User!],
     user(id: ID, username: String): User!, 
-    me: User
+    me: User,
+    createCheckoutSession(
+      petName: String!,
+      adoptionFee: Float!
+    ): String,
   }
 
   type Mutation {
@@ -172,7 +181,7 @@ const Query = {
         },
       });
     if (args.name)
-      return Pet.findOne({ name: Capitalize(args.name) }).populate({
+      return Pet.findOne({ name: toCapitalize(args.name) }).populate({
         path: "type",
         select: {
           id: 1,
@@ -252,6 +261,31 @@ const Query = {
         },
       },
     }),
+
+  createCheckoutSession: async (_parent, args) => {
+    const petToBeAdopted = {
+      price_data: {
+        currency: "eur",
+        product_data: {
+          name: args.petName,
+        },
+        unit_amount: args.adoptionFee * 100, //unit amount is in cent by default
+      },
+      quantity: 1,
+    };
+
+    const session = await stripe.checkout.sessions.create({
+      line_items: [petToBeAdopted],
+      mode: "payment",
+      success_url: `${process.env.REACT_APP_FRONTEND}?sucess=true`,
+      cancel_url: `${process.env.REACT_APP_FRONTEND}?sucess=false`,
+      payment_method_types: ["card", "paypal"],
+    });
+
+    return JSON.stringify({
+      url: session.url,
+    });
+  },
 };
 
 const Mutation = {
@@ -342,8 +376,8 @@ const Mutation = {
     const passwordHash = await bcrypt.hash(args.password, SALT_WORK_FACTOR);
 
     const user = new User({
-      firstname: Capitalize(args.firstname),
-      lastname: Capitalize(args.lastname),
+      firstname: toCapitalize(args.firstname),
+      lastname: toCapitalize(args.lastname),
       email: args.email,
       username: args.username,
       password: passwordHash,
@@ -461,7 +495,9 @@ const Mutation = {
       id: user._id,
     };
 
-    return jwt.sign(userForToken, process.env.JWT_SECRET);
+    return JSON.stringify({
+      token: jwt.sign(userForToken, process.env.JWT_SECRET),
+    });
   },
 };
 
@@ -470,4 +506,4 @@ const resolvers = {
   Mutation,
 };
 
-module.exports = { typeDefs, resolvers };
+export { typeDefs, resolvers };

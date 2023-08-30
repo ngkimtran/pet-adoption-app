@@ -8,11 +8,11 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_FAVORITE } from "../../mutations/userMutations";
 import { GET_USER } from "../../queries/userQueries";
 
-type SinglePetDetailsPropsType = {
+type SinglePetDetailsPropType = {
   pet: Pet;
 };
 
-const SinglePetDetails = ({ pet }: SinglePetDetailsPropsType) => {
+const SinglePetDetails = ({ pet }: SinglePetDetailsPropType) => {
   const [user, setUser] = useRecoilState<User | null>(userState);
   const [updateFavorite] = useMutation(UPDATE_FAVORITE, {
     update: (cache, response) => {

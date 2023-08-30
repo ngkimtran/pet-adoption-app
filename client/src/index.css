@@ -105,6 +105,15 @@ code {
 .navbar-link:hover {
   color: #ea9a3f;
 }
+.filter-dropdown-item {
+  white-space: normal !important;
+}
+
+.filter-dropdown-item:hover {
+  border-left: 2px solid #eabc3f;
+  background-color: rgba(234, 188, 63, 0.075);
+  padding-left: 19px !important;
+}
 
 .carousel-item img {
   object-fit: cover;

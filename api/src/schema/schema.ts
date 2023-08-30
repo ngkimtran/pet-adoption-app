@@ -38,7 +38,7 @@ const typeDefs = `
     SMALL
     MEDIUM
     LARGE
-    EXRTALARGE
+    EXTRALARGE
   }
 
   type Characteristic {
@@ -343,7 +343,7 @@ const Mutation = {
 
   updatePet: async (_parent, args) => {
     const animalType = await Animal.findOne({ name: args.type });
-    console.log(args.health);
+
     return Pet.findByIdAndUpdate(
       args.id,
       {

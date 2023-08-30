@@ -313,7 +313,7 @@ const Mutation = {
 
     const pet = new Pet({
       type: animalType._id,
-      name: args.name,
+      name: toCapitalize(args.name),
       breed: args.breed,
       location: args.location,
       description: args.description,
@@ -349,7 +349,7 @@ const Mutation = {
       {
         $set: {
           type: animalType._id,
-          name: args.name,
+          name: toCapitalize(args.name),
           breed: args.breed,
           location: args.location,
           description: args.description,
@@ -411,8 +411,8 @@ const Mutation = {
       args.id,
       {
         $set: {
-          firstname: args.firstname,
-          lastname: args.lastname,
+          firstname: toCapitalize(args.firstname),
+          lastname: toCapitalize(args.lastname),
           email: args.email,
           username: args.username,
           password: passwordHash,

@@ -82,10 +82,6 @@ code {
   color: #ea9a3f;
 }
 
-.nav-text:hover {
-  color: #eabc3f;
-}
-
 .animal-type {
   outline: 3px solid #eabc3f;
   padding: 2rem;
@@ -105,14 +101,17 @@ code {
 .navbar-link:hover {
   color: #ea9a3f;
 }
-.filter-dropdown-item {
+
+.dropdown-item {
   white-space: normal !important;
 }
 
-.filter-dropdown-item:hover {
+.dropdown-item:hover {
   border-left: 2px solid #eabc3f;
   background-color: rgba(234, 188, 63, 0.075);
   padding-left: 19px !important;
+  color: #eabc3f;
+  font-weight: 500;
 }
 
 .carousel-item img {

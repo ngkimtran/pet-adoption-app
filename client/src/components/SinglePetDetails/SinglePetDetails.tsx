@@ -32,7 +32,7 @@ const SinglePetDetails = ({ pet }: SinglePetDetailsPropType) => {
 
   return (
     <div>
-      <div className=" d-flex align-items-stretch rounded-top shadow bg-white">
+      <div className=" d-flex align-items-stretch top shadow bg-white">
         <div style={{ flex: ".4" }}>
           <img
             src={PLACEHOLDER_IMG}

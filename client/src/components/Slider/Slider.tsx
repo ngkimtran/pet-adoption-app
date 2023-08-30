@@ -40,7 +40,7 @@ const Slider = () => (
       <Searchbar />
     </div>
 
-    <div className="slider-caption z-3 p-0 m-auto carousel-caption d-none d-md-block">
+    <div className="slider-caption z-2 p-0 m-auto carousel-caption d-none d-md-block">
       <h1>
         <span className="text-color-primary">Find your</span>
         <span className="text-animated"> new best friend</span>

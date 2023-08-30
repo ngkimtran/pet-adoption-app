@@ -31,7 +31,7 @@ const Admin = () => {
               className="list-group list-group-flush bg-white mx-2 my-4 rounded"
             >
               <li
-                className={`list-group-item px-5 py-4 fs-5 nav-text ${
+                className={`list-group-item px-5 py-4 fs-5 ${
                   managementComponent === MANAGEMENT_COMPONENT.ANIMAL &&
                   "active"
                 }`}
@@ -42,7 +42,7 @@ const Admin = () => {
                 Animals management
               </li>
               <li
-                className={`list-group-item px-5 py-4 fs-5 nav-text ${
+                className={`list-group-item px-5 py-4 fs-5 ${
                   managementComponent === MANAGEMENT_COMPONENT.PET && "active"
                 }`}
                 onClick={() => setManagementComponent(MANAGEMENT_COMPONENT.PET)}
@@ -50,7 +50,7 @@ const Admin = () => {
                 Pets management
               </li>
               <li
-                className={`list-group-item px-5 py-4 fs-5 nav-text ${
+                className={`list-group-item px-5 py-4 fs-5 ${
                   managementComponent === MANAGEMENT_COMPONENT.USER && "active"
                 }`}
                 onClick={() =>

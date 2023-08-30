@@ -73,7 +73,7 @@ const Header = () => {
                       data.animals.map((animal: Animal) => (
                         <li key={animal.id}>
                           <Link
-                            className="dropdown-item py-2 nav-text text-capitalize"
+                            className="dropdown-item px-4 py-3 text-capitalize"
                             to={`/${animal.name}/browse-pets`}
                           >
                             {animal.name}
@@ -107,7 +107,7 @@ const Header = () => {
                       </li>
                       <li>
                         <Link
-                          className="dropdown-item py-2 nav-text"
+                          className="dropdown-item px-4 py-3"
                           to={`/${user.id}`}
                         >
                           Profile
@@ -116,7 +116,7 @@ const Header = () => {
                       <li>
                         {user?.role === "ADMIN" && (
                           <Link
-                            className="dropdown-item py-2 nav-text"
+                            className="dropdown-item px-4 py-3"
                             to={`/${user.id}/admin-panel`}
                           >
                             Admin panel
@@ -124,7 +124,7 @@ const Header = () => {
                         )}
                         {user?.role === "USER" && (
                           <Link
-                            className="dropdown-item py-2 nav-text"
+                            className="dropdown-item px-4 py-3"
                             to={`/${user.id}/favorites`}
                           >
                             Favorite pets
@@ -134,7 +134,7 @@ const Header = () => {
                       <li>
                         <p
                           role="button"
-                          className="dropdown-item py-2 nav-text"
+                          className="dropdown-item px-4 py-3"
                           onClick={() => logout(client)}
                         >
                           Log out

@@ -32,7 +32,7 @@ const FilterItem = ({
         {filterParamOptions.map((p, index) => (
           <li
             key={index}
-            className="dropdown-item px-4 py-3 filter-dropdown-item"
+            className="dropdown-item px-4 py-3"
             onClick={() => setFilterParamValue(p)}
           >
             {toCapitalize(p)}

@@ -314,7 +314,7 @@ const Mutation = {
     const pet = new Pet({
       type: animalType._id,
       name: toCapitalize(args.name),
-      breed: args.breed,
+      breed: toCapitalize(args.breed),
       location: args.location,
       description: args.description,
       adoptionFee: args.adoptionFee,
@@ -323,10 +323,10 @@ const Mutation = {
         age: args.age.toUpperCase(),
         gender: args.gender.toUpperCase(),
         size: args.size.toUpperCase(),
-        personality: args.personality,
-        coatLength: args.coatLength,
+        personality: args.personality.map((p: string) => p.toLowerCase()),
+        coatLength: args.coatLength.toLowerCase(),
         houseTrained: args.houseTrained,
-        health: args.health,
+        health: args.health.map((h: string) => h.toLowerCase()),
       },
     });
 
@@ -350,7 +350,7 @@ const Mutation = {
         $set: {
           type: animalType._id,
           name: toCapitalize(args.name),
-          breed: args.breed,
+          breed: toCapitalize(args.breed),
           location: args.location,
           description: args.description,
           adoptionFee: args.adoptionFee,
@@ -359,10 +359,10 @@ const Mutation = {
             age: args.age.toUpperCase(),
             gender: args.gender.toUpperCase(),
             size: args.size.toUpperCase(),
-            personality: args.personality,
-            coatLength: args.coatLength,
+            personality: args.personality.map((p: string) => p.toLowerCase()),
+            coatLength: args.coatLength.toLowerCase(),
             houseTrained: args.houseTrained,
-            health: args.health,
+            health: args.health.map((h: string) => h.toLowerCase()),
           },
         },
       },
@@ -379,7 +379,7 @@ const Mutation = {
   deletePet: async (_parent, args) => Pet.findByIdAndRemove(args.id),
 
   addAnimal: (_parent, args) => {
-    const animal = new Animal({ name: args.name });
+    const animal = new Animal({ name: args.name.toLowerCase() });
 
     return animal.save();
   },

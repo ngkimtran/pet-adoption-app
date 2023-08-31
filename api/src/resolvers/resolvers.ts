@@ -256,8 +256,9 @@ const Mutation = {
     return Pet.findByIdAndRemove(args.id);
   },
 
-  addAnimal: (_parent, args) => {
-    if (Animal.find({ name: args.name })) {
+  addAnimal: async (_parent, args) => {
+    const isNotUnique = await Animal.findOne({ name: args.name });
+    if (isNotUnique) {
       throw new GraphQLError("Name must be unique for each animal type.", {
         extensions: {
           code: "BAD_USER_INPUT",
@@ -282,7 +283,10 @@ const Mutation = {
   },
 
   addUser: async (_parent, args) => {
-    if (User.find({ username: args.username })) {
+    const isNotUniqueUsername = await User.find({ username: args.username });
+    const isNotUniqueEmail = await User.find({ email: args.email });
+
+    if (isNotUniqueUsername) {
       throw new GraphQLError("Username already taken.", {
         extensions: {
           code: "BAD_USER_INPUT",
@@ -291,7 +295,7 @@ const Mutation = {
       });
     }
 
-    if (User.find({ email: args.email })) {
+    if (isNotUniqueEmail) {
       throw new GraphQLError("Email already taken.", {
         extensions: {
           code: "BAD_USER_INPUT",
@@ -320,7 +324,10 @@ const Mutation = {
       ? await bcrypt.hash(args.password, SALT_WORK_FACTOR)
       : oldUser.password;
 
-    if (User.find({ username: args.username })) {
+    const isNotUniqueUsername = await User.find({ username: args.username });
+    const isNotUniqueEmail = await User.find({ email: args.email });
+
+    if (isNotUniqueUsername) {
       throw new GraphQLError("Username already taken.", {
         extensions: {
           code: "BAD_USER_INPUT",
@@ -329,7 +336,7 @@ const Mutation = {
       });
     }
 
-    if (User.find({ email: args.email })) {
+    if (isNotUniqueEmail) {
       throw new GraphQLError("Email already taken.", {
         extensions: {
           code: "BAD_USER_INPUT",

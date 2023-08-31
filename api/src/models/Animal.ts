@@ -9,6 +9,7 @@ const AnimalSchema = new mongoose.Schema({
   petCount: {
     type: Number,
     default: 0,
+    min: 0,
   },
 });
 

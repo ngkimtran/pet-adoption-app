@@ -25,6 +25,7 @@ const PetSchema = new mongoose.Schema({
   adoptionFee: {
     type: Number,
     required: true,
+    min: 0,
   },
   characteristic: {
     age: {

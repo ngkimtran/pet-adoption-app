@@ -305,7 +305,13 @@ const Query = {
 };
 
 const Mutation = {
-  addPet: async (_parent, args) => {
+  addPet: async (_parent, args, { currentUser }) => {
+    if (currentUser.role !== "ADMIN") {
+      throw new GraphQLError("No permissions", {
+        extensions: { code: "FORBIDDEN" },
+      });
+    }
+
     let animalType = await Animal.findOne({ name: args.type });
 
     if (!animalType) {
@@ -343,7 +349,13 @@ const Mutation = {
     return pet.save();
   },
 
-  updatePet: async (_parent, args) => {
+  updatePet: async (_parent, args, { currentUser }) => {
+    if (currentUser.role !== "ADMIN") {
+      throw new GraphQLError("No permissions", {
+        extensions: { code: "FORBIDDEN" },
+      });
+    }
+
     const animalType = await Animal.findOne({ name: args.type });
 
     return Pet.findByIdAndUpdate(
@@ -378,17 +390,60 @@ const Mutation = {
     });
   },
 
-  deletePet: async (_parent, args) => Pet.findByIdAndRemove(args.id),
+  deletePet: async (_parent, args, { currentUser }) => {
+    if (currentUser.role !== "ADMIN") {
+      throw new GraphQLError("No permissions", {
+        extensions: { code: "FORBIDDEN" },
+      });
+    }
+
+    return Pet.findByIdAndRemove(args.id);
+  },
 
   addAnimal: (_parent, args) => {
+    if (Animal.find({ name: args.name })) {
+      throw new GraphQLError("Name must be unique for each animal type.", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+          invalidArgs: args.name,
+        },
+      });
+    }
+
     const animal = new Animal({ name: args.name.toLowerCase() });
 
     return animal.save();
   },
 
-  deleteAnimal: async (_parent, args) => Animal.findByIdAndRemove(args.id),
+  deleteAnimal: async (_parent, args, { currentUser }) => {
+    if (currentUser.role !== "ADMIN") {
+      throw new GraphQLError("No permissions", {
+        extensions: { code: "FORBIDDEN" },
+      });
+    }
+
+    return Animal.findByIdAndRemove(args.id);
+  },
 
   addUser: async (_parent, args) => {
+    if (User.find({ username: args.username })) {
+      throw new GraphQLError("Username already taken.", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+          invalidArgs: args.username,
+        },
+      });
+    }
+
+    if (User.find({ email: args.email })) {
+      throw new GraphQLError("Email already taken.", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+          invalidArgs: args.email,
+        },
+      });
+    }
+
     const passwordHash = await bcrypt.hash(args.password, SALT_WORK_FACTOR);
 
     const user = new User({
@@ -408,6 +463,24 @@ const Mutation = {
     const passwordHash = args.password
       ? await bcrypt.hash(args.password, SALT_WORK_FACTOR)
       : oldUser.password;
+
+    if (User.find({ username: args.username })) {
+      throw new GraphQLError("Username already taken.", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+          invalidArgs: args.username,
+        },
+      });
+    }
+
+    if (User.find({ email: args.email })) {
+      throw new GraphQLError("Email already taken.", {
+        extensions: {
+          code: "BAD_USER_INPUT",
+          invalidArgs: args.email,
+        },
+      });
+    }
 
     return User.findByIdAndUpdate(
       args.id,
@@ -430,11 +503,19 @@ const Mutation = {
     });
   },
 
-  deleteUser: async (_parent, args) => User.findByIdAndRemove(args.id),
+  deleteUser: async (_parent, args, { currentUser }) => {
+    if (currentUser.id !== args.id || currentUser.role !== "ADMIN") {
+      throw new GraphQLError("No permissions", {
+        extensions: { code: "FORBIDDEN" },
+      });
+    }
+
+    return User.findByIdAndRemove(args.id);
+  },
 
   updateFavorite: async (_parent, args, { currentUser }) => {
     if (!currentUser) {
-      throw new GraphQLError("Wrong credentials", {
+      throw new GraphQLError("Login required", {
         extensions: { code: "BAD_USER_INPUT" },
       });
     }

@@ -1,12 +1,13 @@
+import { useMutation } from "@apollo/client";
 import { FaRegHeart, FaHeart } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { PLACEHOLDER_IMG } from "../../constants/constants";
 import { Pet, User } from "../../types/types";
-import SinglePetDetailsItem from "../SinglePetDetailsItem/SinglePetDetailsItem";
-import { useRecoilState } from "recoil";
 import { userState } from "../../states/state";
-import { useMutation } from "@apollo/client";
-import { UPDATE_FAVORITE } from "../../mutations/userMutations";
 import { GET_USER } from "../../queries/userQueries";
+import { UPDATE_FAVORITE } from "../../mutations/userMutations";
+import SinglePetDetailsItem from "../SinglePetDetailsItem/SinglePetDetailsItem";
 
 type SinglePetDetailsPropType = {
   pet: Pet;
@@ -14,6 +15,7 @@ type SinglePetDetailsPropType = {
 
 const SinglePetDetails = ({ pet }: SinglePetDetailsPropType) => {
   const [user, setUser] = useRecoilState<User | null>(userState);
+  const navigate = useNavigate();
   const [updateFavorite] = useMutation(UPDATE_FAVORITE, {
     update: (cache, response) => {
       cache.updateQuery(
@@ -25,6 +27,10 @@ const SinglePetDetails = ({ pet }: SinglePetDetailsPropType) => {
         },
         () => setUser(response.data.updateFavorite)
       );
+    },
+    onError: (error) => {
+      if (error.graphQLErrors[0].message === "Login required")
+        navigate("/login");
     },
   });
 

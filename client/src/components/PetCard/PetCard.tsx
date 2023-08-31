@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { AiOutlineDoubleRight } from "react-icons/ai";
-import { PLACEHOLDER_IMG } from "../../constants/constants";
 import { Pet } from "../../types/types";
 import { toCapitalize } from "../../utilities/utilities";
 
@@ -16,7 +15,7 @@ const PetCard = ({ pet, animal }: PetCardrPropType) => (
       className="text-decoration-none"
     >
       <img
-        src={PLACEHOLDER_IMG}
+        src={pet.image}
         className="card-img-top object-fit-cover"
         style={{ width: "250px", height: "250px" }}
         alt=""

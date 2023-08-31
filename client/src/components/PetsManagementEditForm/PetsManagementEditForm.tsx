@@ -40,6 +40,7 @@ const PetsManagementEditForm = ({
     pet.characteristic.houseTrained
   );
   const [health, setHealth] = useState<string[]>(pet.characteristic.health);
+  const [image, setImage] = useState<string>(pet.image);
 
   const [updatePet] = useMutation(UPDATE_PET, {
     update: (cache, response) => {
@@ -87,6 +88,7 @@ const PetsManagementEditForm = ({
     setCoatLength(pet.characteristic.coatLength);
     setHouseTrained(pet.characteristic.houseTrained);
     setHealth(pet.characteristic.health);
+    setImage(pet.image);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -108,6 +110,7 @@ const PetsManagementEditForm = ({
         coatLength,
         houseTrained,
         health: health.filter((item) => item !== ""),
+        image,
       },
     });
   };
@@ -425,6 +428,23 @@ const PetsManagementEditForm = ({
             id={`${pet.id}-health`}
             value={health.join(", ")}
             onChange={({ target }) => setHealth(target.value.split(", "))}
+            required
+          />
+        </div>
+      </div>
+      <div className="row align-items-center mt-2 mb-3 ms-4 gap-2">
+        <div className="col-lg-2">
+          <label htmlFor={`${pet.id}-image`} className="form-label fw-semibold">
+            Image URL
+          </label>
+        </div>
+        <div className="col-lg-7">
+          <input
+            type="url"
+            className="form-control"
+            id={`${pet.id}-image`}
+            value={image}
+            onChange={({ target }) => setImage(target.value)}
             required
           />
         </div>

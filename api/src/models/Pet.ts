@@ -59,6 +59,9 @@ const PetSchema = new mongoose.Schema({
       required: true,
     },
   },
+  image: {
+    type: String,
+  },
 });
 
 export default mongoose.model("Pet", PetSchema);

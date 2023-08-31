@@ -20,6 +20,7 @@ const PET_DETAILS = gql`
     location
     description
     adoptionFee
+    image
     characteristic {
       age
       gender
@@ -62,6 +63,7 @@ const CURRENT_USER_DETAILS = gql`
       }
       breed
       location
+      image
       characteristic {
         age
         gender

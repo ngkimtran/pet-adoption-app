@@ -16,6 +16,7 @@ const ADD_PET = gql`
     $coatLength: String!
     $houseTrained: Boolean!
     $health: [String]!
+    $image: String
   ) {
     addPet(
       type: $type
@@ -31,6 +32,7 @@ const ADD_PET = gql`
       coatLength: $coatLength
       houseTrained: $houseTrained
       health: $health
+      image: $image
     ) {
       ...PetDetails
     }
@@ -54,6 +56,7 @@ const UPDATE_PET = gql`
     $coatLength: String!
     $houseTrained: Boolean!
     $health: [String]!
+    $image: String!
   ) {
     updatePet(
       id: $id
@@ -70,6 +73,7 @@ const UPDATE_PET = gql`
       coatLength: $coatLength
       houseTrained: $houseTrained
       health: $health
+      image: $image
     ) {
       ...PetDetails
     }

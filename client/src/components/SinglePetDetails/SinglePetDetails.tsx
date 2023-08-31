@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/client";
 import { FaRegHeart, FaHeart } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { PLACEHOLDER_IMG } from "../../constants/constants";
 import { Pet, User } from "../../types/types";
 import { userState } from "../../states/state";
 import { GET_USER } from "../../queries/userQueries";
@@ -41,7 +40,7 @@ const SinglePetDetails = ({ pet }: SinglePetDetailsPropType) => {
       <div className=" d-flex align-items-stretch top shadow bg-white">
         <div style={{ flex: ".4" }}>
           <img
-            src={PLACEHOLDER_IMG}
+            src={pet.image}
             className="object-fit-cover h-100 w-100"
             style={{ borderTopLeftRadius: "0.375rem" }}
             alt=""

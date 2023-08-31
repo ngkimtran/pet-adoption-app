@@ -48,6 +48,7 @@ const typeDefs = `
     description: String,
     adoptionFee: Float!,
     characteristic: Characteristic!,
+    image: String,
   }
 
   type User {
@@ -90,6 +91,7 @@ const typeDefs = `
         coatLength: String!,
         houseTrained: Boolean!,
         health: [String]!,
+        image: String,
     ): Pet
 
     updatePet(
@@ -107,6 +109,7 @@ const typeDefs = `
         coatLength: String!,
         houseTrained: Boolean!,
         health: [String]!,
+        image: String!,
     ): Pet
 
     deletePet(id: ID!): Pet

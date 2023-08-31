@@ -30,6 +30,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
   const [coatLength, setCoatLength] = useState<string>("");
   const [houseTrained, setHouseTrained] = useState<boolean>(false);
   const [health, setHealth] = useState<string[]>([""]);
+  const [image, setImage] = useState<string>("");
 
   const [addPet] = useMutation(ADD_PET, {
     update: (cache, response) => {
@@ -324,6 +325,19 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
                 required
               />
             </div>
+            <div className="mb-3 input-group-lg">
+              <label htmlFor="image" className="form-label">
+                Image URL
+              </label>
+              <input
+                id="image"
+                type="url"
+                className="form-control"
+                value={image}
+                onChange={({ target }) => setImage(target.value)}
+                required
+              />
+            </div>
           </div>
           <div className="modal-footer">
             <button
@@ -353,6 +367,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
                     coatLength,
                     houseTrained,
                     health: health.filter((item) => item !== ""),
+                    image,
                   },
                 })
               }

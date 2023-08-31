@@ -11,6 +11,7 @@ import User from "../models/User";
 import { toCapitalize } from "../utilities/utilities";
 
 const SALT_WORK_FACTOR = 10;
+const PLACEHOLDER_IMG = "https://i.imgur.com/9K7ztcM.png";
 
 const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY, {
   apiVersion: "2023-08-16",
@@ -120,6 +121,7 @@ const Query = {
         breed: 1,
         location: 1,
         characteristic: 1,
+        image: 1,
       },
       populate: {
         path: "type",
@@ -188,6 +190,7 @@ const Mutation = {
         houseTrained: args.houseTrained,
         health: args.health.map((h: string) => h.toLowerCase()),
       },
+      image: args.image ? args.image : PLACEHOLDER_IMG,
     });
 
     pet.populate({
@@ -230,6 +233,7 @@ const Mutation = {
             houseTrained: args.houseTrained,
             health: args.health.map((h: string) => h.toLowerCase()),
           },
+          image: args.image,
         },
       },
       { new: true }

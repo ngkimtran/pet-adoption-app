@@ -24,6 +24,7 @@ export type Pet = {
   id: string;
   location: string;
   name: string;
+  image: string;
   type: {
     id: string;
     name: string;
@@ -56,6 +57,7 @@ export type User = {
     id: string;
     location: string;
     name: string;
+    image: string;
     type: {
       id: string;
       name: string;

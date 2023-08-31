@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { userState } from "../../states/state";
-import { PLACEHOLDER_IMG } from "../../constants/constants";
+import { toCapitalize } from "../../utilities/utilities";
 
 const Favorites = () => {
   const [user] = useRecoilState(userState);
@@ -41,7 +41,7 @@ const Favorites = () => {
                     className="text-decoration-none"
                   >
                     <img
-                      src={PLACEHOLDER_IMG}
+                      src={pet.image}
                       className="card-img-top object-fit-cover"
                       style={{ width: "250px", height: "250px" }}
                       alt=""
@@ -55,7 +55,7 @@ const Favorites = () => {
                         style={{ minHeight: "5rem" }}
                       >
                         <span className="m-0 d-block">
-                          {pet.characteristic.age}
+                          {toCapitalize(pet.characteristic.age)}
                           <span className="px-2">&#x2022;</span>
                           {pet.breed}
                         </span>

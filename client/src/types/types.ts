@@ -40,12 +40,8 @@ export type User = {
   email: string;
   role: ROLE;
   favorites: {
+    adoptionFee: number;
     breed: string;
-    type: {
-      id: string;
-      name: string;
-      __typename: string;
-    };
     characteristic: {
       age: AGE;
       coatLength: string;
@@ -56,9 +52,15 @@ export type User = {
       size: SIZE;
       __typename: string;
     };
+    description: string;
     id: string;
     location: string;
     name: string;
+    type: {
+      id: string;
+      name: string;
+      __typename: string;
+    };
     __typename: string;
   }[];
   __typename: string;

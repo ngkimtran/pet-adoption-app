@@ -8,6 +8,8 @@ import { userState } from "../../states/state";
 import { GET_PET } from "../../queries/petQueries";
 import { CREATE_CHECKOUT_SESSION } from "../../queries/paymentQueries";
 import { ERROR_TOAST_ID, LOGO } from "../../constants/constants";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { Pet } from "../../types/types";
 
 const AdoptionForm = () => {
   const [user] = useRecoilState(userState);
@@ -16,6 +18,7 @@ const AdoptionForm = () => {
   const [petId, setPetId] = useState<string>(
     searchParams.get("pet-id") ? searchParams.get("pet-id")! : ""
   );
+  const [displayedPetName, setDisplayedPetName] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -63,6 +66,11 @@ const AdoptionForm = () => {
           adoptionFee: petQueryResult.data.pet.adoptionFee,
         },
       });
+  };
+
+  const handlePetSelect = (pet: Pet) => {
+    setDisplayedPetName(pet.name);
+    setPetId(pet.id);
   };
 
   return (
@@ -140,22 +148,39 @@ const AdoptionForm = () => {
                   I want to adopt
                 </h6>
                 <div className="mx-4 text-color-dark">
-                  <select
-                    className="form-select"
-                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-                      setPetId(event.target.value)
-                    }
-                    defaultValue={petId}
-                  >
-                    <option value="" disabled>
-                      Select a pet
-                    </option>
-                    {user.favorites.map((fav) => (
-                      <option key={fav.id} value={fav.id}>
-                        {fav.name}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="dropdown">
+                    <div
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      data-bs-auto-close="outside"
+                      aria-expanded="false"
+                      className="d-flex align-items-center"
+                    >
+                      <input
+                        type="text"
+                        className="form-control p-3"
+                        placeholder="Select a pet"
+                        value={displayedPetName}
+                        readOnly
+                      />
+                      <MdKeyboardArrowDown
+                        className="fs-5 d-flex align-items-center"
+                        style={{ marginLeft: "-2.5rem" }}
+                      />
+
+                      <ul className="dropdown-menu w-100">
+                        {user.favorites.map((fav) => (
+                          <li
+                            key={fav.id}
+                            onClick={() => handlePetSelect(fav)}
+                            className="dropdown-item px-4 py-3"
+                          >
+                            {fav.name}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
               <hr className="mt-5 mx-4" />

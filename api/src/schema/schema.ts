@@ -261,6 +261,8 @@ const Query = {
     currentUser.populate({
       path: "favorites",
       select: {
+        adoptionFee: 1,
+        description: 1,
         id: 1,
         name: 1,
         breed: 1,

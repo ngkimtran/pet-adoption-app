@@ -3,12 +3,12 @@ import { Animal } from "../../types/types";
 
 type AnimalsManagementRowPropType = {
   animal: Animal;
-  setId: Function;
+  setAnimalToBeDeleted: Function;
 };
 
 const AnimalsManagementRow = ({
   animal,
-  setId,
+  setAnimalToBeDeleted,
 }: AnimalsManagementRowPropType) => (
   <tr>
     <td className="p-3">{animal.id}</td>
@@ -20,7 +20,7 @@ const AnimalsManagementRow = ({
         className="fs-5 text-danger"
         data-bs-toggle="modal"
         data-bs-target="#deleteAnimalModal"
-        onClick={() => setId(animal.id)}
+        onClick={() => setAnimalToBeDeleted(animal)}
       />
     </td>
   </tr>

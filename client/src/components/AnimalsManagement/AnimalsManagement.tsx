@@ -11,7 +11,9 @@ import AnimalsManagementRow from "../AnimalsManagementRow/AnimalsManagementRow";
 
 const AnimalsManagement = () => {
   const [searchInput, setSearchInput] = useState<string>("");
-  const [id, setId] = useState<string>("");
+  const [animalToBeDeleted, setAnimalToBeDeleted] = useState<
+    Animal | undefined
+  >(undefined);
   const [animalList, setAnimalList] = useState<Animal[]>([]);
 
   const animalsQueryResult = useQuery(GET_ANIMALS);
@@ -127,7 +129,7 @@ const AnimalsManagement = () => {
                     <AnimalsManagementRow
                       key={animal.id}
                       animal={animal}
-                      setId={setId}
+                      setAnimalToBeDeleted={setAnimalToBeDeleted}
                     />
                   ))}
               </tbody>
@@ -135,8 +137,8 @@ const AnimalsManagement = () => {
 
             <AddAnimalModal setAnimalList={setAnimalList} />
             <DeleteAnimalModal
-              id={id}
-              setId={setId}
+              animalToBeDeleted={animalToBeDeleted}
+              setAnimalToBeDeleted={setAnimalToBeDeleted}
               setAnimalList={setAnimalList}
             />
           </>

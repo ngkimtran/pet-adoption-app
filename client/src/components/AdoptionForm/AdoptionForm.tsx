@@ -26,7 +26,6 @@ const AdoptionForm = () => {
   const [createCheckoutSession] = useLazyQuery(CREATE_CHECKOUT_SESSION, {
     onCompleted: (data) => {
       const { url } = JSON.parse(data.createCheckoutSession);
-      console.log(url);
       window.location.replace(url);
     },
     onError: (error) => {

@@ -169,6 +169,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
                 id="adoptionFee"
                 type="number"
                 className="form-control"
+                min={0}
                 value={adoptionFee}
                 onChange={({ target }) => setAdoptionFee(Number(target.value))}
                 required
@@ -181,7 +182,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
               <select
                 className="form-select"
                 id="age"
-                defaultValue={age}
+                defaultValue=""
                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
                   setAge(event.target.value)
                 }
@@ -236,7 +237,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
               <select
                 className="form-select"
                 id="size"
-                defaultValue={size}
+                defaultValue=""
                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
                   setSize(event.target.value)
                 }

@@ -222,6 +222,7 @@ const PetsManagementEditForm = ({
             type="number"
             className="form-control"
             id={`${pet.id}-adoptionFee`}
+            min={0}
             value={adoptionFee}
             onChange={({ target }) => setAdoptionFee(Number(target.value))}
             required

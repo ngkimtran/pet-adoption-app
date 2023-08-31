@@ -74,7 +74,7 @@ const Header = () => {
                         <li key={animal.id}>
                           <Link
                             className="dropdown-item px-4 py-3 text-capitalize"
-                            to={`/${animal.name}/browse-pets`}
+                            to={`/browse-pets/${animal.name}`}
                           >
                             {animal.name}
                           </Link>

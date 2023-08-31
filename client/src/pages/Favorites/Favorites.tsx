@@ -35,7 +35,9 @@ const Favorites = () => {
                   style={{ width: "18rem" }}
                 >
                   <Link
-                    to={`/${pet.type.name}/${pet.name.toLowerCase()}-${pet.id}`}
+                    to={`/browse-pets/${
+                      pet.type.name
+                    }/${pet.name.toLowerCase()}-${pet.id}`}
                     className="text-decoration-none"
                   >
                     <img

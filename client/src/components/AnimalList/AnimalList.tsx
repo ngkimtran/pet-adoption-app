@@ -9,16 +9,15 @@ const AnimalList = () => {
   const { loading, error, data } = useQuery(GET_ANIMALS);
 
   return (
-    <div className="container my-5">
+    <div className="container-fluid">
       {loading && <Loader />}
       {error && <Error />}
       {!loading && !error && data && (
         <div className="d-flex flex-column align-items-center">
-          <h1 className="text-color-primary">Choose your companion</h1>
           <div className="d-flex flex-wrap align-items-center justify-content-evenly gap-5 my-5">
             {data.animals.map((animal: Animal) => (
               <Link
-                to={`/${animal.name}/browse-pets`}
+                to={`/browse-pets/${animal.name}`}
                 key={animal.id}
                 className="cta-primary animal-type text-color-primary text-center text-decoration-none fw-bold fs-2 shadow rounded text-capitalize"
               >

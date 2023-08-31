@@ -116,7 +116,7 @@ code {
 
 .carousel-item img {
   object-fit: cover;
-  height: 80vh;
+  max-height: 500px;
   filter: blur(1px);
   -webkit-filter: blur(1px);
 }

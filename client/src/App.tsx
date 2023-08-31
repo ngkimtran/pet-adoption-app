@@ -39,11 +39,11 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/:animal/browse-pets",
+        path: "/browse-pets/:animal",
         element: <Pets />,
       },
       {
-        path: "/:animal/:id",
+        path: "/browse-pets/:animal/:id",
         element: <SinglePet />,
       },
       {

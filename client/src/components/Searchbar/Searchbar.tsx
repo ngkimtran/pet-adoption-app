@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { useQuery } from "@apollo/client";
 import { GET_ANIMALS } from "../../queries/animalQueries";
 import { Animal } from "../../types/types";
-import { useNavigate } from "react-router-dom";
 
 const Searchbar = () => {
   const [input, setInput] = useState<string>("");
@@ -16,14 +16,14 @@ const Searchbar = () => {
 
   const handleSuggestionClick = (animal: Animal) => {
     setInput(animal.name);
-    setTimeout(() => navigate(`/${animal.name}/browse-pets`), 500);
+    setTimeout(() => navigate(`/browse-pets/${animal.name}`), 500);
   };
 
   const handleNavigate = () => {
     animalsQueryResult.data.animals.some(
       (animal: Animal) => animal.name === input
     )
-      ? navigate(`/${input}/browse-pets`)
+      ? navigate(`/browse-pets/${input}`)
       : navigate("/");
   };
   useEffect(() => {

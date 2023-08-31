@@ -18,10 +18,14 @@ const Pets = () => {
         <title>List of available {animal}s</title>
       </Helmet>
       <div className="container-fluid m-0 p-0">
-        {loading && <Loader />}
-        {error && <Error />}
-        {!loading && !error && data && (
-          <PetList pets={data?.pets} animal={animal} />
+        {animal && (
+          <>
+            {loading && <Loader />}
+            {error && <Error />}
+            {!loading && !error && data && (
+              <PetList pets={data?.pets} animal={animal} />
+            )}
+          </>
         )}
       </div>
     </>

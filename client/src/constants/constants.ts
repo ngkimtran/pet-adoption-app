@@ -1,5 +1,6 @@
 export const PLACEHOLDER_IMG = require("../assets/placeholder.jpg");
 export const LOGO = require("../assets/logo.png");
+export const LOGO_ALT = require("../assets/logo_alt.png");
 export const LANDING_IMGS = [
   require("../assets/landing-1.jpg"),
   require("../assets/landing-2.jpg"),

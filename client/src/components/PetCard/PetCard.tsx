@@ -10,9 +10,9 @@ type PetCardrPropType = {
 };
 
 const PetCard = ({ pet, animal }: PetCardrPropType) => (
-  <div key={pet.id} className="col card p-0 mb-5" style={{ width: "18rem" }}>
+  <div className="col card p-0 mb-5" style={{ width: "18rem" }}>
     <Link
-      to={`/${animal}/${pet.name.toLowerCase()}-${pet.id}`}
+      to={`/browse-pets/${animal}/${pet.name.toLowerCase()}-${pet.id}`}
       className="text-decoration-none"
     >
       <img
@@ -37,7 +37,7 @@ const PetCard = ({ pet, animal }: PetCardrPropType) => (
       </div>
     </Link>
     <Link
-      to={`/${animal}/${pet.name.toLowerCase()}-${pet.id}`}
+      to={`/browse-pets/${animal}/${pet.name.toLowerCase()}-${pet.id}`}
       className="card-footer btn btn-primary text-uppercase fw-semibold"
     >
       <AiOutlineDoubleRight /> details

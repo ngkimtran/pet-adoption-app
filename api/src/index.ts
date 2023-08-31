@@ -9,7 +9,8 @@ import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 
-import { typeDefs, resolvers } from "./schema/schema";
+import typeDefs from "./schema/schema";
+import resolvers from "./resolvers/resolvers";
 import connectDB from "./config/db";
 import User from "./models/User";
 

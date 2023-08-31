@@ -54,11 +54,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <RecoilRoot>
-        <App />
-      </RecoilRoot>
-    </ApolloProvider>
-  </React.StrictMode>
+  <ApolloProvider client={client}>
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
+  </ApolloProvider>
 );

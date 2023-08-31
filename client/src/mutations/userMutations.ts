@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { USER_DETAILS } from "../fragments/fragments";
 
 const ADD_USER = gql`
   mutation addUser(
@@ -15,16 +16,10 @@ const ADD_USER = gql`
       email: $email
       password: $password
     ) {
-      id
-      username
-      firstname
-      lastname
-      email
-      favorites {
-        id
-      }
+      ...UserDetails
     }
   }
+  ${USER_DETAILS}
 `;
 
 const UPDATE_USER = gql`
@@ -44,16 +39,10 @@ const UPDATE_USER = gql`
       email: $email
       password: $password
     ) {
-      id
-      username
-      firstname
-      lastname
-      email
-      favorites {
-        id
-      }
+      ...UserDetails
     }
   }
+  ${USER_DETAILS}
 `;
 
 const DELETE_USER = gql`
@@ -73,29 +62,19 @@ const LOGIN = gql`
 const UPDATE_FAVORITE = gql`
   mutation updateFavorite($petId: ID!) {
     updateFavorite(petId: $petId) {
-      id
-      username
-      firstname
-      lastname
-      email
-      favorites {
-        id
-      }
+      ...UserDetails
     }
   }
+  ${USER_DETAILS}
 `;
 
 const UPDATE_ROLE = gql`
   mutation updateRole($id: ID!, $role: String!) {
     updateRole(id: $id, role: $role) {
-      id
-      firstname
-      lastname
-      username
-      email
-      role
+      ...UserDetails
     }
   }
+  ${USER_DETAILS}
 `;
 
 export {

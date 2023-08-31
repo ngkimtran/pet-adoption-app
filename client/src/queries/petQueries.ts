@@ -1,55 +1,22 @@
 import { gql } from "@apollo/client";
+import { PET_DETAILS } from "../fragments/fragments";
 
 const GET_PETS = gql`
   query getPets($type: String) {
     pets(type: $type) {
-      id
-      name
-      type {
-        id
-        name
-      }
-      breed
-      location
-      description
-      adoptionFee
-      characteristic {
-        age
-        gender
-        size
-        personality
-        coatLength
-        houseTrained
-        health
-      }
+      ...PetDetails
     }
   }
+  ${PET_DETAILS}
 `;
 
 const GET_PET = gql`
   query getPet($id: ID, $name: String) {
     pet(id: $id, name: $name) {
-      id
-      name
-      type {
-        id
-        name
-      }
-      breed
-      location
-      description
-      adoptionFee
-      characteristic {
-        age
-        gender
-        size
-        personality
-        coatLength
-        houseTrained
-        health
-      }
+      ...PetDetails
     }
   }
+  ${PET_DETAILS}
 `;
 
 export { GET_PETS, GET_PET };

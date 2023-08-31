@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { PET_DETAILS } from "../fragments/fragments";
 
 const ADD_PET = gql`
   mutation addPet(
@@ -31,26 +32,10 @@ const ADD_PET = gql`
       houseTrained: $houseTrained
       health: $health
     ) {
-      id
-      type {
-        name
-      }
-      name
-      breed
-      location
-      description
-      adoptionFee
-      characteristic {
-        age
-        gender
-        size
-        personality
-        coatLength
-        houseTrained
-        health
-      }
+      ...PetDetails
     }
   }
+  ${PET_DETAILS}
 `;
 
 const UPDATE_PET = gql`
@@ -86,26 +71,10 @@ const UPDATE_PET = gql`
       houseTrained: $houseTrained
       health: $health
     ) {
-      id
-      type {
-        name
-      }
-      name
-      breed
-      location
-      description
-      adoptionFee
-      characteristic {
-        age
-        gender
-        size
-        personality
-        coatLength
-        houseTrained
-        health
-      }
+      ...PetDetails
     }
   }
+  ${PET_DETAILS}
 `;
 
 const DELETE_PET = gql`

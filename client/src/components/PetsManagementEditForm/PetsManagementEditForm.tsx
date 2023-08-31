@@ -47,7 +47,11 @@ const PetsManagementEditForm = ({
         {
           query: GET_PETS,
         },
-        () => setPetList((prev: Pet[]) => [...prev, response.data.updatePet])
+        () =>
+          setPetList((prev: Pet[]) => [
+            ...prev.filter((pet) => pet.id !== response.data.updatePet.id),
+            response.data.updatePet,
+          ])
       );
     },
     onCompleted: () => {

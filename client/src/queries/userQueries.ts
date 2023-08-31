@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { CURRENT_USER_DETAILS, USER_DETAILS } from "../fragments/fragments";
 
 const GET_USERS = gql`
   query getUsers {
@@ -19,48 +20,19 @@ const GET_USERS = gql`
 const GET_USER = gql`
   query getUser($id: ID, $username: String) {
     user(username: $username, id: $id) {
-      id
-      username
-      firstname
-      lastname
-      email
-      role
-      favorites {
-        id
-      }
+      ...UserDetails
     }
   }
+  ${USER_DETAILS}
 `;
 
 const CURRENT_USER = gql`
   query currentUser {
     me {
-      id
-      username
-      firstname
-      lastname
-      email
-      role
-      favorites {
-        id
-        name
-        type {
-          name
-        }
-        breed
-        location
-        characteristic {
-          age
-          gender
-          size
-          personality
-          coatLength
-          houseTrained
-          health
-        }
-      }
+      ...CurrentUserDetails
     }
   }
+  ${CURRENT_USER_DETAILS}
 `;
 
 export { GET_USERS, GET_USER, CURRENT_USER };

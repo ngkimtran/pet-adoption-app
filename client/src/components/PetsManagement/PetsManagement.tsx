@@ -14,8 +14,10 @@ const PetsManagement = () => {
   const [id, setId] = useState<string>("");
   const [petList, setPetList] = useState<Pet[]>([]);
 
-  const petsQueryResult = useQuery(GET_PETS);
-  const [getPet, petQueryResult] = useLazyQuery(GET_PET);
+  const petsQueryResult = useQuery(GET_PETS, { fetchPolicy: "no-cache" });
+  const [getPet, petQueryResult] = useLazyQuery(GET_PET, {
+    fetchPolicy: "no-cache",
+  });
 
   useEffect(() => {
     const fetchData = async () => {

@@ -16,8 +16,10 @@ const AnimalsManagement = () => {
   >(undefined);
   const [animalList, setAnimalList] = useState<Animal[]>([]);
 
-  const animalsQueryResult = useQuery(GET_ANIMALS);
-  const [getAnimal, animalQueryResult] = useLazyQuery(GET_ANIMAL);
+  const animalsQueryResult = useQuery(GET_ANIMALS, { fetchPolicy: "no-cache" });
+  const [getAnimal, animalQueryResult] = useLazyQuery(GET_ANIMAL, {
+    fetchPolicy: "no-cache",
+  });
 
   useEffect(() => {
     const fetchData = async () => {

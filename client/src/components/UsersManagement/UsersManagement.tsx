@@ -11,8 +11,10 @@ const UsersManagement = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [userList, setUserList] = useState<User[]>([]);
 
-  const usersQueryResult = useQuery(GET_USERS);
-  const [getUser, userQueryResult] = useLazyQuery(GET_USER);
+  const usersQueryResult = useQuery(GET_USERS, { fetchPolicy: "no-cache" });
+  const [getUser, userQueryResult] = useLazyQuery(GET_USER, {
+    fetchPolicy: "no-cache",
+  });
 
   useEffect(() => {
     const fetchData = async () => {

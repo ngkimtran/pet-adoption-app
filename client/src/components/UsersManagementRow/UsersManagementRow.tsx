@@ -25,7 +25,11 @@ const UsersManagementRow = ({
         {
           query: GET_USERS,
         },
-        () => setUserList(response.data.updateRole)
+        () =>
+          setUserList((prev: User[]) => [
+            ...prev.filter((user) => user.id !== response.data.updateRole.id),
+            response.data.updateRole,
+          ])
       );
     },
     onCompleted: () => {

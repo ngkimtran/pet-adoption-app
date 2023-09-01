@@ -1,4 +1,3 @@
-import React from "react";
 import { Helmet } from "react-helmet";
 
 const Faq = () => {
@@ -142,8 +141,7 @@ const Faq = () => {
         </div>
 
         <div className="mt-5 text-center fw-semibold fs-5 text-secondary">
-          Do you still have a question? Contact us and we&apos;ll be happy to
-          help.
+          Do you still have a question? Contact us and we'll be happy to help.
         </div>
       </div>
     </>

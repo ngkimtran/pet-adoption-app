@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import AnimalList from "../../components/AnimalList/AnimalList";
 import Slider from "../../components/Slider/Slider";
 import Suggestion from "../../components/Suggestion/Suggestion";
+import Actions from "../../components/Actions/Actions";
 
 const Home = () => (
   <>
@@ -15,6 +16,7 @@ const Home = () => (
     />
     <AnimalList />
     <Suggestion />
+    <Actions />
   </>
 );
 

@@ -283,8 +283,8 @@ const Mutation = {
   },
 
   addUser: async (_parent, args) => {
-    const isNotUniqueUsername = await User.find({ username: args.username });
-    const isNotUniqueEmail = await User.find({ email: args.email });
+    const isNotUniqueUsername = await User.findOne({ username: args.username });
+    const isNotUniqueEmail = await User.findOne({ email: args.email });
 
     if (isNotUniqueUsername) {
       throw new GraphQLError("Username already taken.", {
@@ -324,10 +324,10 @@ const Mutation = {
       ? await bcrypt.hash(args.password, SALT_WORK_FACTOR)
       : oldUser.password;
 
-    const isNotUniqueUsername = await User.find({ username: args.username });
-    const isNotUniqueEmail = await User.find({ email: args.email });
+    const isNotUniqueUsername = await User.findOne({ username: args.username });
+    const isNotUniqueEmail = await User.findOne({ email: args.email });
 
-    if (isNotUniqueUsername) {
+    if (isNotUniqueUsername && isNotUniqueUsername.id !== args.id) {
       throw new GraphQLError("Username already taken.", {
         extensions: {
           code: "BAD_USER_INPUT",
@@ -336,7 +336,7 @@ const Mutation = {
       });
     }
 
-    if (isNotUniqueEmail) {
+    if (isNotUniqueEmail && isNotUniqueUsername.id !== args.id) {
       throw new GraphQLError("Email already taken.", {
         extensions: {
           code: "BAD_USER_INPUT",

@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,58 +35,61 @@ const Layout = () => (
   </div>
 );
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/browse-pets/:animal",
-        element: <Pets />,
-      },
-      {
-        path: "/browse-pets/:animal/:id",
-        element: <SinglePet />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        path: "/:userId",
-        element: <Profile />,
-      },
-      {
-        path: "/:userId/favorites",
-        element: <Favorites />,
-      },
-      {
-        path: "/:userId/admin-panel",
-        element: <Admin />,
-      },
-      {
-        path: "/adopt",
-        element: <Adopt />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/faq",
-        element: <Faq />,
-      },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/browse-pets/:animal",
+          element: <Pets />,
+        },
+        {
+          path: "/browse-pets/:animal/:id",
+          element: <SinglePet />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/:userId",
+          element: <Profile />,
+        },
+        {
+          path: "/:userId/favorites",
+          element: <Favorites />,
+        },
+        {
+          path: "/:userId/admin-panel",
+          element: <Admin />,
+        },
+        {
+          path: "/adopt",
+          element: <Adopt />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/faq",
+          element: <Faq />,
+        },
+      ],
+    },
+  ],
+  { basename: "/pet-adoption-app" }
+);
 
 const App = () => {
   const [token] = useRecoilState(tokenState);

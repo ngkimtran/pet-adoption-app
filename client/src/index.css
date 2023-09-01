@@ -54,7 +54,7 @@ code {
   background-color: #ea9a3f;
 }
 
-.btn-secondary {
+.action-btn {
   text-transform: uppercase;
   font-size: 1rem;
   font-weight: bold;
@@ -65,7 +65,7 @@ code {
   color: #ea9a3f;
 }
 
-.btn-secondary:hover {
+.action-btn:hover {
   background-color: #eabc3f;
   color: #fff;
 }

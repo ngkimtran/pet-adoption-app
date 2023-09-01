@@ -25,7 +25,7 @@ const Actions = () => {
           </div>
           <Link
             to={`/browse-pets/cat`}
-            className="btn-secondary rounded-pill text-decoration-none"
+            className="action-btn rounded-pill text-decoration-none"
           >
             Browse
           </Link>
@@ -42,7 +42,7 @@ const Actions = () => {
           </div>
           <Link
             to={`/faq`}
-            className="btn-secondary rounded-pill text-decoration-none"
+            className="action-btn rounded-pill text-decoration-none"
           >
             Browse
           </Link>
@@ -62,7 +62,7 @@ const Actions = () => {
           </div>
           <Link
             to={`/adopt`}
-            className="btn-secondary rounded-pill text-decoration-none"
+            className="action-btn rounded-pill text-decoration-none"
           >
             Browse
           </Link>

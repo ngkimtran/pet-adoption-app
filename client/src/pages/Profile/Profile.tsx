@@ -22,7 +22,7 @@ const Profile = () => {
         >
           <div className="d-flex flex-column gap-4 align-items-stretch rounded shadow bg-white">
             <div className="background-primary p-5 rounded-top">
-              <h1 className="text-white">My Profile</h1>
+              <h1 className="text-white text-capitalize">My Profile</h1>
             </div>
             <div className="m-5 d-flex flex-column gap-3">
               <UpdateUserModal />

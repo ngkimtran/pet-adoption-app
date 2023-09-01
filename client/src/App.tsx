@@ -17,6 +17,7 @@ import { tokenState, userState } from "./states/state";
 import { CURRENT_USER } from "./queries/userQueries";
 import Adopt from "./pages/Adopt/Adopt";
 import About from "./pages/About/About";
+import Faq from "./pages/Faq/Faq";
 
 const Layout = () => (
   <div className="bg-offwhite ">
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/faq",
+        element: <Faq />,
       },
     ],
   },

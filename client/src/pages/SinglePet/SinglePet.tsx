@@ -70,7 +70,7 @@ const SinglePet = () => {
               </Link>
               <Link
                 className="adopt-option w-50 py-2 cta-primary text-color-primary text-center text-decoration-none fw-bold fs-5 rounded-pill text-uppercase"
-                to="/"
+                to="/faq"
               >
                 Read FAQs
               </Link>

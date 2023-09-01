@@ -108,7 +108,7 @@ const AdoptionForm = () => {
                   Login
                 </button>
                 <button
-                  onClick={() => navigate(-1)}
+                  onClick={() => navigate("/")}
                   className="btn btn-secondary w-100"
                 >
                   Go back
@@ -205,7 +205,7 @@ const AdoptionForm = () => {
                   Proceed to checkout
                 </button>
                 <button
-                  onClick={() => navigate(-1)}
+                  onClick={() => navigate("/")}
                   className="btn btn-secondary w-50"
                 >
                   Cancel the applicaion

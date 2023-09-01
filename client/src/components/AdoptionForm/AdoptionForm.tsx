@@ -40,7 +40,13 @@ const AdoptionForm = () => {
   });
 
   useEffect(() => {
-    getPet({ variables: { id: petId } });
+    const fetchData = async () => {
+      const { data, loading, error } = await getPet({
+        variables: { id: petId },
+      });
+      if (!loading && !error && data) setDisplayedPetName(data.pet.name);
+    };
+    fetchData();
   }, [petId, getPet]);
 
   const handlePayment = async (

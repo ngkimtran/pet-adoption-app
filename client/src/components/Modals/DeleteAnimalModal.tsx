@@ -67,7 +67,7 @@ const DeleteAnimalModal = ({
     if (animalToBeDeleted) {
       const result = await getPets({
         variables: {
-          type: animalToBeDeleted.name,
+          type: animalToBeDeleted?.name,
         },
       });
 

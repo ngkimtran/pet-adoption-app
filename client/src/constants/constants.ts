@@ -1,10 +1,10 @@
-export const LOGO = require("../assets/logo.png");
-export const LOGO_ALT = require("../assets/logo_alt.png");
+export const LOGO = "https://i.imgur.com/2bvYC7o.png";
+export const LOGO_ALT = "https://i.imgur.com/1OLHV3E.png";
 export const LANDING_IMGS = [
-  require("../assets/landing-1.jpg"),
-  require("../assets/landing-2.jpg"),
-  require("../assets/landing-3.jpg"),
-  require("../assets/landing-4.jpg"),
+  "https://i.imgur.com/LCci5P8.jpg",
+  "https://i.imgur.com/FoWtVeG.jpg",
+  "https://i.imgur.com/aurIBTA.jpg",
+  "https://i.imgur.com/SPZk5Ez.jpg",
 ];
 
 export const ERROR_TOAST_ID = "error";

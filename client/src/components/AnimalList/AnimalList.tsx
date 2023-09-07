@@ -17,6 +17,7 @@ const AnimalList = () => {
           <div className="d-flex flex-wrap align-items-center justify-content-evenly gap-5 my-5">
             {data.animals.map((animal: Animal) => (
               <Link
+                data-testid="animal-option"
                 to={`/browse-pets/${animal.name}`}
                 key={animal.id}
                 className="cta-primary animal-type text-color-primary text-center text-decoration-none fw-bold fs-2 shadow rounded text-capitalize"

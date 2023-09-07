@@ -11,6 +11,7 @@ const mockPets = [
     type: {
       id: "64d0d112a88a7b265940ae64",
       name: "cat",
+      __typename: "Animal",
     },
     breed: "Domestic short hair",
     location: "Helsinki, FI",
@@ -25,7 +26,9 @@ const mockPets = [
       coatLength: "short",
       houseTrained: true,
       health: ["vaccinations up to date"],
+      __typename: "Characteristic",
     },
+    __typename: "Pet",
   },
 ];
 const apolloMocks = [

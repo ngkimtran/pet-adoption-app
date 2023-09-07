@@ -10,12 +10,13 @@ const AnimalsManagementRow = ({
   animal,
   setAnimalToBeDeleted,
 }: AnimalsManagementRowPropType) => (
-  <tr>
+  <tr data-testid="animal-management-row">
     <td className="p-3">{animal.id}</td>
     <td className="text-capitalize p-3">{animal.name}</td>
     <td className="p-3">{animal.petCount}</td>
     <td className="p-3">
       <BsFillTrashFill
+        data-testid="deleteAnimalBtn"
         role="button"
         className="fs-5 text-danger"
         data-bs-toggle="modal"

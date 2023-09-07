@@ -45,6 +45,7 @@ const AddAnimalModal = ({ setAnimalList }: AddAnimalModalPropType) => {
 
   return (
     <div
+      data-testid="addAnimalModal"
       className="modal fade"
       id="addAnimalModal"
       tabIndex={-1}
@@ -67,7 +68,7 @@ const AddAnimalModal = ({ setAnimalList }: AddAnimalModalPropType) => {
           <div className="modal-body">
             <div className="mb-3 input-group-lg">
               <label htmlFor="name" className="form-label">
-                Name
+                Animal Name
               </label>
               <input
                 id="name"

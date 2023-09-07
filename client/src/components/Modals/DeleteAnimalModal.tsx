@@ -86,6 +86,7 @@ const DeleteAnimalModal = ({
 
   return (
     <div
+      data-testid="deleteAnimalModal"
       className="modal fade"
       id="deleteAnimalModal"
       tabIndex={-1}

@@ -79,12 +79,12 @@ const AnimalsManagement = () => {
                   </button>
                 </div>
                 <button
-                  className="btn-primary px-0 py-2 rounded fw-bold"
+                  className="btn-primary p-2 rounded fw-bold"
                   style={{ flex: "0.2" }}
                   data-bs-toggle="modal"
                   data-bs-target="#addAnimalModal"
                 >
-                  Add animal
+                  Add new animal
                 </button>
               </div>
             </div>

@@ -169,6 +169,7 @@ const AdoptionForm = () => {
                         readOnly
                       />
                       <MdKeyboardArrowDown
+                        role="button"
                         className="fs-5 d-flex align-items-center"
                         style={{ marginLeft: "-2.5rem" }}
                       />

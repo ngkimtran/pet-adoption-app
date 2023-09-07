@@ -6,21 +6,46 @@ import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 
 import Pets from "../pages/Pets/Pets";
 import { RecoilRoot } from "recoil";
+import AdoptionForm from "../components/AdoptionForm/AdoptionForm";
+import { tokenState, userState } from "../states/state";
+import { User } from "../types/types";
 
 type WrapperProps = {
-  mocks?: readonly MockedResponse<Record<string, any>, Record<string, any>>[];
+  apolloMocks?: readonly MockedResponse<
+    Record<string, any>,
+    Record<string, any>
+  >[];
+  mockUserState?: User | undefined;
+  mockTokenState?: string | undefined;
+};
+
+const mockRecoilState = (
+  snapshot: any,
+  mockUserState: User | undefined,
+  mockTokenState: string | undefined
+) => {
+  if (mockUserState) snapshot.set(userState, mockUserState);
+  if (mockTokenState) snapshot.set(tokenState, mockTokenState);
 };
 
 const AllTheProviders = ({
   children,
-  mocks,
+  apolloMocks,
+  mockUserState,
+  mockTokenState,
 }: {
   children: React.ReactNode;
-  mocks?: WrapperProps["mocks"];
+  apolloMocks?: WrapperProps["apolloMocks"];
+  mockUserState?: WrapperProps["mockUserState"];
+  mockTokenState?: WrapperProps["mockTokenState"];
 }) => {
   return (
-    <MockedProvider mocks={mocks}>
-      <RecoilRoot>
+    <MockedProvider mocks={apolloMocks}>
+      <RecoilRoot
+        initializeState={(snapshot) =>
+          mockRecoilState(snapshot, mockUserState, mockTokenState)
+        }
+      >
         <MemoryRouter
           basename={"/pet-adoption-app"}
           initialEntries={["/pet-adoption-app"]}
@@ -28,6 +53,7 @@ const AllTheProviders = ({
           <Routes>
             <Route path="/" element={<div>App</div>} />
             <Route path="/browse-pets/cat" element={<Pets />} />
+            <Route path="/adopt" element={<AdoptionForm />} />
           </Routes>
           {children}
         </MemoryRouter>

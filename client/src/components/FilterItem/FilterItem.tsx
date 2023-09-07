@@ -15,11 +15,15 @@ const FilterItem = ({
   setFilterParamValue,
 }: FilterItemPropType) => (
   <div style={{ width: "250px" }}>
-    <label htmlFor="breed" className="form-label text-color-dark fw-semibold">
+    <label
+      htmlFor={filterParamTitle}
+      className="form-label text-color-dark fw-semibold"
+    >
       {filterParamTitle}
     </label>
     <div className="dropdown text-capitalize">
       <div
+        data-testid="filterDropdown"
         role="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"

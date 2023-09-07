@@ -67,6 +67,7 @@ const AnimalsManagement = () => {
                     placeholder="Search for animal name"
                   />
                   <button
+                    data-testid="searchAnimalNameBtn"
                     className="btn btn-primary"
                     type="button"
                     onClick={async () =>

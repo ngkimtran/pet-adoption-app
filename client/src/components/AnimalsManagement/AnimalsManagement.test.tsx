@@ -4,6 +4,7 @@ import AnimalsManagement from "./AnimalsManagement";
 import userEvent from "@testing-library/user-event";
 import { GET_ANIMAL, GET_ANIMALS } from "../../queries/animalQueries";
 import { ROLE } from "../../constants/constants";
+import { GraphQLError } from "graphql";
 
 const mockAnimals = [
   {
@@ -45,11 +46,29 @@ const apolloMocks = [
   {
     request: {
       query: GET_ANIMAL,
+      variables: {
+        name: mockAnimals[1].name,
+      },
     },
     result: {
       data: {
         animal: mockAnimals[1],
       },
+    },
+  },
+  {
+    request: {
+      query: GET_ANIMAL,
+      variables: {
+        name: "test",
+      },
+    },
+    result: {
+      errors: [
+        new GraphQLError("No permissions", {
+          extensions: { code: "FORBIDDEN" },
+        }),
+      ],
     },
   },
 ];
@@ -115,6 +134,53 @@ describe("<AnimalManagement />", () => {
 
         userEvent.click(deleteAnimalBtns[0]);
         expect(await screen.findByTestId("deleteAnimalModal")).toBeVisible();
+      });
+    });
+
+    describe("searching for animal name", () => {
+      describe("when animal name is available in the database", () => {
+        test("shows the correct content", async () => {
+          render(<AnimalsManagement />, {
+            wrapperProps: {
+              apolloMocks,
+              mockUserState,
+            },
+          });
+
+          userEvent.type(
+            await screen.findByPlaceholderText("Search for animal name"),
+            mockAnimals[1].name
+          );
+          userEvent.click(await screen.findByTestId("searchAnimalNameBtn"));
+
+          expect(
+            await screen.findAllByTestId("animal-management-row")
+          ).toHaveLength(1);
+          expect(
+            await screen.findByText(mockAnimals[1].name)
+          ).toBeInTheDocument();
+        });
+      });
+
+      describe("when animal name is not available in the database", () => {
+        test("shows the correct content", async () => {
+          render(<AnimalsManagement />, {
+            wrapperProps: {
+              apolloMocks: [apolloMocks[0], apolloMocks[2]],
+              mockUserState,
+            },
+          });
+
+          userEvent.type(
+            await screen.findByPlaceholderText("Search for animal name"),
+            "test"
+          );
+          userEvent.click(await screen.findByTestId("searchAnimalNameBtn"));
+
+          expect(
+            await screen.findByText("No animal found")
+          ).toBeInTheDocument();
+        });
       });
     });
   });

@@ -48,7 +48,9 @@ const Filter = ({
   );
 
   const handleFilter = useCallback(
-    (newFilteredPets: Pet[]) => setFilteredPets(newFilteredPets),
+    (newFilteredPets: Pet[]) => {
+      setFilteredPets(newFilteredPets);
+    },
     [setFilteredPets]
   );
 
@@ -155,7 +157,8 @@ const Filter = ({
             onChange={({ target }) => setFilterPetName(target.value)}
           />
           <button
-            className=" btn btn-light border"
+            data-testid="filterPetNameBtn"
+            className="btn btn-light border"
             type="button"
             onClick={() =>
               setFilteredPets(

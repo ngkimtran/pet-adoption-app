@@ -5,7 +5,9 @@ const Loader = () => (
       style={{ width: "5rem", height: "5rem" }}
       role="status"
     >
-      <span className="visually-hidden">Loading...</span>
+      <span className="visually-hidden" style={{ visibility: "hidden" }}>
+        Loading...
+      </span>
     </div>
   </div>
 );

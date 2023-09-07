@@ -4,7 +4,7 @@ import Loader from "./Loader";
 
 describe("<Error>", () => {
   describe("when rendering", () => {
-    test("shows the correct content", async () => {
+    test("shows the correct content", () => {
       render(<Loader />);
 
       expect(screen.getByText("Loading...")).toBeInTheDocument();

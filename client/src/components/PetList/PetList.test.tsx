@@ -60,18 +60,20 @@ const mockPets = [
 const mockAnimal = "cat";
 
 describe("<PetCard />", () => {
-  test("shows the correct content", () => {
-    render(<PetList pets={mockPets} animal={mockAnimal} />);
+  describe("rendering", () => {
+    test("shows the correct content", () => {
+      render(<PetList pets={mockPets} animal={mockAnimal} />);
 
-    expect(
-      screen.getByText(
-        `${
-          mockPets.length > 1 ? `${mockAnimal}s` : mockAnimal
-        } available for adoptions.`
-      )
-    ).toBeInTheDocument();
-    expect(screen.getByTestId("filter")).toBeInTheDocument();
-    expect(screen.getAllByTestId("petCard")).toHaveLength(mockPets.length);
+      expect(
+        screen.getByText(
+          `${
+            mockPets.length > 1 ? `${mockAnimal}s` : mockAnimal
+          } available for adoptions.`
+        )
+      ).toBeInTheDocument();
+      expect(screen.getByTestId("filter")).toBeInTheDocument();
+      expect(screen.getAllByTestId("petCard")).toHaveLength(mockPets.length);
+    });
   });
 
   describe("filtering", () => {

@@ -33,16 +33,18 @@ const mockPet = {
 const mockAnimal = "cat";
 
 describe("<PetCard />", () => {
-  test("shows the correct content", () => {
-    render(<PetCard pet={mockPet} animal={mockAnimal} />);
+  describe("rendering", () => {
+    test("shows the correct content", () => {
+      render(<PetCard pet={mockPet} animal={mockAnimal} />);
 
-    expect(screen.getByAltText("").getAttribute("src")).toBe(mockPet.image);
-    expect(screen.getByText(mockPet.name)).toBeInTheDocument();
-    expect(
-      screen.getByText(toCapitalize(mockPet.characteristic.age))
-    ).toBeInTheDocument();
-    expect(screen.getByText(mockPet.breed)).toBeInTheDocument();
-    expect(screen.getByText(mockPet.location)).toBeInTheDocument();
+      expect(screen.getByAltText("").getAttribute("src")).toBe(mockPet.image);
+      expect(screen.getByText(mockPet.name)).toBeInTheDocument();
+      expect(
+        screen.getByText(toCapitalize(mockPet.characteristic.age))
+      ).toBeInTheDocument();
+      expect(screen.getByText(mockPet.breed)).toBeInTheDocument();
+      expect(screen.getByText(mockPet.location)).toBeInTheDocument();
+    });
   });
 
   test("links to the correct page", () => {

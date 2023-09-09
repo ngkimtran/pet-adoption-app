@@ -12,7 +12,7 @@ const mockAnimal = {
 
 const mockSetAnimalToBeDeleted = jest.fn();
 
-describe("<AnimalManagementRow />", () => {
+describe("<AnimalsManagementRow />", () => {
   describe("rendering", () => {
     test("shows the correct content", async () => {
       render(

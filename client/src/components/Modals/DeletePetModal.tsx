@@ -6,23 +6,30 @@ import { GET_PETS } from "../../queries/petQueries";
 import { Pet } from "../../types/types";
 
 type DeletePetModalPropType = {
-  id: string;
-  setId: Function;
+  petToBeDeleted: string;
+  setPetToBeDeleted: Function;
   setPetList: Function;
 };
 
-const DeletePetModal = ({ id, setId, setPetList }: DeletePetModalPropType) => {
+const DeletePetModal = ({
+  petToBeDeleted,
+  setPetToBeDeleted,
+  setPetList,
+}: DeletePetModalPropType) => {
   const [deletePet] = useMutation(DELETE_PET, {
     update: (cache) => {
       cache.updateQuery(
         {
           query: GET_PETS,
         },
-        () => setPetList((prev: Pet[]) => prev.filter((pet) => pet.id !== id))
+        () =>
+          setPetList((prev: Pet[]) =>
+            prev.filter((pet) => pet.id !== petToBeDeleted)
+          )
       );
     },
     onCompleted: () => {
-      setId("");
+      setPetToBeDeleted("");
       toast.success("Delete pet successfully!", {
         toastId: SUCCESS_TOAST_ID,
         position: toast.POSITION.TOP_CENTER,
@@ -82,7 +89,7 @@ const DeletePetModal = ({ id, setId, setPetList }: DeletePetModalPropType) => {
               data-bs-dismiss="modal"
               onClick={() =>
                 deletePet({
-                  variables: { id },
+                  variables: { petToBeDeleted },
                 })
               }
             >

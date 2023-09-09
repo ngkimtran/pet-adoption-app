@@ -34,7 +34,7 @@ describe("<AnimalList />", () => {
         },
       });
 
-      expect(await screen.findAllByTestId("animal-option")).toHaveLength(
+      expect(await screen.findAllByTestId("animalOption")).toHaveLength(
         mockAnimals.length
       );
 

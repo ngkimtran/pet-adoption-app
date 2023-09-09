@@ -6,6 +6,14 @@ import { GET_ANIMAL, GET_ANIMALS } from "../../queries/animalQueries";
 import { ROLE } from "../../constants/constants";
 import { GraphQLError } from "graphql";
 
+jest.mock("../Modals/AddAnimalModal.tsx", () => () => (
+  <div>AddAnimalModal</div>
+));
+
+jest.mock("../Modals/DeleteAnimalModal.tsx", () => () => (
+  <div>DeleteAnimalModal</div>
+));
+
 const mockAnimals = [
   {
     id: "64d0d112a88a7b265940ae64",
@@ -65,15 +73,15 @@ const apolloMocks = [
     },
     result: {
       errors: [
-        new GraphQLError("No permissions", {
-          extensions: { code: "FORBIDDEN" },
+        new GraphQLError("Cannot read property '_id' of null", {
+          extensions: { code: "INTERNAL_SERVER_ERROR" },
         }),
       ],
     },
   },
 ];
 
-describe("<AnimalManagement />", () => {
+describe("<AnimalsManagement />", () => {
   describe("when logged in user is admin", () => {
     describe("rendering", () => {
       test("shows the correct content", async () => {
@@ -100,7 +108,7 @@ describe("<AnimalManagement />", () => {
         expect(await screen.findByText("Name")).toBeInTheDocument();
         expect(await screen.findByText("Pet Count")).toBeInTheDocument();
         expect(
-          await screen.findAllByTestId("animal-management-row")
+          await screen.findAllByTestId("animalManagementRow")
         ).toHaveLength(mockAnimals.length);
       });
     });
@@ -115,7 +123,7 @@ describe("<AnimalManagement />", () => {
         });
 
         userEvent.click(await screen.findByText("Add new animal"));
-        expect(await screen.findByTestId("addAnimalModal")).toBeVisible();
+        expect(await screen.findByText("AddAnimalModal")).toBeVisible();
       });
     });
 
@@ -133,7 +141,7 @@ describe("<AnimalManagement />", () => {
         );
 
         userEvent.click(deleteAnimalBtns[0]);
-        expect(await screen.findByTestId("deleteAnimalModal")).toBeVisible();
+        expect(await screen.findByText("DeleteAnimalModal")).toBeVisible();
       });
     });
 
@@ -154,7 +162,7 @@ describe("<AnimalManagement />", () => {
           userEvent.click(await screen.findByTestId("searchAnimalNameBtn"));
 
           expect(
-            await screen.findAllByTestId("animal-management-row")
+            await screen.findAllByTestId("animalManagementRrow")
           ).toHaveLength(1);
           expect(
             await screen.findByText(mockAnimals[1].name)

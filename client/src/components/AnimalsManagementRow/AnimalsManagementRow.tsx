@@ -10,7 +10,7 @@ const AnimalsManagementRow = ({
   animal,
   setAnimalToBeDeleted,
 }: AnimalsManagementRowPropType) => (
-  <tr data-testid="animal-management-row">
+  <tr data-testid="animalManagementRow">
     <td className="p-3">{animal.id}</td>
     <td className="text-capitalize p-3">{animal.name}</td>
     <td className="p-3">{animal.petCount}</td>

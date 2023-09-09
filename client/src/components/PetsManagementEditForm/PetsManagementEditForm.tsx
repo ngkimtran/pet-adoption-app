@@ -42,7 +42,7 @@ const PetsManagementEditForm = ({
   const [health, setHealth] = useState<string[]>(pet.characteristic.health);
   const [image, setImage] = useState<string>(pet.image);
 
-  const [updatePet] = useMutation(UPDATE_PET, {
+  const [updatePet, res] = useMutation(UPDATE_PET, {
     update: (cache, response) => {
       cache.updateQuery(
         {
@@ -269,11 +269,10 @@ const PetsManagementEditForm = ({
             <input
               className="form-check-input"
               type="radio"
-              name={`${pet.id}-gender`}
+              name={`${pet.id}-gender-male`}
               id={`${pet.id}-gender-male`}
               checked={gender === GENDER.MALE}
               onChange={() => setGender(GENDER.MALE)}
-              required
             />
             <label
               className="form-check-label"
@@ -286,11 +285,10 @@ const PetsManagementEditForm = ({
             <input
               className="form-check-input"
               type="radio"
-              name={`${pet.id}-gender`}
+              name={`${pet.id}-gender-female`}
               id={`${pet.id}-gender-female`}
               checked={gender === GENDER.FEMALE}
               onChange={() => setGender(GENDER.FEMALE)}
-              required
             />
             <label
               className="form-check-label"
@@ -381,11 +379,10 @@ const PetsManagementEditForm = ({
             <input
               className="form-check-input"
               type="radio"
-              name={`${pet.id}-houseTrained`}
+              name={`${pet.id}-houseTrained-yes`}
               id={`${pet.id}-houseTrained-yes`}
               checked={houseTrained}
               onChange={() => setHouseTrained(true)}
-              required
             />
             <label
               className="form-check-label"
@@ -398,11 +395,10 @@ const PetsManagementEditForm = ({
             <input
               className="form-check-input"
               type="radio"
-              name={`${pet.id}-houseTrained`}
+              name={`${pet.id}-houseTrained-no`}
               id={`${pet.id}-houseTrained-no`}
               checked={!houseTrained}
               onChange={() => setHouseTrained(false)}
-              required
             />
             <label
               className="form-check-label"

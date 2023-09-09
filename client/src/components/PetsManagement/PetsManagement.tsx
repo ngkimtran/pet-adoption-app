@@ -11,7 +11,7 @@ import PetsManagementRow from "../PetsManagementRow/PetsManagementRow";
 
 const PetsManagement = () => {
   const [searchInput, setSearchInput] = useState<string>("");
-  const [id, setId] = useState<string>("");
+  const [petToBeDeleted, setPetToBeDeleted] = useState<string>("");
   const [petList, setPetList] = useState<Pet[]>([]);
 
   const petsQueryResult = useQuery(GET_PETS, { fetchPolicy: "no-cache" });
@@ -63,6 +63,7 @@ const PetsManagement = () => {
                   placeholder="Search for pet name"
                 />
                 <button
+                  data-testid="searchPetNameBtn"
                   className="btn btn-primary"
                   type="button"
                   onClick={async () =>
@@ -82,7 +83,7 @@ const PetsManagement = () => {
                 data-bs-toggle="modal"
                 data-bs-target="#addPetModal"
               >
-                Add pet
+                Add new pet
               </button>
             </div>
           </div>
@@ -130,14 +131,18 @@ const PetsManagement = () => {
                     key={pet.id}
                     pet={pet}
                     setPetList={setPetList}
-                    setId={setId}
+                    setPetToBeDeleted={setPetToBeDeleted}
                   />
                 ))}
             </tbody>
           </table>
 
           <AddPetModal setPetList={setPetList} />
-          <DeletePetModal id={id} setId={setId} setPetList={setPetList} />
+          <DeletePetModal
+            petToBeDeleted={petToBeDeleted}
+            setPetToBeDeleted={setPetToBeDeleted}
+            setPetList={setPetList}
+          />
         </>
       )}
     </div>

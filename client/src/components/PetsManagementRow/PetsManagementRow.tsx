@@ -6,16 +6,17 @@ import PetsManagementEditForm from "../PetsManagementEditForm/PetsManagementEdit
 type PetsManagementRowPropType = {
   pet: Pet;
   setPetList: Function;
-  setId: Function;
+  setPetToBeDeleted: Function;
 };
 
 const PetsManagementRow = ({
   pet,
   setPetList,
-  setId,
+  setPetToBeDeleted,
 }: PetsManagementRowPropType) => (
   <>
     <tr
+      data-testid="petManagementRow"
       key={pet.id}
       data-bs-toggle="collapse"
       data-bs-target={`#collapse-${pet.id}`}
@@ -32,11 +33,12 @@ const PetsManagementRow = ({
       <td className="text-capitalize p-3">{pet.type.name}</td>
       <td className="p-3">
         <BsFillTrashFill
+          data-testid="deletePetBtn"
           role="button"
           className="fs-5 text-danger"
           data-bs-toggle="modal"
           data-bs-target="#deletePetModal"
-          onClick={() => setId(pet.id)}
+          onClick={() => setPetToBeDeleted(pet.id)}
         />
       </td>
     </tr>

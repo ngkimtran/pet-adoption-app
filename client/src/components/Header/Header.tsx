@@ -92,6 +92,7 @@ const Header = () => {
                 {user ? (
                   <div className="dropdown">
                     <BsFillPersonFill
+                      data-testid="userIcon"
                       className="fs-3 icon-primary dropdown-toggle"
                       data-bs-toggle="dropdown"
                     />

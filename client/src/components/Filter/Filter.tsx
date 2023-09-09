@@ -102,6 +102,7 @@ const Filter = ({
 
   return (
     <div
+      data-testid="filter"
       className="d-flex flex-column mx-3 my-5 gap-5 align-items-center text-start text-uppercase"
       style={{ ...style }}
     >

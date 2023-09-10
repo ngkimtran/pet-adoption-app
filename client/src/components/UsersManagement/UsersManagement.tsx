@@ -60,6 +60,7 @@ const UsersManagement = () => {
                   placeholder="Search for username"
                 />
                 <button
+                  data-testid="searchUserNameBtn"
                   className="btn btn-primary"
                   type="button"
                   onClick={async () =>

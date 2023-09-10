@@ -52,7 +52,7 @@ const UsersManagementRow = ({
   });
 
   return (
-    <tr>
+    <tr data-testid="userManagementRow">
       <td className="p-3">{user.id}</td>
       <td className="text-capitalize p-3">
         {user.firstname} {user.lastname}
@@ -61,6 +61,7 @@ const UsersManagementRow = ({
       <td className="p-3">{user.email}</td>
       <td className="p-3">
         <select
+          data-testid="userRoleSelect"
           className="form-select"
           defaultValue={user.role}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>

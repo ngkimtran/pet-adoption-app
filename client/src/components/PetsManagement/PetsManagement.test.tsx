@@ -147,6 +147,9 @@ describe("<PetsManagement />", () => {
         expect(await screen.findByText("ID")).toBeInTheDocument();
         expect(await screen.findByText("Name")).toBeInTheDocument();
         expect(await screen.findByText("Type")).toBeInTheDocument();
+        expect(await screen.findAllByTestId("petManagementRow")).toHaveLength(
+          mockPets.length
+        );
       });
     });
 

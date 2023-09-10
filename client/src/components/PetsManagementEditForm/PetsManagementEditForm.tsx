@@ -42,7 +42,7 @@ const PetsManagementEditForm = ({
   const [health, setHealth] = useState<string[]>(pet.characteristic.health);
   const [image, setImage] = useState<string>(pet.image);
 
-  const [updatePet, res] = useMutation(UPDATE_PET, {
+  const [updatePet] = useMutation(UPDATE_PET, {
     update: (cache, response) => {
       cache.updateQuery(
         {

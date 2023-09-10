@@ -162,7 +162,7 @@ describe("<AnimalsManagement />", () => {
           userEvent.click(await screen.findByTestId("searchAnimalNameBtn"));
 
           expect(
-            await screen.findAllByTestId("animalManagementRrow")
+            await screen.findAllByTestId("animalManagementRow")
           ).toHaveLength(1);
           expect(
             await screen.findByText(mockAnimals[1].name)

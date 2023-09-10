@@ -99,9 +99,17 @@ const SinglePetDetails = ({ pet }: SinglePetDetailsPropType) => {
         </div>
         <div className="py-4 fs-1" style={{ flex: ".1 " }}>
           {user && user.favorites.some((p) => p.id === pet.id) ? (
-            <FaHeart onClick={toggleFavorite} className="icon-primary" />
+            <FaHeart
+              data-testid="removeFavoriteBtn"
+              onClick={toggleFavorite}
+              className="icon-primary"
+            />
           ) : (
-            <FaRegHeart onClick={toggleFavorite} className="icon-primary" />
+            <FaRegHeart
+              data-testid="addFavoriteBtn"
+              onClick={toggleFavorite}
+              className="icon-primary"
+            />
           )}
           <div />
         </div>

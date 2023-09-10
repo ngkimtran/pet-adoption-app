@@ -130,7 +130,7 @@ describe("<Suggestion />", () => {
   });
 
   describe("clicking on search button", () => {
-    test("navigates", async () => {
+    test("navigates as expected", async () => {
       render(<Searchbar />, {
         wrapperProps: {
           apolloMocks,

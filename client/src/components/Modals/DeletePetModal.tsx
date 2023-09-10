@@ -89,7 +89,7 @@ const DeletePetModal = ({
               data-bs-dismiss="modal"
               onClick={() =>
                 deletePet({
-                  variables: { petToBeDeleted },
+                  variables: { id: petToBeDeleted },
                 })
               }
             >

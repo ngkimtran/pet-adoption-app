@@ -180,6 +180,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
                 Age
               </label>
               <select
+                data-testid="addPetModalAge"
                 className="form-select"
                 id="age"
                 defaultValue=""
@@ -203,13 +204,12 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
               </label>
               <div className="form-check">
                 <input
-                  id="gender-male"
-                  type="radio"
                   className="form-check-input"
-                  name="gender"
+                  type="radio"
+                  name="gender-male"
+                  id="gender-male"
                   checked={gender === GENDER.MALE}
                   onChange={() => setGender(GENDER.MALE)}
-                  required
                 />
                 <label className="form-check-label" htmlFor="gender-male">
                   Male
@@ -217,13 +217,12 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
               </div>
               <div className="form-check">
                 <input
-                  id="gender-female"
-                  type="radio"
                   className="form-check-input"
-                  name="gender"
+                  type="radio"
+                  name="gender-female"
+                  id="gender-female"
                   checked={gender === GENDER.FEMALE}
                   onChange={() => setGender(GENDER.FEMALE)}
-                  required
                 />
                 <label className="form-check-label" htmlFor="gender-female">
                   Female
@@ -235,6 +234,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
                 Size
               </label>
               <select
+                data-testid="addPetModalSize"
                 className="form-select"
                 id="size"
                 defaultValue=""
@@ -289,7 +289,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
                   id="houseTrained-yes"
                   type="radio"
                   className="form-check-input"
-                  name="houseTrained"
+                  name="houseTrained-yes"
                   checked={houseTrained}
                   onChange={() => setHouseTrained(true)}
                   required
@@ -303,7 +303,7 @@ const AddPetModal = ({ setPetList }: AddPetModalPropType) => {
                   id="houseTrained-no"
                   type="radio"
                   className="form-check-input"
-                  name="houseTrained"
+                  name="houseTrained-no"
                   checked={!houseTrained}
                   onChange={() => setHouseTrained(false)}
                   required

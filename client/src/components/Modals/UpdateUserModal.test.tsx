@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen, waitFor } from "../../utilities/testUtilities";
+import { render, screen } from "../../utilities/testUtilities";
 import UpdateUserModal from "./UpdateUserModal";
 import userEvent from "@testing-library/user-event";
 import { ROLE } from "../../constants/constants";

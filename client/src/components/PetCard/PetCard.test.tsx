@@ -47,10 +47,10 @@ describe("<PetCard />", () => {
     });
   });
 
-  test("links to the correct page", () => {
+  test("links to the correct page", async () => {
     render(<PetCard pet={mockPet} animal={mockAnimal} />);
 
-    const links = screen.getAllByRole("button");
+    const links = await screen.findAllByTestId("petCardLink");
     links.map((link) =>
       expect(link.getAttribute("href")).toBe(
         `/pet-adoption-app/browse-pets/${mockAnimal}/${mockPet.name.toLowerCase()}-${

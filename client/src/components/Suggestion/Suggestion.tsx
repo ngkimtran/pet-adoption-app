@@ -26,6 +26,7 @@ const Suggestion = () => {
                 style={{ width: "18rem" }}
               >
                 <Link
+                  data-testid="browseAllLink"
                   to={`/browse-pets/cat`}
                   className="background-primary text-decoration-none card-body pb-4 text-center d-flex flex-column align-items-center justify-content-center"
                 >
@@ -40,6 +41,7 @@ const Suggestion = () => {
                   </h5>
                 </Link>
                 <Link
+                  data-testid="browseAllLink"
                   to={`/browse-pets/cat`}
                   className="fs-5 py-4 border-top border-white card-footer btn btn-primary text-uppercase fw-semibold"
                 >

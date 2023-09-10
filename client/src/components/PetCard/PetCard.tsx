@@ -15,7 +15,7 @@ const PetCard = ({ pet, animal }: PetCardrPropType) => (
     style={{ width: "18rem" }}
   >
     <Link
-      role="button"
+      data-testid="petCardLink"
       to={`/browse-pets/${animal}/${pet.name.toLowerCase()}-${pet.id}`}
       className="text-decoration-none"
     >
@@ -41,7 +41,7 @@ const PetCard = ({ pet, animal }: PetCardrPropType) => (
       </div>
     </Link>
     <Link
-      role="button"
+      data-testid="petCardLink"
       to={`/browse-pets/${animal}/${pet.name.toLowerCase()}-${pet.id}`}
       className="card-footer btn btn-primary text-uppercase fw-semibold"
     >

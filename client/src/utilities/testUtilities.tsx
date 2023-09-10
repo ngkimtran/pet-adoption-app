@@ -3,12 +3,19 @@ import { render, RenderOptions } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
-
-import Pets from "../pages/Pets/Pets";
 import { RecoilRoot } from "recoil";
-import AdoptionForm from "../components/AdoptionForm/AdoptionForm";
 import { tokenState, userState } from "../states/state";
 import { User } from "../types/types";
+import Pets from "../pages/Pets/Pets";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
+import Favorites from "../pages/Favorites/Favorites";
+import Admin from "../pages/Admin/Admin";
+import About from "../pages/About/About";
+import Faq from "../pages/Faq/Faq";
+import Adopt from "../pages/Adopt/Adopt";
+import SinglePet from "../pages/SinglePet/SinglePet";
+import Profile from "../pages/Profile/Profile";
 
 type WrapperProps = {
   apolloMocks?: readonly MockedResponse<
@@ -52,8 +59,16 @@ const AllTheProviders = ({
         >
           <Routes>
             <Route path="/" element={<div>App</div>} />
-            <Route path="/browse-pets/cat" element={<Pets />} />
-            <Route path="/adopt" element={<AdoptionForm />} />
+            <Route path="/browse-pets/:animal" element={<Pets />} />
+            <Route path="/browse-pets/:animal/:id" element={<SinglePet />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/:userId" element={<Profile />} />
+            <Route path="/:userId/favorites" element={<Favorites />} />
+            <Route path="/:userId/admin-panel" element={<Admin />} />
+            <Route path="/adopt" element={<Adopt />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/faq" element={<Faq />} />
           </Routes>
           {children}
         </MemoryRouter>

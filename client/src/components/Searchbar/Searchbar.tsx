@@ -26,14 +26,6 @@ const Searchbar = () => {
       ? navigate(`/browse-pets/${input}`)
       : navigate("/");
   };
-  useEffect(() => {
-    if (
-      !animalsQueryResult.loading &&
-      !animalsQueryResult.error &&
-      animalsQueryResult.data
-    )
-      setSearchSuggestionList(animalsQueryResult.data.animals);
-  }, [animalsQueryResult]);
 
   useEffect(() => {
     if (
@@ -48,13 +40,14 @@ const Searchbar = () => {
           )
         );
       else setSearchSuggestionList(animalsQueryResult.data.animals);
-  }, [input]); //eslint-disable-line
+  }, [animalsQueryResult, input]);
 
   return (
     <>
       <div className="container dropdown">
         <div className="input-group input-group-lg">
           <input
+            data-testid="searchbarInput"
             type="text"
             className="form-control p-3 dropdown-toggle"
             placeholder="Which animal are you looking for?"
@@ -67,6 +60,7 @@ const Searchbar = () => {
           />
 
           <button
+            data-testid="searchbarBtn"
             className="px-4 btn btn-primary rounded-end"
             type="button"
             onClick={handleNavigate}

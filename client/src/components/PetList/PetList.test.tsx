@@ -64,12 +64,9 @@ describe("<PetCard />", () => {
     test("shows the correct content", () => {
       render(<PetList pets={mockPets} animal={mockAnimal} />);
 
+      expect(screen.getByText(`${mockPets.length}`)).toBeInTheDocument();
       expect(
-        screen.getByText(
-          `${
-            mockPets.length > 1 ? `${mockAnimal}s` : mockAnimal
-          } available for adoptions.`
-        )
+        screen.getByText(`${mockAnimal}s available for adoptions.`)
       ).toBeInTheDocument();
       expect(screen.getByTestId("filter")).toBeInTheDocument();
       expect(screen.getAllByTestId("petCard")).toHaveLength(mockPets.length);

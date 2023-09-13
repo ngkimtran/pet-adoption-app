@@ -151,7 +151,7 @@ const Login = () => {
           />
           <div className="m-0 text-secondary">
             Already have an account?{" "}
-            <Link to="/register" className="text-color-primary fw-semibold">
+            <Link to="/login" className="text-color-primary fw-semibold">
               Login
             </Link>
           </div>

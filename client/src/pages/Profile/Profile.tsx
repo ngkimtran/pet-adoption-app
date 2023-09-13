@@ -52,7 +52,7 @@ const Profile = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#deleteUserModal"
                 >
-                  <BsFillTrashFill className="fs-4 me-2" /> Delete acount
+                  <BsFillTrashFill className="fs-4 me-2" /> Delete account
                 </button>
               </div>
             </div>

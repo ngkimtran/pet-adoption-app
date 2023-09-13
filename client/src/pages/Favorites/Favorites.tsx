@@ -35,6 +35,7 @@ const Favorites = () => {
                   style={{ width: "18rem" }}
                 >
                   <Link
+                    data-testid="favoritePetDetailsLink"
                     to={`/browse-pets/${
                       pet.type.name
                     }/${pet.name.toLowerCase()}-${pet.id}`}
@@ -55,15 +56,16 @@ const Favorites = () => {
                         style={{ minHeight: "5rem" }}
                       >
                         <span className="m-0 d-block">
-                          {toCapitalize(pet.characteristic.age)}
+                          <span>{toCapitalize(pet.characteristic.age)}</span>
                           <span className="px-2">&#x2022;</span>
-                          {pet.breed}
+                          <span>{pet.breed}</span>
                         </span>
                         <span className="fw-semibold">{pet.location}</span>
                       </p>
                     </div>
                   </Link>
                   <Link
+                    data-testid="favoritePetAdoptLink"
                     to={{
                       pathname: "/adopt",
                       search: `pet-id=${pet.id}`,

@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
+    "start:test": "set NODE_ENV=test && ts-node --esm src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV=production && ts-node --esm src/index.ts",
     "dev": "nodemon src/index.ts",

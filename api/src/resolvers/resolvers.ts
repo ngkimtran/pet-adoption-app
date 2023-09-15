@@ -367,7 +367,8 @@ const Mutation = {
   },
 
   deleteUser: async (_parent, args, { currentUser }) => {
-    if (currentUser.id !== args.id || currentUser.role !== "ADMIN") {
+    console.log(currentUser.id !== args.id || currentUser.role !== "ADMIN");
+    if (currentUser.id !== args.id && currentUser.role !== "ADMIN") {
       throw new GraphQLError("No permissions", {
         extensions: { code: "FORBIDDEN" },
       });

@@ -430,7 +430,13 @@ const Mutation = {
         },
       },
       { new: true }
-    );
+    ).populate({
+      path: "favorites",
+      select: {
+        id: 1,
+        name: 1,
+      },
+    });
   },
 
   login: async (_parent, args) => {

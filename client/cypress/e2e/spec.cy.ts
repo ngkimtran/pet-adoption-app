@@ -446,6 +446,9 @@ describe("Pet Adoption App", function () {
       cy.contains("How do I search for a pet?");
       cy.contains("How do I adopt a pet?");
       cy.contains("Can I return the pet I adopted?");
+      cy.contains(
+        "Do you still have a question? Contact us and we'll be happy to help."
+      );
     });
 
     it("can be used to navigate to adoption form", function () {

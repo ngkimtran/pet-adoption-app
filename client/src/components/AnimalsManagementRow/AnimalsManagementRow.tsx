@@ -16,6 +16,7 @@ const AnimalsManagementRow = ({
     <td className="p-3">{animal.petCount}</td>
     <td className="p-3">
       <BsFillTrashFill
+        id={`deleteAnimalBtn-${animal.name}`}
         data-testid="deleteAnimalBtn"
         role="button"
         className="fs-5 text-danger"

@@ -45,6 +45,7 @@ const mockNewPet = {
 const mockAnimal = {
   name: "cat",
 };
+
 const mockNewAnimal = {
   name: "parrot",
 };
@@ -74,10 +75,38 @@ describe("Pet Adoption App", function () {
     cy.visit("/pet-adoption-app");
   });
 
-  it("front page can be opened", function () {
-    cy.contains("Pet Adoption");
-    cy.contains("Find your new best friend!");
-    cy.contains("Pets are not our whole life, but they make our lives whole.");
+  describe("front page", function () {
+    it("can be opened", function () {
+      cy.contains("Pet Adoption");
+      cy.contains("Find your new best friend!");
+      cy.contains(
+        "Pets are not our whole life, but they make our lives whole."
+      );
+
+      cy.contains("Pets available for adoption");
+
+      cy.contains("Planning To Adopt?");
+      cy.contains("View list of pets");
+      cy.contains(
+        "See our wonderful list of pets, categorized for your convenience."
+      );
+      cy.contains("Read our FAQs");
+      cy.contains("Read answers to questions you're wondering about.");
+      cy.contains("Fill the adoption form");
+      cy.contains(
+        "Already have a pet that caught your eyes? Fill the form and adopt your new friend before it's too late!"
+      );
+    });
+
+    it("can be used to search for animal", function () {
+      cy.get(`input[data-testid="searchbarInput"]`).type(mockAnimal.name);
+      cy.get(`button[data-testid="searchbarBtn"]`).click();
+
+      cy.location("pathname").should(
+        "eq",
+        `/pet-adoption-app/browse-pets/${mockAnimal.name}`
+      );
+    });
   });
 
   it("user can register", function () {
@@ -122,10 +151,13 @@ describe("Pet Adoption App", function () {
       });
 
       describe("profile page", function () {
-        it("can be viewed", function () {
+        beforeEach(function () {
           cy.get(`[data-testid="userIcon"]`).click();
+          cy.wait(500);
           cy.contains("Profile").click();
+        });
 
+        it("can be viewed", function () {
           cy.contains(mockNewUser.firstname);
           cy.contains(mockNewUser.lastname);
           cy.contains(mockNewUser.username);
@@ -133,8 +165,6 @@ describe("Pet Adoption App", function () {
         });
 
         it("can be used to update information", function () {
-          cy.get(`[data-testid="userIcon"]`).click();
-          cy.contains("Profile").click();
           cy.contains("Edit information").click();
 
           cy.contains("Update personal profile");
@@ -149,16 +179,17 @@ describe("Pet Adoption App", function () {
       });
 
       describe("favorite pets page", function () {
-        it("can be viewed", function () {
+        beforeEach(function () {
           cy.get(`[data-testid="userIcon"]`).click();
+          cy.wait(500);
           cy.contains("Favorite pets").click();
+        });
 
+        it("can be viewed", function () {
           cy.contains(mockNewUser.favorites[0].name);
         });
 
         it("can be used to navigate to adoption form", function () {
-          cy.get(`[data-testid="userIcon"]`).click();
-          cy.contains("Favorite pets").click();
           cy.contains("Start adoption process").click();
 
           cy.contains("Submit your application");
@@ -175,6 +206,7 @@ describe("Pet Adoption App", function () {
 
       it("can log out", function () {
         cy.get(`[data-testid="userIcon"]`).click();
+        cy.wait(500);
         cy.contains("Log out").click();
         cy.location("pathname").should("eq", "/pet-adoption-app");
       });
@@ -192,6 +224,7 @@ describe("Pet Adoption App", function () {
       describe("admin panel page", function () {
         beforeEach(function () {
           cy.get(`[data-testid="userIcon"]`).click();
+          cy.wait(500);
           cy.contains("Admin panel").click();
         });
 
@@ -466,15 +499,49 @@ describe("Pet Adoption App", function () {
     });
   });
 
+  describe("adopt a pet page", function () {
+    describe("when not logged in", function () {
+      it("shows correct content", function () {
+        cy.contains("Adopt a pet").click();
+        cy.contains("Login to start adopting a pet!");
+        cy.contains("Login");
+        cy.contains("Go back");
+      });
+    });
+
+    describe("when logged in", function () {
+      it("shows correct content", function () {
+        cy.contains("Log in").click();
+        cy.get("#username").type(mockNewUser.username);
+        cy.get("#password").type(mockNewUser.password);
+        cy.get("button").contains("Log in").click();
+
+        cy.wait(500);
+
+        cy.contains("Adopt a pet").click();
+
+        cy.contains("Submit your application");
+        cy.contains("Contact info");
+        cy.contains(mockNewUser.firstname);
+        cy.contains(mockNewUser.lastname);
+        cy.contains(mockNewUser.emailUpdated);
+        cy.contains("I want to adopt");
+        cy.get(`input[placeholder="Select a pet"]`);
+        cy.contains("Adoption Fee:");
+        cy.contains("€0.00");
+      });
+    });
+  });
+
   describe("", function () {
-    beforeEach(function () {
+    it("user can delete their account", function () {
       cy.contains("Log in").click();
       cy.get("#username").type(mockNewUser.username);
       cy.get("#password").type(mockNewUser.password);
       cy.get("button").contains("Log in").click();
-    });
 
-    it("user can delete their account", function () {
+      cy.wait(500);
+
       cy.get(`[data-testid="userIcon"]`).click();
       cy.contains("Profile").click();
       cy.contains("Delete account").click();

@@ -24,7 +24,7 @@ const Actions = () => (
         </div>
         <Link
           role="button"
-          to={`/browse-pets/cat`}
+          to={`/browse-pets`}
           className="action-btn rounded-pill text-decoration-none"
         >
           Browse

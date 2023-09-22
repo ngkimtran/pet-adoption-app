@@ -107,6 +107,20 @@ describe("Pet Adoption App", function () {
         `/pet-adoption-app/browse-pets/${mockAnimal.name}`
       );
     });
+
+    it("can be used to navigate to pet browsing page", function () {
+      cy.contains("Meet them now").click();
+
+      cy.location("pathname").should("eq", `/pet-adoption-app/browse-pets`);
+
+      cy.get(`[data-testid="catOption"]`).click();
+      cy.contains("Find pets").click();
+
+      cy.location("pathname").should(
+        "eq",
+        `/pet-adoption-app/browse-pets/${mockAnimal.name}`
+      );
+    });
   });
 
   it("user can register", function () {
@@ -417,6 +431,7 @@ describe("Pet Adoption App", function () {
   describe("pet list page", function () {
     beforeEach(function () {
       cy.contains("Find a pet").click();
+      cy.wait(500);
       cy.contains(mockPet.type.name).click();
     });
 

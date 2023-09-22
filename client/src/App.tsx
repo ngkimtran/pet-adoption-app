@@ -41,6 +41,10 @@ const router = createBrowserRouter(
           element: <Home />,
         },
         {
+          path: "/browse-pets",
+          element: <Pets />,
+        },
+        {
           path: "/browse-pets/:animal",
           element: <Pets />,
         },

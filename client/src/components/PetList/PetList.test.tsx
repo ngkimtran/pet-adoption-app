@@ -59,7 +59,7 @@ const mockPets = [
 ];
 const mockAnimal = "cat";
 
-describe("<PetCard />", () => {
+describe("<PetList />", () => {
   describe("rendering", () => {
     test("shows the correct content", () => {
       render(<PetList pets={mockPets} animal={mockAnimal} />);

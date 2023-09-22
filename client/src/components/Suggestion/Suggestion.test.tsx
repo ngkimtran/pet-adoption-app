@@ -148,9 +148,7 @@ describe("<Suggestion />", () => {
 
       const links = await screen.findAllByTestId("browseAllLink");
       links.map((link) =>
-        expect(link.getAttribute("href")).toBe(
-          "/pet-adoption-app/browse-pets/cat"
-        )
+        expect(link.getAttribute("href")).toBe("/pet-adoption-app/browse-pets")
       );
     });
   });

@@ -77,7 +77,7 @@ describe("<Actions />", () => {
     test("has the correct href for 'View list of pets' button", async () => {
       render(<Actions />, { wrapperProps: { apolloMocks } });
       expect(screen.getAllByRole("button")[0].getAttribute("href")).toBe(
-        "/pet-adoption-app/browse-pets/cat"
+        "/pet-adoption-app/browse-pets"
       );
     });
 

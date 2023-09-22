@@ -27,7 +27,7 @@ const Suggestion = () => {
               >
                 <Link
                   data-testid="browseAllLink"
-                  to={`/browse-pets/cat`}
+                  to={`/browse-pets`}
                   className="background-primary text-decoration-none card-body pb-4 text-center d-flex flex-column align-items-center justify-content-center"
                 >
                   <img
@@ -42,7 +42,7 @@ const Suggestion = () => {
                 </Link>
                 <Link
                   data-testid="browseAllLink"
-                  to={`/browse-pets/cat`}
+                  to={`/browse-pets`}
                   className="fs-5 py-4 border-top border-white card-footer btn btn-primary text-uppercase fw-semibold"
                 >
                   Meet them now

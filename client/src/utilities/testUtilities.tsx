@@ -16,6 +16,7 @@ import Faq from "../pages/Faq/Faq";
 import Adopt from "../pages/Adopt/Adopt";
 import SinglePet from "../pages/SinglePet/SinglePet";
 import Profile from "../pages/Profile/Profile";
+import PetCategory from "../components/PetCategory/PetCategory";
 
 type WrapperProps = {
   apolloMocks?: readonly MockedResponse<
@@ -59,6 +60,7 @@ const AllTheProviders = ({
         >
           <Routes>
             <Route path="/" element={<div>App</div>} />
+            <Route path="/browse-pets" element={<PetCategory />} />
             <Route path="/browse-pets/:animal" element={<Pets />} />
             <Route path="/browse-pets/:animal/:id" element={<SinglePet />} />
             <Route path="/login" element={<Login />} />

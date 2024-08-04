@@ -7,6 +7,11 @@
  - username: mluuka   
  - password: thisisatest
 
+##### Admin:
+ - username: admin   
+ - password: thisisatest
+
+ - 
 #### To run test
 1. Download this repository
 2. In terminal, run `cd client`
